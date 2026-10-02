@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Vênus por Thaianne — tarô, espiritualidade e autoconhecimento com atendimentos online." />
+  <meta name="theme-color" content="#fff8f5" />
+  <title>Vênus por Thaianne | Tarô, espiritualidade e autoconhecimento</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="#inicio" aria-label="Vênus por Thaianne">
+        <span class="venus-symbol">♀</span>
+        <span><strong>Vênus</strong><small>por Thaianne</small></span>
+      </a>
+      <button class="menu-toggle" aria-label="Abrir menu">☰</button>
+      <nav class="nav" aria-label="Navegação principal">
+        <a href="#sobre" data-i18n="navAbout">Sobre</a>
+        <a href="#servicos" data-i18n="navServices">Consultas</a>
+        <a href="#como-funciona" data-i18n="navHow">Como funciona</a>
+        <a href="#faq" data-i18n="navFaq">FAQ</a>
+        <a href="#contato" data-i18n="navContact">Contato</a>
+        <div class="country-picker"><select id="countrySelect" aria-label="País / Country"><option value="br">🇧🇷 Brasil</option><option value="us">🇺🇸 United States</option></select></div>
+        <button class="cart-button" id="openCart"><span data-i18n="cart">Carrinho</span> <span id="cartCount">0</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-orb orb-a"></div>
+      <div class="hero-orb orb-b"></div>
+      <div class="container hero-grid">
+        <div class="hero-copy reveal-on-load">
+          <div class="hero-kicker"><span class="kicker-dot"></span><span data-i18n="eyebrowHero">TARÔ • ESPIRITUALIDADE • AUTOCONHECIMENTO</span></div>
+          <h1 data-i18n="heroTitle">Clareza para ouvir sua intuição. <em>Coragem para escolher seu caminho.</em></h1>
+          <p class="hero-text" data-i18n="heroText">Na Vênus por Thaianne, o tarô é uma ferramenta de reflexão e leitura simbólica para iluminar possibilidades, padrões e escolhas — sem promessas absolutas e sem tirar de você o poder das próprias decisões.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#servicos" data-i18n="seeReadings">Ver consultas</a>
+            <a class="btn btn-ghost" href="#como-funciona" data-i18n="howWorks">Como funciona</a>
+          </div>
+          <div class="hero-proof">
+            <span>01</span><span data-i18n="proof1">Atendimento individual</span>
+            <i></i>
+            <span>02</span><span data-i18n="proof2">100% online</span>
+            <i></i>
+            <span>03</span><span data-i18n="proof3">Áudios gravados</span>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal-on-load">
+          <div class="hero-visual-ring"></div>
+          <div class="hero-visual-glow"></div>
+          <span class="floating-star star-one">✦</span>
+          <span class="floating-star star-two">✧</span>
+          <span class="floating-star star-three">✦</span>
+          <div class="hero-logo-wrap">
+            <img src="logo-venus.png" alt="Vênus por Thaianne" class="hero-logo" />
+          </div>
+          <div class="hero-pill"><span>♀</span><span data-i18n="heroPill">Tarô, presença &amp; autoconhecimento</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section about-section" id="sobre">
+      <div class="container two-col about-grid">
+        <div class="section-heading reveal-on-scroll">
+          <p class="eyebrow" data-i18n="aboutEyebrow">SOBRE A MARCA</p>
+          <h2 data-i18n="aboutTitle">Uma experiência íntima, elegante e sem teatro.</h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="prose reveal-on-scroll">
+          <p data-i18n="aboutP1">Vênus por Thaianne nasce do encontro entre sensibilidade, simbolismo e uma leitura direta. Aqui, o tarô não é usado como sentença: ele abre espaço para perguntas melhores, percepção mais clara e decisões mais conscientes.</p>
+          <p data-i18n="aboutP2">As consultas são feitas de forma online, com cuidado, privacidade e linguagem acessível. Você recebe a leitura no seu ritmo, sem precisar marcar chamada ao vivo.</p>
+          <a href="#contato" class="text-link" data-i18n="aboutLink">Falar com Thaianne →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft services-section" id="servicos">
+      <div class="container">
+        <div class="section-heading centered reveal-on-scroll">
+          <p class="eyebrow" data-i18n="servicesEyebrow">CONSULTAS</p>
+          <h2 data-i18n="servicesTitle">Escolha a leitura que combina com o seu momento.</h2>
+          <p data-i18n="servicesNote">Os valores mudam automaticamente conforme o país selecionado.</p>
+        </div>
+        <div class="cards" id="serviceGrid"></div>
+      </div>
+    </section>
+
+    <section class="section process-section" id="como-funciona">
+      <div class="container">
+        <div class="section-heading centered reveal-on-scroll">
+          <p class="eyebrow" data-i18n="howEyebrow">COMO FUNCIONA</p>
+          <h2 data-i18n="howTitle">Simples, privado e 100% online.</h2>
+        </div>
+        <div class="steps">
+          <article class="process-card reveal-on-scroll"><div class="process-number">01</div><div class="process-icon">✦</div><h3 data-i18n="step1Title">Escolha sua consulta</h3><p data-i18n="step1Text">Selecione o tipo de leitura e adicione ao carrinho.</p></article>
+          <article class="process-card reveal-on-scroll"><div class="process-number">02</div><div class="process-icon">☾</div><h3 data-i18n="step2Title">Envie sua pergunta</h3><p data-i18n="step2Text">Após a confirmação do pedido, você recebe as orientações para enviar sua questão.</p></article>
+          <article class="process-card reveal-on-scroll"><div class="process-number">03</div><div class="process-icon">♀</div><h3 data-i18n="step3Title">Receba sua leitura</h3><p data-i18n="step3Text">A interpretação é enviada online, com áudios gravados e explicação organizada.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section manifesto">
+      <div class="manifesto-glow"></div>
+      <div class="container manifesto-inner reveal-on-scroll">
+        <span class="venus-mark">♀</span>
+        <blockquote data-i18n="quote">“O tarô pode mostrar símbolos, padrões e possibilidades. A decisão final continua sendo sua.”</blockquote>
+        <p>— Vênus por Thaianne</p>
+      </div>
+    </section>
+
+    <section class="section faq-section" id="faq">
+      <div class="container faq-wrap">
+        <div class="section-heading reveal-on-scroll">
+          <p class="eyebrow" data-i18n="faqEyebrow">PERGUNTAS FREQUENTES</p>
+          <h2 data-i18n="faqTitle">Antes de reservar.</h2>
+          <p class="section-intro" data-i18n="faqIntro">Tudo o que você precisa saber antes de escolher sua leitura.</p>
+        </div>
+        <div class="faq-list reveal-on-scroll">
+          <details><summary data-i18n="q1">A consulta é ao vivo?</summary><p data-i18n="a1">Não. A proposta principal é online e assíncrona: você envia sua pergunta e recebe a leitura com áudios e interpretação.</p></details>
+          <details><summary data-i18n="q2">Posso fazer perguntas sobre qualquer tema?</summary><p data-i18n="a2">Sim, desde que a leitura não seja usada como substituição de atendimento médico, jurídico, psicológico ou financeiro profissional.</p></details>
+          <details><summary data-i18n="q3">O tarô prevê o futuro?</summary><p data-i18n="a3">A abordagem da Vênus por Thaianne é simbólica e interpretativa. A leitura trabalha tendências, contextos e possibilidades, sem prometer resultados inevitáveis.</p></details>
+          <details><summary data-i18n="q4">Como recebo a leitura?</summary><p data-i18n="a4">O formato inicial é por WhatsApp, com áudios gravados e, quando necessário, fotos das cartas e resumo escrito.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contato">
+      <div class="container contact-shell reveal-on-scroll">
+        <div class="contact-copy">
+          <p class="eyebrow" data-i18n="contactEyebrow">CONTACT US</p>
+          <h2 data-i18n="contactTitle">Quer conversar antes de escolher sua leitura?</h2>
+          <p data-i18n="contactText">Fale comigo para tirar uma dúvida sobre as consultas, entender qual leitura combina com seu momento ou receber as orientações para começar.</p>
+        </div>
+        <div class="contact-options">
+          <a class="contact-card" href="https://wa.me/15555555555" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <span class="contact-icon">◌</span>
+            <span><small data-i18n="whatsappLabel">WhatsApp</small><strong>+1 (555) 555-5555</strong></span>
+            <span class="contact-arrow">↗</span>
+          </a>
+          <a class="contact-card" href="mailto:contato@venusporthaianne.com">
+            <span class="contact-icon">@</span>
+            <span><small data-i18n="emailLabel">E-mail</small><strong>contato@venusporthaianne.com</strong></span>
+            <span class="contact-arrow">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-orbit footer-orbit-a"></div>
+    <div class="footer-orbit footer-orbit-b"></div>
+    <div class="container footer-grid">
+      <div class="footer-brand-col">
+        <div class="brand footer-brand"><span class="venus-symbol">♀</span><span><strong>Vênus</strong><small>por Thaianne</small></span></div>
+        <p data-i18n="footerTagline">Tarô • espiritualidade • autoconhecimento</p>
+      </div>
+      <div class="footer-nav"><a href="#sobre" data-i18n="navAbout">Sobre</a><a href="#servicos" data-i18n="navServices">Consultas</a><a href="#contato" data-i18n="navContact">Contato</a></div>
+      <div class="footer-meta"><p>venusporthaianne.com</p><p>© <span id="year"></span> Vênus por Thaianne.</p><a href="politica-de-privacidade.html" data-i18n="privacy">Privacidade</a><a href="termos.html" data-i18n="terms">Termos</a></div>
+    </div>
+  </footer>
+
+  <button id="backToTop" class="back-to-top" aria-label="Voltar ao topo"><span>↑</span></button>
+
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Carrinho">
+    <div class="drawer-header"><h2 data-i18n="cartTitle">Seu carrinho</h2><button id="closeCart" aria-label="Fechar">×</button></div>
+    <div id="cartItems" class="cart-items"></div>
+    <div class="coupon-row"><input id="couponInput" placeholder="Cupom de desconto" data-i18n-placeholder="couponPlaceholder" /><button id="applyCoupon" data-i18n="apply">Aplicar</button></div>
+    <p class="coupon-message" id="couponMessage"></p>
+    <div class="totals"><span data-i18n="total">Total</span><strong id="cartTotal">R$ 0,00</strong></div>
+    <button class="btn btn-primary full" id="goCheckout" data-i18n="checkoutBtn">Ir para pagamento</button>
+  </aside>
+
+  <div class="modal" id="checkoutModal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close" id="closeCheckout" aria-label="Fechar">×</button>
+      <p class="eyebrow" data-i18n="checkoutEyebrow">CHECKOUT</p>
+      <h2 data-i18n="checkoutTitle">Finalize sua reserva</h2>
+      <div id="checkoutSummary" class="checkout-summary"></div>
+      <form id="checkoutForm">
+        <div class="form-grid">
+          <label><span data-i18n="fullName">Nome completo</span><input required name="name" autocomplete="name" /></label>
+          <label><span data-i18n="email">E-mail</span><input required type="email" name="email" autocomplete="email" /></label>
+          <label><span data-i18n="phone">WhatsApp</span><input required name="phone" inputmode="tel" /></label>
+          <label><span data-i18n="paymentMethod">Forma de pagamento</span><select id="paymentMethod" name="payment"></select></label>
+        </div>
+        <div id="paymentNote" class="payment-note"></div>
+        <label class="consent"><input required type="checkbox" /><span data-i18n="consent">Li e aceito os termos e entendo que a leitura de tarô é interpretativa e não substitui aconselhamento profissional.</span></label>
+        <button class="btn btn-primary full" type="submit" data-i18n="continuePayment">Continuar para pagamento</button>
+      </form>
+      <p class="secure-note" data-i18n="secureNote">Nesta versão para GitHub Pages, o botão de pagamento usa links externos configuráveis. Nenhum dado de cartão é armazenado neste site.</p>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
