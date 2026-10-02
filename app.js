@@ -45,8 +45,62 @@ let country=localStorage.getItem('venusCountry')||'br';
 let cart=JSON.parse(localStorage.getItem('venusCart')||'[]').map(item=>typeof item==='string'?item:item?.id).filter(Boolean);
 let discount=Number(localStorage.getItem('venusDiscount')||0);
 const $=s=>document.querySelector(s),t=()=>I18N[country],money=v=>new Intl.NumberFormat(t().locale,{style:'currency',currency:t().currency}).format(v),serviceData=s=>s[country];
+function updateWhatsAppLink() {
+  const whatsapp = document.getElementById('whatsappContact');
 
-function updateLanguage(){const tr=t();document.documentElement.lang=tr.lang;document.title=tr.title;const md=document.querySelector('meta[name="description"]');if(md)md.content=tr.description;document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(tr[k]!==undefined)el.innerHTML=tr[k]});document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{const k=el.dataset.i18nPlaceholder;if(tr[k]!==undefined)el.placeholder=tr[k]});$('#countrySelect').value=country;updatePaymentOptions();renderServices();renderCart();}
+  if (!whatsapp) return;
+
+  const message =
+    country === 'br'
+      ? `Olá! Tenho interesse em marcar uma consulta com a Vênus por Thaianne.
+
+Vim pelo site:
+https://venusporthaianne.com`
+
+      : `Hello! I’m interested in booking a reading with Vênus by Thaianne.
+
+I found you through the website:
+https://venusporthaianne.com`;
+
+  whatsapp.href =
+    `https://wa.me/5561999546522?text=${encodeURIComponent(message)}`;
+}
+function updateLanguage() {
+  const tr = t();
+
+  document.documentElement.lang = tr.lang;
+  document.title = tr.title;
+
+  const md = document.querySelector('meta[name="description"]');
+
+  if (md) {
+    md.content = tr.description;
+  }
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.dataset.i18n;
+
+    if (tr[k] !== undefined) {
+      el.innerHTML = tr[k];
+    }
+  });
+
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const k = el.dataset.i18nPlaceholder;
+
+    if (tr[k] !== undefined) {
+      el.placeholder = tr[k];
+    }
+  });
+
+  $('#countrySelect').value = country;
+
+  updatePaymentOptions();
+  renderServices();
+  renderCart();
+
+  updateWhatsAppLink();
+}
 function switchCountry(next){country=next;localStorage.setItem('venusCountry',country);updateLanguage()}
 function renderServices(){$('#serviceGrid').innerHTML=services.map(s=>{const d=serviceData(s);return `<article class="service-card"><div class="service-icon">${s.icon}</div><p class="service-meta">${d.meta}</p><h3>${d.title}</h3><p>${d.description}</p><div class="service-footer"><span class="price">${money(d.price)}</span><button class="add-btn" data-id="${s.id}">${t().add}</button></div></article>`}).join('');document.querySelectorAll('.add-btn').forEach(b=>b.addEventListener('click',()=>addToCart(b.dataset.id)))}
 function addToCart(id){cart.push(id);persist();renderCart();const s=services.find(x=>x.id===id);toast(`${serviceData(s).title} ${t().added}`);openCart()}
@@ -92,3 +146,187 @@ https://venusporthaianne.com`;
   whatsapp.href =
     `https://wa.me/5561999546522?text=${encodeURIComponent(message)}`;
 }
+
+
+function updateLanguage() {
+  const tr = t();
+
+  document.documentElement.lang = tr.lang;
+  document.title = tr.title;
+
+  const md = document.querySelector('meta[name="description"]');
+
+  if (md) {
+    md.content = tr.description;
+  }
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.dataset.i18n;
+
+    if (tr[k] !== undefined) {
+      el.innerHTML = tr[k];
+    }
+  });
+
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const k = el.dataset.i18nPlaceholder;
+
+    if (tr[k] !== undefined) {
+      el.placeholder = tr[k];
+    }
+  });
+
+  $('#countrySelect').value = country;
+
+  updatePaymentOptions();
+  renderServices();
+  renderCart();
+
+  updateWhatsAppLink();
+}
+
+
+function switchCountry(next) {
+  country = next;
+
+  localStorage.setItem(
+    'venusCountry',
+    country
+  );
+
+  updateLanguage();
+}
+
+
+function setupReveal() {
+  const els =
+    document.querySelectorAll('.reveal-on-scroll');
+
+  if (!('IntersectionObserver' in window)) {
+    els.forEach(e =>
+      e.classList.add('is-visible')
+    );
+
+    return;
+  }
+
+  const io =
+    new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.14
+      }
+    );
+
+  els.forEach(e => io.observe(e));
+}
+
+
+function setupBackToTop() {
+  const btn = $('#backToTop');
+
+  const onScroll = () => {
+    if (window.scrollY > 420) {
+      btn.classList.add('show');
+    } else {
+      btn.classList.remove('show');
+    }
+  };
+
+  window.addEventListener(
+    'scroll',
+    onScroll,
+    {
+      passive: true
+    }
+  );
+
+  btn.addEventListener(
+    'click',
+    () =>
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
+  );
+
+  onScroll();
+}
+
+
+$('#countrySelect').addEventListener(
+  'change',
+  e => switchCountry(e.target.value)
+);
+
+$('#openCart').addEventListener(
+  'click',
+  openCart
+);
+
+$('#closeCart').addEventListener(
+  'click',
+  closeCart
+);
+
+$('#drawerBackdrop').addEventListener(
+  'click',
+  closeCart
+);
+
+$('#applyCoupon').addEventListener(
+  'click',
+  applyCoupon
+);
+
+$('#goCheckout').addEventListener(
+  'click',
+  openCheckout
+);
+
+$('#closeCheckout').addEventListener(
+  'click',
+  closeCheckout
+);
+
+$('#checkoutForm').addEventListener(
+  'submit',
+  checkout
+);
+
+$('#paymentMethod').addEventListener(
+  'change',
+  updatePaymentNote
+);
+
+$('.menu-toggle').addEventListener(
+  'click',
+  () =>
+    $('.nav').classList.toggle('show')
+);
+
+document.querySelectorAll('.nav a')
+  .forEach(a =>
+    a.addEventListener(
+      'click',
+      () =>
+        $('.nav').classList.remove('show')
+    )
+  );
+
+
+$('#year').textContent =
+  new Date().getFullYear();
+
+
+updateLanguage();
+setupReveal();
+setupBackToTop();
