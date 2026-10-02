@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Vênus por Thaianne — tarô, espiritualidade e autoconhecimento com atendimentos online." />
+  <meta name="theme-color" content="#f7efe9" />
+  <title>Vênus por Thaianne | Tarô, espiritualidade e autoconhecimento</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="#inicio" aria-label="Vênus por Thaianne"><span class="venus-symbol">♀</span><span><strong>Vênus</strong><small>por Thaianne</small></span></a>
+      <button class="menu-toggle" aria-label="Menu">☰</button>
+      <nav class="nav" aria-label="Navigation">
+        <a href="#sobre" data-i18n="navAbout">Sobre</a>
+        <a href="#servicos" data-i18n="navServices">Consultas</a>
+        <a href="#como-funciona" data-i18n="navHow">Como funciona</a>
+        <a href="#faq" data-i18n="navFaq">FAQ</a>
+        <div class="country-picker"><select id="countrySelect" aria-label="Country"><option value="br">🇧🇷 Brasil</option><option value="us">🇺🇸 United States</option></select></div>
+        <button class="cart-button" id="openCart"><span data-i18n="cart">Carrinho</span> <span id="cartCount">0</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio"><div class="container hero-grid"><div class="hero-copy">
+      <p class="eyebrow" data-i18n="eyebrowHero">TARÔ • ESPIRITUALIDADE • AUTOCONHECIMENTO</p>
+      <h1 data-i18n="heroTitle">Clareza para ouvir sua intuição. <em>Coragem para escolher seu caminho.</em></h1>
+      <p class="hero-text" data-i18n="heroText"></p>
+      <div class="hero-actions"><a class="btn btn-primary" href="#servicos" data-i18n="seeReadings">Ver consultas</a><a class="btn btn-ghost" href="#como-funciona" data-i18n="howWorks">Como funciona</a></div>
+      <p class="microcopy" data-i18n="microcopy"></p>
+    </div><div class="hero-card" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="moon">☾</div><div class="venus-large">♀</div><p>VÊNUS</p><span>por Thaianne</span></div></div></section>
+
+    <section class="section" id="sobre"><div class="container two-col"><div><p class="eyebrow" data-i18n="aboutEyebrow"></p><h2 data-i18n="aboutTitle"></h2></div><div class="prose"><p data-i18n="aboutP1"></p><p data-i18n="aboutP2"></p></div></div></section>
+
+    <section class="section soft" id="servicos"><div class="container"><div class="section-heading"><p class="eyebrow" data-i18n="servicesEyebrow"></p><h2 data-i18n="servicesTitle"></h2><p data-i18n="servicesNote"></p></div><div class="cards" id="serviceGrid"></div></div></section>
+
+    <section class="section" id="como-funciona"><div class="container"><div class="section-heading narrow"><p class="eyebrow" data-i18n="howEyebrow"></p><h2 data-i18n="howTitle"></h2></div><div class="steps">
+      <article><span>01</span><h3 data-i18n="step1Title"></h3><p data-i18n="step1Text"></p></article>
+      <article><span>02</span><h3 data-i18n="step2Title"></h3><p data-i18n="step2Text"></p></article>
+      <article><span>03</span><h3 data-i18n="step3Title"></h3><p data-i18n="step3Text"></p></article>
+    </div></div></section>
+
+    <section class="section manifesto"><div class="container manifesto-inner"><span class="venus-mark">♀</span><blockquote data-i18n="quote"></blockquote><p>— Vênus por Thaianne</p></div></section>
+
+    <section class="section soft" id="faq"><div class="container faq-wrap"><div class="section-heading"><p class="eyebrow" data-i18n="faqEyebrow"></p><h2 data-i18n="faqTitle"></h2></div><div class="faq-list">
+      <details><summary data-i18n="q1"></summary><p data-i18n="a1"></p></details>
+      <details><summary data-i18n="q2"></summary><p data-i18n="a2"></p></details>
+      <details><summary data-i18n="q3"></summary><p data-i18n="a3"></p></details>
+      <details><summary data-i18n="q4"></summary><p data-i18n="a4"></p></details>
+    </div></div></section>
+
+    <section class="section contact"><div class="container contact-box"><div><p class="eyebrow">VÊNUS POR THAIANNE</p><h2 data-i18n="contactTitle"></h2><p data-i18n="contactText"></p></div><a class="btn btn-primary" href="#servicos" data-i18n="contactBtn"></a></div></section>
+  </main>
+
+  <footer class="footer"><div class="container footer-grid"><div class="brand footer-brand"><span class="venus-symbol">♀</span><span><strong>Vênus</strong><small>por Thaianne</small></span></div><div><p>venusporthaianne.com</p><p>© <span id="year"></span> Vênus por Thaianne.</p></div><div><a href="politica-de-privacidade.html" data-i18n="privacy">Privacidade</a><a href="termos.html" data-i18n="terms">Termos</a></div></div></footer>
+
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Cart"><div class="drawer-header"><h2 data-i18n="cartTitle"></h2><button id="closeCart" aria-label="Close">×</button></div><div id="cartItems" class="cart-items"></div><div class="coupon-row"><input id="couponInput" data-i18n-placeholder="couponPlaceholder" /><button id="applyCoupon" data-i18n="apply"></button></div><p class="coupon-message" id="couponMessage"></p><div class="totals"><span data-i18n="total"></span><strong id="cartTotal"></strong></div><button class="btn btn-primary full" id="goCheckout" data-i18n="checkoutBtn"></button></aside>
+
+  <div class="modal" id="checkoutModal" aria-hidden="true"><div class="modal-card"><button class="modal-close" id="closeCheckout" aria-label="Close">×</button><p class="eyebrow" data-i18n="checkoutEyebrow"></p><h2 data-i18n="checkoutTitle"></h2><form id="checkoutForm"><div class="form-grid">
+    <label><span data-i18n="fullName"></span><input required name="name" autocomplete="name" /></label>
+    <label><span data-i18n="email"></span><input required type="email" name="email" autocomplete="email" /></label>
+    <label><span data-i18n="phone"></span><input required name="phone" inputmode="tel" /></label>
+    <label><span data-i18n="paymentMethod"></span><select name="payment" id="paymentMethod"></select></label>
+  </div><div class="payment-note" id="paymentNote"></div><div class="checkout-summary" id="checkoutSummary"></div><label class="consent"><input required type="checkbox" /><span data-i18n="consent"></span></label><button class="btn btn-primary full" type="submit" data-i18n="continuePayment"></button></form><p class="secure-note" data-i18n="secureNote"></p></div></div>
+
+  <div class="toast" id="toast"></div>
+  <script src="assets/app.js"></script>
+</body>
+</html>
