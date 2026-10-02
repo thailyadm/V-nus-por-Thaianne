@@ -1,11 +1,13 @@
 const CONFIG = {
   whatsapp: '+5561999546522',
   email: 'contato@venusporthaianne.com',
+
   paymentLinks: {
     us_card: '',
     br_card: '',
     br_pix: ''
   },
+
   coupons: {
     VENUS10: 0.10,
     BEMVINDA15: 0.15
@@ -511,14 +513,16 @@ const services = [
     br: {
       title: 'Leitura Essencial',
       meta: '1 pergunta • leitura objetiva',
-      description: 'Para uma questão específica que precisa de clareza, contexto e orientação simbólica.',
+      description:
+        'Para uma questão específica que precisa de clareza, contexto e orientação simbólica.',
       price: 50
     },
 
     us: {
       title: 'Essential Reading',
       meta: '1 question • focused reading',
-      description: 'For one specific question that needs clarity, context and symbolic guidance.',
+      description:
+        'For one specific question that needs clarity, context and symbolic guidance.',
       price: 15
     }
   },
@@ -531,14 +535,16 @@ const services = [
     br: {
       title: 'Leitura Vênus',
       meta: '3 perguntas • leitura aprofundada',
-      description: 'Uma leitura mais completa para observar diferentes aspectos de uma situação ou fase da vida.',
+      description:
+        'Uma leitura mais completa para observar diferentes aspectos de uma situação ou fase da vida.',
       price: 100
     },
 
     us: {
       title: 'Vênus Reading',
       meta: '3 questions • in-depth reading',
-      description: 'A deeper reading to explore different aspects of a situation or phase of life.',
+      description:
+        'A deeper reading to explore different aspects of a situation or phase of life.',
       price: 25
     }
   },
@@ -551,14 +557,16 @@ const services = [
     br: {
       title: 'Caminhos & Possibilidades',
       meta: 'tiragem ampla • panorama',
-      description: 'Para explorar cenário atual, desafios, tendências, oportunidades e próximos passos possíveis.',
+      description:
+        'Para explorar cenário atual, desafios, tendências, oportunidades e próximos passos possíveis.',
       price: 160
     },
 
     us: {
       title: 'Paths & Possibilities',
       meta: 'expanded spread • overview',
-      description: 'Explore your current situation, challenges, trends, opportunities and possible next steps.',
+      description:
+        'Explore your current situation, challenges, trends, opportunities and possible next steps.',
       price: 35
     }
   },
@@ -571,14 +579,16 @@ const services = [
     br: {
       title: 'Amor & Relações',
       meta: 'tema afetivo • vínculos',
-      description: 'Leitura voltada a dinâmicas, sentimentos, limites, padrões e possibilidades no campo afetivo.',
+      description:
+        'Leitura voltada a dinâmicas, sentimentos, limites, padrões e possibilidades no campo afetivo.',
       price: 130
     },
 
     us: {
       title: 'Love & Relationships',
       meta: 'love • relationships',
-      description: 'A reading focused on dynamics, feelings, boundaries, patterns and possibilities in relationships.',
+      description:
+        'A reading focused on dynamics, feelings, boundaries, patterns and possibilities in relationships.',
       price: 30
     }
   },
@@ -591,14 +601,16 @@ const services = [
     br: {
       title: 'Direcionamento Espiritual',
       meta: 'energia • reflexão',
-      description: 'Uma leitura focada em autoconhecimento, padrões internos, energia do momento e direcionamento pessoal.',
+      description:
+        'Uma leitura focada em autoconhecimento, padrões internos, energia do momento e direcionamento pessoal.',
       price: 130
     },
 
     us: {
       title: 'Spiritual Guidance',
       meta: 'energy • reflection',
-      description: 'A reading focused on self-knowledge, inner patterns, your current energy and personal direction.',
+      description:
+        'A reading focused on self-knowledge, inner patterns, your current energy and personal direction.',
       price: 30
     }
   },
@@ -611,14 +623,16 @@ const services = [
     br: {
       title: 'Leitura Completa',
       meta: 'sessão premium • múltiplos temas',
-      description: 'Para quem quer uma leitura extensa, com mais espaço para perguntas e conexão entre diferentes áreas.',
+      description:
+        'Para quem quer uma leitura extensa, com mais espaço para perguntas e conexão entre diferentes áreas.',
       price: 250
     },
 
     us: {
       title: 'Complete Reading',
       meta: 'premium • multiple areas',
-      description: 'An extensive reading with more space for questions and connections across different areas of life.',
+      description:
+        'An extensive reading with more space for questions and connections across different areas of life.',
       price: 45
     }
   }
@@ -649,26 +663,29 @@ let discount =
 
 
 const $ =
-  s => document.querySelector(s);
+  selector =>
+    document.querySelector(selector);
 
 
 const t =
-  () => I18N[country];
+  () =>
+    I18N[country];
 
 
 const money =
-  v =>
+  value =>
     new Intl.NumberFormat(
       t().locale,
       {
         style: 'currency',
         currency: t().currency
       }
-    ).format(v);
+    ).format(value);
 
 
 const serviceData =
-  s => s[country];
+  service =>
+    service[country];
 
 
 function updateWhatsAppLink() {
@@ -678,6 +695,7 @@ function updateWhatsAppLink() {
       'whatsappContact'
     );
 
+
   if (!whatsapp) return;
 
 
@@ -686,10 +704,14 @@ function updateWhatsAppLink() {
     country === 'br'
 
       ? `Olá! Tenho interesse em marcar uma consulta com a Vênus por Thaianne.
-Vim pelo site: venusporthaianne.com`
+
+Vim pelo site:
+https://venusporthaianne.com`
 
       : `Hello! I’m interested in booking a reading with Vênus by Thaianne.
-I found you through the website: venusporthaianne.com`;
+
+I found you through the website:
+https://venusporthaianne.com`;
 
 
   whatsapp.href =
@@ -699,7 +721,8 @@ I found you through the website: venusporthaianne.com`;
 
 function updateLanguage() {
 
-  const tr = t();
+  const tr =
+    t();
 
 
   document.documentElement.lang =
@@ -710,30 +733,32 @@ function updateLanguage() {
     tr.title;
 
 
-  const md =
+  const metaDescription =
     document.querySelector(
       'meta[name="description"]'
     );
 
 
-  if (md) {
-    md.content =
+  if (metaDescription) {
+
+    metaDescription.content =
       tr.description;
+
   }
 
 
   document
     .querySelectorAll('[data-i18n]')
-    .forEach(el => {
+    .forEach(element => {
 
-      const k =
-        el.dataset.i18n;
+      const key =
+        element.dataset.i18n;
 
 
-      if (tr[k] !== undefined) {
+      if (tr[key] !== undefined) {
 
-        el.innerHTML =
-          tr[k];
+        element.innerHTML =
+          tr[key];
 
       }
 
@@ -742,24 +767,32 @@ function updateLanguage() {
 
   document
     .querySelectorAll('[data-i18n-placeholder]')
-    .forEach(el => {
+    .forEach(element => {
 
-      const k =
-        el.dataset.i18nPlaceholder;
+      const key =
+        element.dataset.i18nPlaceholder;
 
 
-      if (tr[k] !== undefined) {
+      if (tr[key] !== undefined) {
 
-        el.placeholder =
-          tr[k];
+        element.placeholder =
+          tr[key];
 
       }
 
     });
 
 
-  $('#countrySelect').value =
-    country;
+  const countrySelect =
+    $('#countrySelect');
+
+
+  if (countrySelect) {
+
+    countrySelect.value =
+      country;
+
+  }
 
 
   updatePaymentOptions();
@@ -772,10 +805,10 @@ function updateLanguage() {
 }
 
 
-function switchCountry(next) {
+function switchCountry(nextCountry) {
 
   country =
-    next;
+    nextCountry;
 
 
   localStorage.setItem(
@@ -790,13 +823,19 @@ function switchCountry(next) {
 
 function renderServices() {
 
-  $('#serviceGrid').innerHTML =
+  const grid =
+    $('#serviceGrid');
 
+
+  if (!grid) return;
+
+
+  grid.innerHTML =
     services
-      .map(s => {
+      .map(service => {
 
-        const d =
-          serviceData(s);
+        const data =
+          serviceData(service);
 
 
         return `
@@ -804,30 +843,31 @@ function renderServices() {
           <article class="service-card">
 
             <div class="service-icon">
-              ${s.icon}
+              ${service.icon}
             </div>
 
             <p class="service-meta">
-              ${d.meta}
+              ${data.meta}
             </p>
 
             <h3>
-              ${d.title}
+              ${data.title}
             </h3>
 
             <p>
-              ${d.description}
+              ${data.description}
             </p>
 
             <div class="service-footer">
 
               <span class="price">
-                ${money(d.price)}
+                ${money(data.price)}
               </span>
 
               <button
                 class="add-btn"
-                data-id="${s.id}"
+                data-id="${service.id}"
+                type="button"
               >
                 ${t().add}
               </button>
@@ -842,23 +882,33 @@ function renderServices() {
       .join('');
 
 
-  document
+  grid
     .querySelectorAll('.add-btn')
-    .forEach(b =>
+    .forEach(button => {
 
-      b.addEventListener(
+      button.addEventListener(
         'click',
         () =>
           addToCart(
-            b.dataset.id
+            button.dataset.id
           )
-      )
+      );
 
-    );
+    });
 }
 
 
 function addToCart(id) {
+
+  const service =
+    services.find(
+      item =>
+        item.id === id
+    );
+
+
+  if (!service) return;
+
 
   cart.push(id);
 
@@ -866,21 +916,9 @@ function addToCart(id) {
 
   renderCart();
 
-
-  const s =
-    services.find(
-      x => x.id === id
-    );
-
-
-  if (s) {
-
-    toast(
-      `${serviceData(s).title} ${t().added}`
-    );
-
-  }
-
+  toast(
+    `${serviceData(service).title} ${t().added}`
+  );
 
   openCart();
 }
@@ -910,7 +948,7 @@ function persist() {
 
   localStorage.setItem(
     'venusDiscount',
-    discount
+    String(discount)
   );
 }
 
@@ -920,17 +958,18 @@ function subtotal() {
   return cart.reduce(
     (sum, id) => {
 
-      const s =
+      const service =
         services.find(
-          x => x.id === id
+          item =>
+            item.id === id
         );
 
 
       return (
         sum +
         (
-          s
-            ? serviceData(s).price
+          service
+            ? serviceData(service).price
             : 0
         )
       );
@@ -950,101 +989,137 @@ function total() {
 
 function renderCart() {
 
-  $('#cartCount').textContent =
+  const count =
+    $('#cartCount');
+
+  const items =
+    $('#cartItems');
+
+  const totalElement =
+    $('#cartTotal');
+
+
+  if (!count || !items || !totalElement) {
+    return;
+  }
+
+
+  count.textContent =
     cart.length;
 
 
-  $('#cartItems').innerHTML =
+  if (!cart.length) {
 
-    cart.length
+    items.innerHTML =
+      `<p>${t().emptyCart}</p>`;
 
-      ? cart
-          .map(
-            (id, idx) => {
+  } else {
 
-              const s =
-                services.find(
-                  x => x.id === id
-                );
+    items.innerHTML =
+      cart
+        .map(
+          (id, index) => {
 
-
-              if (!s) return '';
-
-
-              const d =
-                serviceData(s);
+            const service =
+              services.find(
+                item =>
+                  item.id === id
+              );
 
 
-              return `
+            if (!service) {
+              return '';
+            }
 
-                <div class="cart-item">
 
-                  <div>
+            const data =
+              serviceData(service);
 
-                    <h4>
-                      ${d.title}
-                    </h4>
 
-                    <p>
-                      ${d.meta}
-                    </p>
+            return `
 
-                    <strong>
-                      ${money(d.price)}
-                    </strong>
+              <div class="cart-item">
 
-                  </div>
+                <div>
 
-                  <button
-                    class="remove"
-                    data-index="${idx}"
-                  >
-                    ${t().remove}
-                  </button>
+                  <h4>
+                    ${data.title}
+                  </h4>
+
+                  <p>
+                    ${data.meta}
+                  </p>
+
+                  <strong>
+                    ${money(data.price)}
+                  </strong>
 
                 </div>
 
-              `;
+                <button
+                  class="remove"
+                  data-index="${index}"
+                  type="button"
+                >
+                  ${t().remove}
+                </button>
 
-            }
-          )
-          .join('')
+              </div>
 
-      : `<p>${t().emptyCart}</p>`;
+            `;
+
+          }
+        )
+        .join('');
+
+  }
 
 
-  document
+  items
     .querySelectorAll('.remove')
-    .forEach(b =>
+    .forEach(button => {
 
-      b.addEventListener(
+      button.addEventListener(
         'click',
         () =>
           removeFromCart(
             Number(
-              b.dataset.index
+              button.dataset.index
             )
           )
-      )
+      );
 
-    );
+    });
 
 
-  $('#cartTotal').textContent =
+  totalElement.textContent =
     money(total());
 }
 
 
 function applyCoupon() {
 
+  const input =
+    $('#couponInput');
+
+
+  const message =
+    $('#couponMessage');
+
+
+  if (!input || !message) {
+    return;
+  }
+
+
   const code =
-    $('#couponInput')
-      .value
+    input.value
       .trim()
       .toUpperCase();
 
 
   if (
+    code &&
     CONFIG.coupons[code]
   ) {
 
@@ -1052,17 +1127,16 @@ function applyCoupon() {
       CONFIG.coupons[code];
 
 
-    $('#couponMessage')
-      .textContent =
+    message.textContent =
       `${t().couponApplied}: ${Math.round(discount * 100)}%.`;
 
   } else {
 
-    discount = 0;
+    discount =
+      0;
 
 
-    $('#couponMessage')
-      .textContent =
+    message.textContent =
       code
         ? t().invalidCoupon
         : t().enterCoupon;
@@ -1078,27 +1152,41 @@ function applyCoupon() {
 
 function openCart() {
 
-  $('#cartDrawer')
-    .classList
-    .add('open');
+  const drawer =
+    $('#cartDrawer');
+
+  const backdrop =
+    $('#drawerBackdrop');
 
 
-  $('#drawerBackdrop')
-    .classList
-    .add('show');
+  if (drawer) {
+    drawer.classList.add('open');
+  }
+
+
+  if (backdrop) {
+    backdrop.classList.add('show');
+  }
 }
 
 
 function closeCart() {
 
-  $('#cartDrawer')
-    .classList
-    .remove('open');
+  const drawer =
+    $('#cartDrawer');
+
+  const backdrop =
+    $('#drawerBackdrop');
 
 
-  $('#drawerBackdrop')
-    .classList
-    .remove('show');
+  if (drawer) {
+    drawer.classList.remove('open');
+  }
+
+
+  if (backdrop) {
+    backdrop.classList.remove('show');
+  }
 }
 
 
@@ -1117,16 +1205,19 @@ function openCheckout() {
   closeCart();
 
 
-  $('#checkoutModal')
-    .classList
-    .add('show');
+  const modal =
+    $('#checkoutModal');
 
 
-  $('#checkoutModal')
-    .setAttribute(
-      'aria-hidden',
-      'false'
-    );
+  if (!modal) return;
+
+
+  modal.classList.add('show');
+
+  modal.setAttribute(
+    'aria-hidden',
+    'false'
+  );
 
 
   renderCheckout();
@@ -1135,22 +1226,32 @@ function openCheckout() {
 
 function closeCheckout() {
 
-  $('#checkoutModal')
-    .classList
-    .remove('show');
+  const modal =
+    $('#checkoutModal');
 
 
-  $('#checkoutModal')
-    .setAttribute(
-      'aria-hidden',
-      'true'
-    );
+  if (!modal) return;
+
+
+  modal.classList.remove('show');
+
+  modal.setAttribute(
+    'aria-hidden',
+    'true'
+  );
 }
 
 
 function renderCheckout() {
 
-  $('#checkoutSummary').innerHTML = `
+  const summary =
+    $('#checkoutSummary');
+
+
+  if (!summary) return;
+
+
+  summary.innerHTML = `
 
     <strong>
       ${t().summary}:
@@ -1161,20 +1262,23 @@ function renderCheckout() {
     ${cart
       .map(id => {
 
-        const s =
+        const service =
           services.find(
-            x => x.id === id
+            item =>
+              item.id === id
           );
 
 
-        if (!s) return '';
+        if (!service) {
+          return '';
+        }
 
 
-        const d =
-          serviceData(s);
+        const data =
+          serviceData(service);
 
 
-        return `${d.title} — ${money(d.price)}`;
+        return `${data.title} — ${money(data.price)}`;
 
       })
       .join('<br>')}
@@ -1237,29 +1341,33 @@ function updatePaymentNote() {
   const select =
     $('#paymentMethod');
 
+  const note =
+    $('#paymentNote');
 
-  if (!select) return;
+
+  if (!select || !note) {
+    return;
+  }
 
 
-  $('#paymentNote').innerHTML =
-
+  note.innerHTML =
     select.value === 'pix'
-
       ? t().pixNote
-
       : t().cardNote;
 }
 
 
-function checkout(e) {
+function checkout(event) {
 
-  e.preventDefault();
+  event.preventDefault();
+
+
+  const form =
+    event.target;
 
 
   const data =
-    new FormData(
-      e.target
-    );
+    new FormData(form);
 
 
   const method =
@@ -1279,14 +1387,14 @@ function checkout(e) {
       : 'us_card';
 
 
-  const link =
+  const paymentLink =
     CONFIG.paymentLinks[key];
 
 
-  if (link) {
+  if (paymentLink) {
 
     window.location.href =
-      link;
+      paymentLink;
 
     return;
   }
@@ -1296,32 +1404,39 @@ function checkout(e) {
     cart
       .map(id => {
 
-        const s =
+        const service =
           services.find(
-            x => x.id === id
+            item =>
+              item.id === id
           );
 
 
-        if (!s) return '';
+        if (!service) {
+          return '';
+        }
 
 
-        const d =
-          serviceData(s);
+        const data =
+          serviceData(service);
 
 
-        return `• ${d.title} (${money(d.price)})`;
+        return (
+          `• ${data.title} ` +
+          `(${money(data.price)})`
+        );
 
       })
+      .filter(Boolean)
       .join('\n');
 
 
-  const payLabel =
+  const paymentLabel =
     method === 'pix'
       ? 'Pix'
       : t().card;
 
 
-  const intro =
+  const greeting =
 
     country === 'br'
 
@@ -1330,15 +1445,15 @@ function checkout(e) {
       : 'Hello! I would like to complete a purchase from Vênus by Thaianne.';
 
 
-  const msg =
+  const message =
     encodeURIComponent(
 
-      `${intro}
+      `${greeting}
 
 ${order}
 
 ${t().total}: ${money(total())}
-${t().paymentMethod}: ${payLabel}
+${t().paymentMethod}: ${paymentLabel}
 ${t().fullName}: ${data.get('name')}
 ${t().email}: ${data.get('email')}
 WhatsApp: ${data.get('phone')}`
@@ -1347,7 +1462,7 @@ WhatsApp: ${data.get('phone')}`
 
 
   window.open(
-    `https://wa.me/${CONFIG.whatsapp}?text=${msg}`,
+    `https://wa.me/5561999546522?text=${message}`,
     '_blank'
   );
 }
@@ -1355,24 +1470,30 @@ WhatsApp: ${data.get('phone')}`
 
 function toast(text) {
 
-  const el =
+  const element =
     $('#toast');
 
 
-  el.textContent =
+  if (!element) return;
+
+
+  element.textContent =
     text;
 
 
-  el.classList.add(
+  element.classList.add(
     'show'
   );
 
 
   setTimeout(
-    () =>
-      el.classList.remove(
+    () => {
+
+      element.classList.remove(
         'show'
-      ),
+      );
+
+    },
     2200
   );
 }
@@ -1380,7 +1501,7 @@ function toast(text) {
 
 function setupReveal() {
 
-  const els =
+  const elements =
     document.querySelectorAll(
       '.reveal-on-scroll'
     );
@@ -1393,18 +1514,18 @@ function setupReveal() {
     )
   ) {
 
-    els.forEach(e =>
-      e.classList.add(
-        'is-visible'
-      )
+    elements.forEach(
+      element =>
+        element.classList.add(
+          'is-visible'
+        )
     );
-
 
     return;
   }
 
 
-  const io =
+  const observer =
     new IntersectionObserver(
 
       entries => {
@@ -1421,7 +1542,7 @@ function setupReveal() {
               );
 
 
-              io.unobserve(
+              observer.unobserve(
                 entry.target
               );
 
@@ -1439,40 +1560,44 @@ function setupReveal() {
     );
 
 
-  els.forEach(e =>
-    io.observe(e)
+  elements.forEach(
+    element =>
+      observer.observe(
+        element
+      )
   );
 }
 
 
 function setupBackToTop() {
 
-  const btn =
+  const button =
     $('#backToTop');
 
 
-  if (!btn) return;
+  if (!button) return;
 
 
-  const onScroll = () => {
+  const onScroll =
+    () => {
 
-    if (
-      window.scrollY > 420
-    ) {
+      if (
+        window.scrollY > 420
+      ) {
 
-      btn.classList.add(
-        'show'
-      );
+        button.classList.add(
+          'show'
+        );
 
-    } else {
+      } else {
 
-      btn.classList.remove(
-        'show'
-      );
+        button.classList.remove(
+          'show'
+        );
 
-    }
+      }
 
-  };
+    };
 
 
   window.addEventListener(
@@ -1484,23 +1609,26 @@ function setupBackToTop() {
   );
 
 
-  btn.addEventListener(
+  button.addEventListener(
     'click',
-    () =>
+    () => {
 
       window.scrollTo(
         {
           top: 0,
           behavior: 'smooth'
         }
-      )
+      );
 
+    }
   );
 
 
   onScroll();
 }
 
+
+/* COUNTRY */
 
 const countrySelect =
   $('#countrySelect');
@@ -1510,14 +1638,16 @@ if (countrySelect) {
 
   countrySelect.addEventListener(
     'change',
-    e =>
+    event =>
       switchCountry(
-        e.target.value
+        event.target.value
       )
   );
 
 }
 
+
+/* CART */
 
 const openCartButton =
   $('#openCart');
@@ -1561,6 +1691,8 @@ if (drawerBackdrop) {
 }
 
 
+/* COUPON */
+
 const applyCouponButton =
   $('#applyCoupon');
 
@@ -1574,6 +1706,8 @@ if (applyCouponButton) {
 
 }
 
+
+/* CHECKOUT */
 
 const checkoutButton =
   $('#goCheckout');
@@ -1631,6 +1765,8 @@ if (paymentMethod) {
 }
 
 
+/* MOBILE MENU */
+
 const menuToggle =
   $('.menu-toggle');
 
@@ -1639,10 +1775,21 @@ if (menuToggle) {
 
   menuToggle.addEventListener(
     'click',
-    () =>
-      $('.nav')
-        .classList
-        .toggle('show')
+    () => {
+
+      const nav =
+        $('.nav');
+
+
+      if (nav) {
+
+        nav.classList.toggle(
+          'show'
+        );
+
+      }
+
+    }
   );
 
 }
@@ -1650,18 +1797,31 @@ if (menuToggle) {
 
 document
   .querySelectorAll('.nav a')
-  .forEach(a =>
+  .forEach(link => {
 
-    a.addEventListener(
+    link.addEventListener(
       'click',
-      () =>
-        $('.nav')
-          .classList
-          .remove('show')
-    )
+      () => {
 
-  );
+        const nav =
+          $('.nav');
 
+
+        if (nav) {
+
+          nav.classList.remove(
+            'show'
+          );
+
+        }
+
+      }
+    );
+
+  });
+
+
+/* YEAR */
 
 const year =
   $('#year');
@@ -1675,6 +1835,8 @@ if (year) {
 
 }
 
+
+/* INITIALIZE */
 
 updateLanguage();
 
