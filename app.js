@@ -2,13 +2,9 @@ const CONFIG = {
   whatsapp: '5561999546522',
   email: 'contato@venusporthaianne.com',
 
-  /*
-   * Depois vamos colocar aqui a URL da função segura
-   * que vai criar o checkout do Mercado Pago.
-   *
-   * Exemplo:
-   * checkoutEndpoint: 'https://seu-endpoint.vercel.app/api/create-checkout'
-   */
+  mercadoPagoGeneral:
+    'https://link.mercadopago.com.br/venusporthaianne',
+
   checkoutEndpoint: '',
 
   coupons: {
@@ -16,7 +12,6 @@ const CONFIG = {
     BEMVINDA15: 0.15
   }
 };
-
 
 const I18N = {
 
