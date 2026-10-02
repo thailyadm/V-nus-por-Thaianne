@@ -1686,43 +1686,41 @@ code {
   justify-self: end;
 
   width: 100%;
-  max-width: 480px;
+  max-width: 400px;
 }
 
 .hero-logo img {
   display: block;
 
   width: 100%;
-  max-width: 480px;
+  max-width: 400px;
   height: auto;
 
   object-fit: contain;
 
   border-radius: 50%;
 
+  /* sombra bem mais delicada */
   filter:
     drop-shadow(
-      0 20px 35px rgba(111, 52, 66, 0.12)
+      0 12px 25px rgba(111, 52, 66, 0.07)
     );
 }
 
 @media (max-width: 860px) {
-
   .hero-logo {
     justify-self: center;
-    max-width: 390px;
+    max-width: 340px;
   }
 
   .hero-logo img {
-    max-width: 390px;
+    max-width: 340px;
   }
 }
 
 @media (max-width: 580px) {
-
   .hero-logo,
   .hero-logo img {
-    max-width: 320px;
+    max-width: 280px;
   }
-
 }
