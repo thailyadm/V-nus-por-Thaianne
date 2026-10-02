@@ -1,12 +1,15 @@
 const CONFIG = {
-  whatsapp: '+5561999546522',
+  whatsapp: '5561999546522',
   email: 'contato@venusporthaianne.com',
 
-  paymentLinks: {
-    us_card: '',
-    br_card: '',
-    br_pix: ''
-  },
+  /*
+   * Depois vamos colocar aqui a URL da função segura
+   * que vai criar o checkout do Mercado Pago.
+   *
+   * Exemplo:
+   * checkoutEndpoint: 'https://seu-endpoint.vercel.app/api/create-checkout'
+   */
+  checkoutEndpoint: '',
 
   coupons: {
     VENUS10: 0.10,
@@ -220,7 +223,7 @@ const I18N = {
       'Continuar para pagamento',
 
     secureNote:
-      'Nesta versão para GitHub Pages, o botão de pagamento usa links externos configuráveis. Nenhum dado de cartão é armazenado neste site.',
+      'O pagamento será realizado em uma página segura do provedor de pagamento. Nenhum dado de cartão é armazenado neste site.',
 
     added:
       'adicionada ao carrinho.',
@@ -244,13 +247,16 @@ const I18N = {
       'Resumo',
 
     cardNote:
-      '<strong>Cartão:</strong> o pagamento será concluído em uma página segura do provedor que você configurar.',
+      '<strong>Cartão:</strong> o pagamento será realizado em uma página segura do provedor de pagamento.',
 
     pixNote:
-      '<strong>Pix:</strong> o pagamento será concluído no link Pix do provedor configurado.',
+      '<strong>Pix:</strong> o pagamento será realizado em uma página segura do provedor de pagamento.',
 
     addBefore:
-      'Adicione uma consulta antes de continuar.'
+      'Adicione uma consulta antes de continuar.',
+
+    checkoutSetup:
+      'O pagamento ainda não foi configurado. Entre em contato para finalizar sua reserva.'
   },
 
 
@@ -468,7 +474,7 @@ const I18N = {
       'Continue to payment',
 
     secureNote:
-      'On this GitHub Pages version, payment buttons use configurable external links. No card information is stored on this website.',
+      'Payment will be completed on a secure payment-provider page. No card information is stored on this website.',
 
     added:
       'added to your cart.',
@@ -492,13 +498,16 @@ const I18N = {
       'Summary',
 
     cardNote:
-      '<strong>Card:</strong> payment will be completed on the secure page of the payment provider you configure.',
+      '<strong>Card:</strong> payment will be completed on a secure payment-provider page.',
 
     pixNote:
-      '<strong>Pix:</strong> payment will be completed through the configured Pix provider link.',
+      '<strong>Pix:</strong> payment will be completed on a secure payment-provider page.',
 
     addBefore:
-      'Add a reading before continuing.'
+      'Add a reading before continuing.',
+
+    checkoutSetup:
+      'Payment has not been configured yet. Please contact me to complete your booking.'
   }
 
 };
@@ -507,26 +516,24 @@ const I18N = {
 const services = [
 
   {
-  id: 'essencial',
-  icon: '✦',
+    id: 'essencial',
+    icon: '✦',
 
-  br: {
-    title: 'Leitura Essencial',
-    meta: '1 pergunta • leitura objetiva',
-    description:
-      'Para uma questão específica que precisa de clareza, contexto e orientação simbólica.',
-    price: 50,
-    paymentLink: 'https://mpago.li/2KztQtN'
-  },
+    br: {
+      title: 'Leitura Essencial',
+      meta: '1 pergunta • leitura objetiva',
+      description:
+        'Para uma questão específica que precisa de clareza, contexto e orientação simbólica.',
+      price: 50
+    },
 
-  us: {
-    title: 'Essential Reading',
-    meta: '1 question • focused reading',
-    description:
-      'For one specific question that needs clarity, context and symbolic guidance.',
-    price: 15
-  }
-}
+    us: {
+      title: 'Essential Reading',
+      meta: '1 question • focused reading',
+      description:
+        'For one specific question that needs clarity, context and symbolic guidance.',
+      price: 15
+    }
   },
 
 
@@ -646,16 +653,33 @@ let country =
   localStorage.getItem('venusCountry') || 'br';
 
 
-let cart =
-  JSON.parse(
-    localStorage.getItem('venusCart') || '[]'
-  )
-  .map(item =>
-    typeof item === 'string'
-      ? item
-      : item?.id
-  )
-  .filter(Boolean);
+let cart = [];
+
+try {
+
+  const savedCart =
+    JSON.parse(
+      localStorage.getItem('venusCart') || '[]'
+    );
+
+  if (Array.isArray(savedCart)) {
+
+    cart =
+      savedCart
+        .map(item =>
+          typeof item === 'string'
+            ? item
+            : item?.id
+        )
+        .filter(Boolean);
+
+  }
+
+} catch (error) {
+
+  cart = [];
+
+}
 
 
 let discount =
@@ -809,6 +833,14 @@ function updateLanguage() {
 
 function switchCountry(nextCountry) {
 
+  if (
+    nextCountry !== 'br' &&
+    nextCountry !== 'us'
+  ) {
+    return;
+  }
+
+
   country =
     nextCountry;
 
@@ -912,21 +944,36 @@ function addToCart(id) {
   if (!service) return;
 
 
+  /*
+   * Permite várias consultas no carrinho.
+   * O checkout dinâmico vai somar todas.
+   */
   cart.push(id);
+
 
   persist();
 
   renderCart();
 
+
   toast(
     `${serviceData(service).title} ${t().added}`
   );
+
 
   openCart();
 }
 
 
 function removeFromCart(index) {
+
+  if (
+    index < 0 ||
+    index >= cart.length
+  ) {
+    return;
+  }
+
 
   cart.splice(
     index,
@@ -994,14 +1041,20 @@ function renderCart() {
   const count =
     $('#cartCount');
 
+
   const items =
     $('#cartItems');
+
 
   const totalElement =
     $('#cartTotal');
 
 
-  if (!count || !items || !totalElement) {
+  if (
+    !count ||
+    !items ||
+    !totalElement
+  ) {
     return;
   }
 
@@ -1072,6 +1125,7 @@ function renderCart() {
 
           }
         )
+        .filter(Boolean)
         .join('');
 
   }
@@ -1109,7 +1163,10 @@ function applyCoupon() {
     $('#couponMessage');
 
 
-  if (!input || !message) {
+  if (
+    !input ||
+    !message
+  ) {
     return;
   }
 
@@ -1162,12 +1219,20 @@ function openCart() {
 
 
   if (drawer) {
-    drawer.classList.add('open');
+
+    drawer.classList.add(
+      'open'
+    );
+
   }
 
 
   if (backdrop) {
-    backdrop.classList.add('show');
+
+    backdrop.classList.add(
+      'show'
+    );
+
   }
 }
 
@@ -1182,12 +1247,20 @@ function closeCart() {
 
 
   if (drawer) {
-    drawer.classList.remove('open');
+
+    drawer.classList.remove(
+      'open'
+    );
+
   }
 
 
   if (backdrop) {
-    backdrop.classList.remove('show');
+
+    backdrop.classList.remove(
+      'show'
+    );
+
   }
 }
 
@@ -1211,10 +1284,15 @@ function openCheckout() {
     $('#checkoutModal');
 
 
-  if (!modal) return;
+  if (!modal) {
+    return;
+  }
 
 
-  modal.classList.add('show');
+  modal.classList.add(
+    'show'
+  );
+
 
   modal.setAttribute(
     'aria-hidden',
@@ -1232,10 +1310,15 @@ function closeCheckout() {
     $('#checkoutModal');
 
 
-  if (!modal) return;
+  if (!modal) {
+    return;
+  }
 
 
-  modal.classList.remove('show');
+  modal.classList.remove(
+    'show'
+  );
+
 
   modal.setAttribute(
     'aria-hidden',
@@ -1250,7 +1333,9 @@ function renderCheckout() {
     $('#checkoutSummary');
 
 
-  if (!summary) return;
+  if (!summary) {
+    return;
+  }
 
 
   summary.innerHTML = `
@@ -1283,6 +1368,7 @@ function renderCheckout() {
         return `${data.title} — ${money(data.price)}`;
 
       })
+      .filter(Boolean)
       .join('<br>')}
 
     <br><br>
@@ -1304,7 +1390,9 @@ function updatePaymentOptions() {
     $('#paymentMethod');
 
 
-  if (!select) return;
+  if (!select) {
+    return;
+  }
 
 
   if (country === 'br') {
@@ -1343,11 +1431,15 @@ function updatePaymentNote() {
   const select =
     $('#paymentMethod');
 
+
   const note =
     $('#paymentNote');
 
 
-  if (!select || !note) {
+  if (
+    !select ||
+    !note
+  ) {
     return;
   }
 
@@ -1359,9 +1451,34 @@ function updatePaymentNote() {
 }
 
 
-function checkout(event) {
+async function checkout(event) {
 
   event.preventDefault();
+
+
+  if (!cart.length) {
+
+    toast(
+      t().addBefore
+    );
+
+    return;
+  }
+
+
+  /*
+   * O checkout agora aceita MAIS DE UMA consulta.
+   * O carrinho inteiro será enviado ao endpoint.
+   */
+
+  if (!CONFIG.checkoutEndpoint) {
+
+    toast(
+      t().checkoutSetup
+    );
+
+    return;
+  }
 
 
   const form =
@@ -1372,37 +1489,7 @@ function checkout(event) {
     new FormData(form);
 
 
-  const method =
-    data.get('payment');
-
-
-  const key =
-
-    country === 'br'
-
-      ? (
-          method === 'pix'
-            ? 'br_pix'
-            : 'br_card'
-        )
-
-      : 'us_card';
-
-
-  const paymentLink =
-    CONFIG.paymentLinks[key];
-
-
-  if (paymentLink) {
-
-    window.location.href =
-      paymentLink;
-
-    return;
-  }
-
-
-  const order =
+  const items =
     cart
       .map(id => {
 
@@ -1414,59 +1501,169 @@ function checkout(event) {
 
 
         if (!service) {
-          return '';
+          return null;
         }
 
 
-        const data =
+        const current =
           serviceData(service);
 
 
-        return (
-          `• ${data.title} ` +
-          `(${money(data.price)})`
-        );
+        return {
+
+          id: service.id,
+
+          title: current.title,
+
+          quantity: 1,
+
+          unit_price: current.price
+
+        };
 
       })
-      .filter(Boolean)
-      .join('\n');
+      .filter(Boolean);
 
 
-  const paymentLabel =
-    method === 'pix'
-      ? 'Pix'
-      : t().card;
+  if (!items.length) {
+
+    toast(
+      t().addBefore
+    );
+
+    return;
+  }
 
 
-  const greeting =
+  const payload = {
 
-    country === 'br'
+    country:
 
-      ? 'Olá! Quero finalizar uma compra na Vênus por Thaianne.'
+      country,
 
-      : 'Hello! I would like to complete a purchase from Vênus by Thaianne.';
+    currency:
+
+      t().currency,
+
+    items:
+
+      items,
+
+    discount:
+
+      discount,
+
+    customer: {
+
+      name:
+        data.get('name'),
+
+      email:
+        data.get('email'),
+
+      phone:
+        data.get('phone')
+
+    },
+
+    paymentMethod:
+      data.get('payment')
+
+  };
 
 
-  const message =
-    encodeURIComponent(
-
-      `${greeting}
-
-${order}
-
-${t().total}: ${money(total())}
-${t().paymentMethod}: ${paymentLabel}
-${t().fullName}: ${data.get('name')}
-${t().email}: ${data.get('email')}
-WhatsApp: ${data.get('phone')}`
-
+  const button =
+    form.querySelector(
+      'button[type="submit"]'
     );
 
 
-  window.open(
-    `https://wa.me/5561999546522?text=${message}`,
-    '_blank'
-  );
+  if (button) {
+
+    button.disabled =
+      true;
+
+  }
+
+
+  try {
+
+    const response =
+      await fetch(
+        CONFIG.checkoutEndpoint,
+        {
+
+          method:
+            'POST',
+
+          headers: {
+            'Content-Type':
+              'application/json'
+          },
+
+          body:
+            JSON.stringify(
+              payload
+            )
+
+        }
+      );
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        `Checkout request failed: ${response.status}`
+      );
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    if (
+      !result ||
+      !result.init_point
+    ) {
+
+      throw new Error(
+        'No Mercado Pago checkout URL returned.'
+      );
+
+    }
+
+
+    window.location.href =
+      result.init_point;
+
+
+  } catch (error) {
+
+    console.error(
+      'Checkout error:',
+      error
+    );
+
+
+    toast(
+      country === 'br'
+        ? 'Não foi possível abrir o pagamento. Tente novamente.'
+        : 'Unable to open payment. Please try again.'
+    );
+
+
+  } finally {
+
+    if (button) {
+
+      button.disabled =
+        false;
+
+    }
+
+  }
 }
 
 
@@ -1476,7 +1673,9 @@ function toast(text) {
     $('#toast');
 
 
-  if (!element) return;
+  if (!element) {
+    return;
+  }
 
 
   element.textContent =
@@ -1577,7 +1776,9 @@ function setupBackToTop() {
     $('#backToTop');
 
 
-  if (!button) return;
+  if (!button) {
+    return;
+  }
 
 
   const onScroll =
