@@ -1677,3 +1677,52 @@ code {
     height: 44px;
   }
 } 
+/* LOGO PRINCIPAL */
+
+.hero-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: end;
+
+  width: 100%;
+  max-width: 480px;
+}
+
+.hero-logo img {
+  display: block;
+
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+
+  object-fit: contain;
+
+  border-radius: 50%;
+
+  filter:
+    drop-shadow(
+      0 20px 35px rgba(111, 52, 66, 0.12)
+    );
+}
+
+@media (max-width: 860px) {
+
+  .hero-logo {
+    justify-self: center;
+    max-width: 390px;
+  }
+
+  .hero-logo img {
+    max-width: 390px;
+  }
+}
+
+@media (max-width: 580px) {
+
+  .hero-logo,
+  .hero-logo img {
+    max-width: 320px;
+  }
+
+}
