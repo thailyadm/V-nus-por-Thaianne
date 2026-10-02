@@ -1,7 +1,7 @@
 const CONFIG = {
   currency: 'USD',
   locale: 'pt-BR',
-  whatsapp: '15555555555', // TROQUE pelo seu numero com codigo do pais
+  whatsapp: '+5561999546522', // TROQUE pelo seu numero com codigo do pais
   paymentLinks: {
     card: '', // Cole aqui um Stripe Payment Link, Square Checkout, PayPal, etc.
     pix: ''   // Cole aqui um link de pagamento Pix do seu provedor (Mercado Pago, PagSeguro, etc.)
@@ -13,12 +13,12 @@ const CONFIG = {
 };
 
 const services = [
-  { id:'essencial', icon:'✦', title:'Leitura Essencial', meta:'1 pergunta • leitura objetiva', description:'Para uma questão específica que precisa de clareza, contexto e orientação simbólica.', price:25 },
-  { id:'venus', icon:'♀', title:'Leitura Vênus', meta:'3 perguntas • leitura aprofundada', description:'Uma leitura mais completa para observar diferentes aspectos de uma situação ou fase da vida.', price:45 },
-  { id:'caminhos', icon:'☾', title:'Caminhos & Possibilidades', meta:'tiragem ampla • panorama', description:'Para explorar cenário atual, desafios, tendências, oportunidades e próximos passos possíveis.', price:65 },
-  { id:'amor', icon:'♡', title:'Amor & Relações', meta:'tema afetivo • vínculos', description:'Leitura voltada a dinâmicas, sentimentos, limites, padrões e possibilidades no campo afetivo.', price:50 },
-  { id:'espiritual', icon:'☼', title:'Direcionamento Espiritual', meta:'energia • reflexão', description:'Uma leitura focada em autoconhecimento, padrões internos, energia do momento e direcionamento pessoal.', price:50 },
-  { id:'completa', icon:'✧', title:'Leitura Completa', meta:'sessão premium • múltiplos temas', description:'Para quem quer uma leitura extensa, com mais espaço para perguntas e conexão entre diferentes áreas.', price:85 }
+  { id:'essencial', icon:'✦', title:'Leitura Essencial', meta:'1 pergunta • leitura objetiva', description:'Para uma questão específica que precisa de clareza, contexto e orientação simbólica.', price:10 },
+  { id:'venus', icon:'♀', title:'Leitura Vênus', meta:'3 perguntas • leitura aprofundada', description:'Uma leitura mais completa para observar diferentes aspectos de uma situação ou fase da vida.', price:20 },
+  { id:'caminhos', icon:'☾', title:'Caminhos & Possibilidades', meta:'tiragem ampla • panorama', description:'Para explorar cenário atual, desafios, tendências, oportunidades e próximos passos possíveis.', price:30 },
+  { id:'amor', icon:'♡', title:'Amor & Relações', meta:'tema afetivo • vínculos', description:'Leitura voltada a dinâmicas, sentimentos, limites, padrões e possibilidades no campo afetivo.', price:25 },
+  { id:'espiritual', icon:'☼', title:'Direcionamento Espiritual', meta:'energia • reflexão', description:'Uma leitura focada em autoconhecimento, padrões internos, energia do momento e direcionamento pessoal.', price:25 },
+  { id:'completa', icon:'✧', title:'Leitura Completa', meta:'sessão premium • múltiplos temas', description:'Para quem quer uma leitura extensa, com mais espaço para perguntas e conexão entre diferentes áreas.', price:45 }
 ];
 
 let cart = JSON.parse(localStorage.getItem('venusCart') || '[]');
