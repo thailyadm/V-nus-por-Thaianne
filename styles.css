@@ -1624,3 +1624,56 @@ code {
       43px;
   }
 }
+
+  /* BOTÃO VOLTAR AO TOPO */
+  
+  .back-to-top {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    width: 48px;
+    height: 48px;
+  
+    border: 1px solid var(--line);
+    border-radius: 50%;
+  
+    background: var(--rose-dark);
+    color: white;
+  
+    font-size: 22px;
+    cursor: pointer;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    box-shadow: var(--shadow);
+  
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+  
+    transition: 0.25s ease;
+  
+    z-index: 70;
+  }
+  
+  .back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .back-to-top:hover {
+    background: var(--rose);
+    transform: translateY(-3px);
+  }
+  
+  @media (max-width: 580px) {
+    .back-to-top {
+      right: 16px;
+      bottom: 16px;
+      width: 44px;
+      height: 44px;
+    }
+  }
