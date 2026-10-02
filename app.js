@@ -507,24 +507,26 @@ const I18N = {
 const services = [
 
   {
-    id: 'essencial',
-    icon: '✦',
+  id: 'essencial',
+  icon: '✦',
 
-    br: {
-      title: 'Leitura Essencial',
-      meta: '1 pergunta • leitura objetiva',
-      description:
-        'Para uma questão específica que precisa de clareza, contexto e orientação simbólica.',
-      price: 50
-    },
+  br: {
+    title: 'Leitura Essencial',
+    meta: '1 pergunta • leitura objetiva',
+    description:
+      'Para uma questão específica que precisa de clareza, contexto e orientação simbólica.',
+    price: 50,
+    paymentLink: 'https://mpago.li/2KztQtN'
+  },
 
-    us: {
-      title: 'Essential Reading',
-      meta: '1 question • focused reading',
-      description:
-        'For one specific question that needs clarity, context and symbolic guidance.',
-      price: 15
-    }
+  us: {
+    title: 'Essential Reading',
+    meta: '1 question • focused reading',
+    description:
+      'For one specific question that needs clarity, context and symbolic guidance.',
+    price: 15
+  }
+}
   },
 
 
