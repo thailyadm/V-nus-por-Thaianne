@@ -1,5 +1,5 @@
 const CONFIG = {
-  whatsapp: '15555555555', // TROQUE pelo seu numero com codigo do pais
+  whatsapp: '+5561999546522', // TROQUE pelo seu numero com codigo do pais
   email: 'contato@venusporthaianne.com',
   paymentLinks: { us_card: '', br_card: '', br_pix: '' },
   coupons: { VENUS10: 0.10, BEMVINDA15: 0.15 }
