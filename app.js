@@ -686,14 +686,10 @@ function updateWhatsAppLink() {
     country === 'br'
 
       ? `Olá! Tenho interesse em marcar uma consulta com a Vênus por Thaianne.
-
-Vim pelo site:
-https://venusporthaianne.com`
+Vim pelo site: venusporthaianne.com`
 
       : `Hello! I’m interested in booking a reading with Vênus by Thaianne.
-
-I found you through the website:
-https://venusporthaianne.com`;
+I found you through the website: venusporthaianne.com`;
 
 
   whatsapp.href =
