@@ -91,6 +91,8 @@ const services = [
 
 let country = localStorage.getItem('venusCountry') || 'br';
 let cart = JSON.parse(localStorage.getItem('venusCart') || '[]');
+// Migra carrinhos salvos pela versao anterior (objetos) para IDs.
+cart = cart.map(item => typeof item === 'string' ? item : item?.id).filter(Boolean);
 let discount = Number(localStorage.getItem('venusDiscount') || 0);
 
 const $ = s => document.querySelector(s);
@@ -102,7 +104,7 @@ function updateLanguage(){
   const tr=t();
   document.documentElement.lang=tr.lang;
   document.title=tr.title;
-  document.querySelector('meta[name="description"]').setAttribute('content',tr.description);
+  const metaDesc=document.querySelector('meta[name="description"]'); if(metaDesc) metaDesc.setAttribute('content',tr.description);
   document.querySelectorAll('[data-i18n]').forEach(el=>{
     const key=el.dataset.i18n;
     if(tr[key]!==undefined) el.innerHTML=tr[key];
