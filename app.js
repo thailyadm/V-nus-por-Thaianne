@@ -71,3 +71,24 @@ function setupBackToTop(){const btn=$('#backToTop');const onScroll=()=>{if(windo
 
 $('#countrySelect').addEventListener('change',e=>switchCountry(e.target.value));$('#openCart').addEventListener('click',openCart);$('#closeCart').addEventListener('click',closeCart);$('#drawerBackdrop').addEventListener('click',closeCart);$('#applyCoupon').addEventListener('click',applyCoupon);$('#goCheckout').addEventListener('click',openCheckout);$('#closeCheckout').addEventListener('click',closeCheckout);$('#checkoutForm').addEventListener('submit',checkout);$('#paymentMethod').addEventListener('change',updatePaymentNote);$('.menu-toggle').addEventListener('click',()=>$('.nav').classList.toggle('show'));document.querySelectorAll('.nav a').forEach(a=>a.addEventListener('click',()=>$('.nav').classList.remove('show')));$('#year').textContent=new Date().getFullYear();
 updateLanguage();setupReveal();setupBackToTop();
+
+function updateWhatsAppLink() {
+  const whatsapp = document.getElementById('whatsappContact');
+
+  if (!whatsapp) return;
+
+  const message =
+    country === 'br'
+      ? `Olá! Tenho interesse em marcar uma consulta com a Vênus por Thaianne.
+
+Vim pelo site:
+https://venusporthaianne.com`
+
+      : `Hello! I’m interested in booking a reading with Vênus by Thaianne.
+
+I found you through the website:
+https://venusporthaianne.com`;
+
+  whatsapp.href =
+    `https://wa.me/5561999546522?text=${encodeURIComponent(message)}`;
+}
