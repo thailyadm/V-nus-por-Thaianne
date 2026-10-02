@@ -147,7 +147,6 @@ https://venusporthaianne.com`;
     `https://wa.me/5561999546522?text=${encodeURIComponent(message)}`;
 }
 
-
 function updateLanguage() {
   const tr = t();
 
