@@ -1649,8 +1649,8 @@ code {
 
   box-shadow: var(--shadow);
 
-  opacity: 0;
-  visibility: hidden;
+  opacity: 1;
+  visibility: visible;
   transform: translateY(10px);
 
   transition: 0.25s ease;
