@@ -1899,34 +1899,28 @@ async function initializePayPalCheckout() {
         async () => {
 
           try {
-
             await paymentSession.start(
               {
                 presentationMode:
                   'auto'
               },
-
-              createPayPalOrder()
-
-            );
-
+            
+              createPayPalOrder().then(
+                result => result.orderId
+              )
+             );
           } catch (error) {
-
             console.error(
               'PayPal start error:',
               error
             );
-
             toast(
               error.message ||
               'Unable to start PayPal checkout.'
             );
-
           }
-
         }
       );
-
     }
 
 
