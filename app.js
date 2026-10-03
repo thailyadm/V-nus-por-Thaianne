@@ -5,7 +5,7 @@ const CONFIG = {
   mercadoPagoGeneral:
     'https://link.mercadopago.com.br/venusporthaianne',
 
-  checkoutEndpoint: 'venus-checkout.contato-b46.workers.dev',
+  checkoutEndpoint: 'https://venus-checkout.contato-b46.workers.dev',
 
   coupons: {
     VENUS10: 0.10,
