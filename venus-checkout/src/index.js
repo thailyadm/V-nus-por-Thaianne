@@ -142,7 +142,7 @@ export default {
             body:
               'grant_type=client_credentials' +
               '&response_type=client_token' +
-              '&domains[]=https://venusporthaianne.com'
+              '&domains[]=venusporthaianne.com'
           }
         );
     
