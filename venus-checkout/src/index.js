@@ -727,7 +727,7 @@ async function createPayPalOrder(
 
   const response =
     await fetch(
-      'https://api-m.sandbox.paypal.com/v2/checkout/orders',
+      'https://api-m.paypal.com',
       {
 
         method:
