@@ -1680,12 +1680,121 @@ async function createPayPalOrder() {
   };
 
 }
-
 function showPaymentSuccess() {
-  // código novo aqui
+
+  const summary =
+    $('#checkoutSummary');
+
+  const brazilCheckout =
+    $('#brazilCheckout');
+
+  const paypalCheckout =
+    $('#paypalCheckout');
+
+  const customerInformation =
+    $('#customerInformation');
+
+  if (brazilCheckout) {
+    brazilCheckout.hidden = true;
+  }
+
+  if (paypalCheckout) {
+    paypalCheckout.hidden = true;
+  }
+
+  if (customerInformation) {
+    customerInformation.hidden = true;
+  }
+
+  if (!summary) {
+    return;
+  }
+
+  const isBrazil =
+    country === 'br';
+
+  const whatsappMessage =
+    isBrazil
+      ? 'Olá, Thaianne! Meu pagamento foi confirmado e quero enviar minha pergunta para a leitura.'
+      : 'Hi, Thaianne! My payment was confirmed and I’m ready to send my question for my tarot reading.';
+
+  const whatsappUrl =
+    `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(whatsappMessage)}`;
+
+  summary.innerHTML = `
+
+    <div class="payment-success">
+
+      <div class="payment-success-icon">
+        ✓
+      </div>
+
+      <p class="eyebrow">
+        ${
+          isBrazil
+            ? 'PAGAMENTO CONFIRMADO'
+            : 'PAYMENT CONFIRMED'
+        }
+      </p>
+
+      <h3>
+        ${
+          isBrazil
+            ? 'Sua reserva foi confirmada.'
+            : 'Your booking is confirmed.'
+        }
+      </h3>
+
+      <p>
+        ${
+          isBrazil
+            ? 'Obrigada pela sua reserva. Seu pagamento foi recebido com sucesso.'
+            : 'Thank you for your booking. Your payment was successfully received.'
+        }
+      </p>
+
+      <p>
+        ${
+          isBrazil
+            ? 'Agora envie sua pergunta pelo WhatsApp para começarmos sua leitura.'
+            : 'Now send your question on WhatsApp so we can begin your reading.'
+        }
+      </p>
+
+      <a
+        class="btn btn-primary full"
+        href="${whatsappUrl}"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        ${
+          isBrazil
+            ? 'Enviar minha pergunta pelo WhatsApp'
+            : 'Send my question on WhatsApp'
+        }
+      </a>
+
+    </div>
+
+  `;
+
+  const modal =
+    $('#checkoutModal');
+
+  if (modal) {
+
+    modal.classList.add(
+      'show'
+    );
+
+    modal.setAttribute(
+      'aria-hidden',
+      'false'
+    );
+
+  }
+
 }
-
-
 async function capturePayPalOrder(
   orderId
 ) {
