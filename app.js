@@ -1634,20 +1634,21 @@ async function checkout(event) {
       result.init_point;
 
 
-  } catch (error) {
-
+   } catch (error) {
+  
     console.error(
       'Checkout error:',
       error
     );
-
-
+  
     toast(
-      country === 'br'
-        ? 'Não foi possível abrir o pagamento. Tente novamente.'
-        : 'Unable to open payment. Please try again.'
+      error.message ||
+      (
+        country === 'br'
+          ? 'Não foi possível abrir o pagamento. Tente novamente.'
+          : 'Unable to open payment. Please try again.'
+      )
     );
-
 
   } finally {
 
