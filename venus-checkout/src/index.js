@@ -97,7 +97,118 @@ export default {
 
 
     try {
+    const url = new URL(request.url);
 
+    if (
+      url.pathname === '/paypal-client-token' &&
+      request.method === 'GET'
+    ) {
+    
+      if (
+        !env.PAYPAL_CLIENT_ID ||
+        !env.PAYPAL_CLIENT_SECRET
+      ) {
+    
+        return jsonResponse(
+          {
+            error:
+              'PayPal credentials are not configured.'
+          },
+          500,
+          origin
+        );
+    
+      }
+    
+      const basicAuth =
+        btoa(
+          `${env.PAYPAL_CLIENT_ID}:${env.PAYPAL_CLIENT_SECRET}`
+        );
+    
+      const tokenResponse =
+        await fetch(
+          'https://api-m.sandbox.paypal.com/v1/oauth2/token',
+          {
+            method: 'POST',
+    
+            headers: {
+              'Authorization':
+                `Basic ${basicAuth}`,
+    
+              'Content-Type':
+                'application/x-www-form-urlencoded'
+            },
+    
+            body:
+              'grant_type=client_credentials' +
+              '&response_type=client_token' +
+              '&domains[]=https://venusporthaianne.com'
+          }
+        );
+    
+      const tokenText =
+        await tokenResponse.text();
+    
+      let tokenData;
+    
+      try {
+    
+        tokenData =
+          JSON.parse(tokenText);
+    
+      } catch {
+    
+        tokenData = {
+          raw:
+            tokenText.slice(0, 1000)
+        };
+    
+      }
+    
+      if (!tokenResponse.ok) {
+    
+        return jsonResponse(
+          {
+            error:
+              'PayPal client token request failed.',
+    
+            status:
+              tokenResponse.status,
+    
+            details:
+              tokenData
+          },
+          502,
+          origin
+        );
+    
+      }
+    
+      if (!tokenData.access_token) {
+    
+        return jsonResponse(
+          {
+            error:
+              'PayPal did not return a client token.'
+          },
+          502,
+          origin
+        );
+    
+      }
+    
+      return jsonResponse(
+        {
+          accessToken:
+            tokenData.access_token,
+    
+          expiresIn:
+            tokenData.expires_in
+        },
+        200,
+        origin
+      );
+    }
       if (
         request.method === 'OPTIONS'
       ) {
