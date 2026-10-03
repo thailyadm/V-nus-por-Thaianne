@@ -1379,49 +1379,81 @@ function renderCheckout() {
   updatePaymentNote();
 }
 
-
 function updatePaymentOptions() {
-
   const select =
     $('#paymentMethod');
 
+  const brazilCheckout =
+    $('#brazilCheckout');
 
-  if (!select) {
-    return;
-  }
+  const paypalCheckout =
+    $('#paypalCheckout');
+
+  const customerInformation =
+    $('#customerInformation');
+
+  const form =
+    $('#checkoutForm');
 
 
   if (country === 'br') {
 
-    select.innerHTML = `
+    if (brazilCheckout) {
+      brazilCheckout.hidden = false;
+    }
 
-      <option value="card">
-        ${t().card}
-      </option>
+    if (paypalCheckout) {
+      paypalCheckout.hidden = true;
+    }
 
-      <option value="pix">
-        ${t().pix}
-      </option>
+    if (customerInformation) {
+      customerInformation.hidden = false;
+    }
 
-    `;
+    if (select) {
+
+      select.innerHTML = `
+
+        <option value="card">
+          ${t().card}
+        </option>
+
+        <option value="pix">
+          ${t().pix}
+        </option>
+
+      `;
+
+    }
+
+    if (form) {
+      form.style.display = '';
+    }
 
   } else {
 
-    select.innerHTML = `
+    if (brazilCheckout) {
+      brazilCheckout.hidden = true;
+    }
 
-      <option value="card">
-        ${t().card}
-      </option>
+    if (paypalCheckout) {
+      paypalCheckout.hidden = false;
+    }
 
-    `;
+    if (customerInformation) {
+      customerInformation.hidden = false;
+    }
+
+    if (form) {
+      form.style.display = 'none';
+    }
+
+    initializePayPalCheckout();
 
   }
 
-
   updatePaymentNote();
 }
-
-
 function updatePaymentNote() {
 
   const select =
