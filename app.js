@@ -1899,15 +1899,15 @@ async function initializePayPalCheckout() {
         async () => {
 
           try {
-            await paymentSession.start(
-              {
-                presentationMode:
-                  'auto'
-              },
-            
-              createPayPalOrder().then(
-                result => result.orderId
-              )
+          const order =
+            await createPayPalOrder(); 
+          await paymentSession.start(
+            {
+              presentationMode:
+                'auto'
+            },
+              
+           order.orderId
              );
           } catch (error) {
             console.error(
