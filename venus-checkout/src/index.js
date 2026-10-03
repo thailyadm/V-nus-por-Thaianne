@@ -116,7 +116,7 @@ async function getPayPalAccessToken(env) {
 
   const response =
     await fetch(
-      'https://api-m.sandbox.paypal.com/v1/oauth2/token',
+      'https://api-m.paypal.com',
       {
 
         method:
