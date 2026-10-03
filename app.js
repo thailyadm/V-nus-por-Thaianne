@@ -1954,21 +1954,14 @@ async function initializePayPalCheckout() {
                   data.orderId
                 );
 
-
                 cart = [];
-
                 discount = 0;
-
+                
                 persist();
-
+                
                 renderCart();
-
-                closeCheckout();
-
-                toast(
-                  'Payment completed successfully.'
-                );
-
+                
+                showPaymentSuccess();
               } catch (error) {
 
                 console.error(
