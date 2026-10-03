@@ -218,11 +218,13 @@
       <h2 data-i18n="checkoutTitle">Finalize sua reserva</h2>
       <div id="checkoutSummary" class="checkout-summary"></div>
       <form id="checkoutForm">
-        <div class="form-grid">
-          <label><span data-i18n="fullName">Nome completo</span><input required name="name" autocomplete="name" /></label>
-          <label><span data-i18n="email">E-mail</span><input required type="email" name="email" autocomplete="email" /></label>
-          <label><span data-i18n="phone">WhatsApp</span><input required name="phone" inputmode="tel" /></label>
-          <label><span data-i18n="paymentMethod">Forma de pagamento</span><select id="paymentMethod" name="payment"></select></label>
+        <div id="paypalCheckout" class="paypal-checkout" hidden>
+          <div class="payment-option-title">
+            <span>Payment</span>
+          </div>
+          <div id="paypal-button-container"></div>
+          <div id="venmo-button-container"></div>
+          <div id="paypal-card-container"></div>
         </div>
         <div id="paymentNote" class="payment-note"></div>
         <label class="consent"><input required type="checkbox" /><span data-i18n="consent">Li e aceito os termos e entendo que a leitura de tarô é interpretativa e não substitui aconselhamento profissional.</span></label>
