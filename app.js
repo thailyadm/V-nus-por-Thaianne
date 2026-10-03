@@ -1931,30 +1931,19 @@ async function initializePayPalCheckout() {
     if (
       eligible.isEligible('venmo')
     ) {
-
       const venmoButton =
         document.createElement(
-          'button'
-        );
-
-
-      venmoButton.type =
-        'button';
-
-
-      venmoButton.className =
-        'paypal-venmo-button';
-
-
-      venmoButton.textContent =
-        'Pay with Venmo';
-
-
+          'venmo-button'
+        );     
+      venmoButton.setAttribute(
+        'type',
+        'pay'
+      );      
+      venmoButton.hidden =
+        false;      
       venmoContainer.appendChild(
         venmoButton
       );
-
-
       const venmoPaymentSession =
         paypalSdkInstance
           .createVenmoOneTimePaymentSession({
