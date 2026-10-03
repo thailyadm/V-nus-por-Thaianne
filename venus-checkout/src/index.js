@@ -520,12 +520,10 @@ export default {
 
       return jsonResponse(
         {
-          error:
-            'Could not create Mercado Pago checkout.'
+          error: 'Mercado Pago error.',
+          details: mpData
         },
-
         502,
-
         origin
       );
 
