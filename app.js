@@ -1795,11 +1795,7 @@ function showPaymentSuccess() {
   }
 
 }
-async function capturePayPalOrder(
-  orderId
-) {
-  // código que já existe
-}
+
 async function capturePayPalOrder(
   orderId
 ) {
