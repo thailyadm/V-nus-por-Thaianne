@@ -1,32 +1,38 @@
 const CATALOG = {
   essencial: {
     title: 'Leitura Essencial',
-    price: 50
+    brPrice: 50,
+    usPrice: 15
   },
 
   venus: {
     title: 'Leitura Vênus',
-    price: 100
+    brPrice: 100,
+    usPrice: 25
   },
 
   caminhos: {
     title: 'Caminhos & Possibilidades',
-    price: 160
+    brPrice: 160,
+    usPrice: 35
   },
 
   amor: {
     title: 'Amor & Relações',
-    price: 130
+    brPrice: 130,
+    usPrice: 30
   },
 
   espiritual: {
     title: 'Direcionamento Espiritual',
-    price: 130
+    brPrice: 130,
+    usPrice: 30
   },
 
   completa: {
     title: 'Leitura Completa',
-    price: 250
+    brPrice: 250,
+    usPrice: 45
   }
 };
 
@@ -55,7 +61,7 @@ function corsHeaders(origin) {
       allowedOrigin,
 
     'Access-Control-Allow-Methods':
-      'POST, OPTIONS',
+      'GET, POST, OPTIONS',
 
     'Access-Control-Allow-Headers':
       'Content-Type',
@@ -88,127 +94,848 @@ function jsonResponse(
 }
 
 
+async function getPayPalAccessToken(env) {
+
+  if (
+    !env.PAYPAL_CLIENT_ID ||
+    !env.PAYPAL_CLIENT_SECRET
+  ) {
+
+    throw new Error(
+      'PayPal credentials are missing.'
+    );
+
+  }
+
+
+  const credentials =
+    btoa(
+      `${env.PAYPAL_CLIENT_ID}:${env.PAYPAL_CLIENT_SECRET}`
+    );
+
+
+  const response =
+    await fetch(
+      'https://api-m.sandbox.paypal.com/v1/oauth2/token',
+      {
+
+        method:
+          'POST',
+
+        headers: {
+
+          'Authorization':
+            `Basic ${credentials}`,
+
+          'Content-Type':
+            'application/x-www-form-urlencoded',
+
+          'Accept':
+            'application/json'
+
+        },
+
+        body:
+          'grant_type=client_credentials'
+
+      }
+    );
+
+
+  const text =
+    await response.text();
+
+
+  let data;
+
+
+  try {
+
+    data =
+      JSON.parse(text);
+
+  } catch {
+
+    data = {
+      raw:
+        text.slice(0, 2000)
+    };
+
+  }
+
+
+  if (!response.ok) {
+
+    throw new Error(
+      `PayPal authentication failed (${response.status}).`
+    );
+
+  }
+
+
+  if (!data.access_token) {
+
+    throw new Error(
+      'PayPal did not return an access token.'
+    );
+
+  }
+
+
+  return data.access_token;
+}
+
+
+function buildBrazilItems(body) {
+
+  const incoming =
+    Array.isArray(body?.items)
+      ? body.items
+      : [];
+
+
+  if (!incoming.length) {
+
+    throw new Error(
+      'Cart is empty or invalid.'
+    );
+
+  }
+
+
+  const items = [];
+
+
+  for (
+    const entry of incoming
+  ) {
+
+    const id =
+      String(
+        entry?.id || ''
+      );
+
+
+    const catalogItem =
+      CATALOG[id];
+
+
+    if (!catalogItem) {
+
+      throw new Error(
+        `Unknown service: ${id}`
+      );
+
+    }
+
+
+    const quantity =
+      Math.max(
+        1,
+        Math.min(
+          10,
+          Number(
+            entry?.quantity || 1
+          )
+        )
+      );
+
+
+    items.push({
+
+      id,
+
+      title:
+        catalogItem.title,
+
+      quantity,
+
+      unit_price:
+        catalogItem.brPrice
+
+    });
+
+  }
+
+
+  return items;
+}
+
+
+function buildUSItems(body) {
+
+  const incoming =
+    Array.isArray(body?.items)
+      ? body.items
+      : [];
+
+
+  if (!incoming.length) {
+
+    throw new Error(
+      'Cart is empty or invalid.'
+    );
+
+  }
+
+
+  const items = [];
+
+
+  for (
+    const entry of incoming
+  ) {
+
+    const id =
+      String(
+        entry?.id || ''
+      );
+
+
+    const catalogItem =
+      CATALOG[id];
+
+
+    if (!catalogItem) {
+
+      throw new Error(
+        `Unknown service: ${id}`
+      );
+
+    }
+
+
+    const quantity =
+      Math.max(
+        1,
+        Math.min(
+          10,
+          Number(
+            entry?.quantity || 1
+          )
+        )
+      );
+
+
+    items.push({
+
+      id,
+
+      title:
+        catalogItem.title,
+
+      quantity,
+
+      unit_price:
+        catalogItem.usPrice
+
+    });
+
+  }
+
+
+  return items;
+}
+
+
+function calculateSubtotal(items) {
+
+  return items.reduce(
+
+    (sum, item) =>
+      sum +
+      (
+        item.unit_price *
+        item.quantity
+      ),
+
+    0
+
+  );
+
+}
+
+
+function getValidDiscount(value) {
+
+  const requested =
+    Number(value || 0);
+
+
+  return Object.values(
+    COUPONS
+  ).includes(requested)
+
+    ? requested
+
+    : 0;
+
+}
+
+
+/*
+ * MERCADO PAGO - BRAZIL
+ */
+
+async function createMercadoPagoCheckout(
+  body,
+  env
+) {
+
+  if (
+    !env.MERCADOPAGO_ACCESS_TOKEN
+  ) {
+
+    throw new Error(
+      'MERCADOPAGO_ACCESS_TOKEN is missing.'
+    );
+
+  }
+
+
+  const items =
+    buildBrazilItems(body);
+
+
+  const subtotal =
+    calculateSubtotal(items);
+
+
+  const discount =
+    getValidDiscount(
+      body?.discount
+    );
+
+
+  const mercadoPagoItems =
+    items.map(
+      item => {
+
+        const discountedUnitPrice =
+          Number(
+            (
+              item.unit_price *
+              (1 - discount)
+            ).toFixed(2)
+          );
+
+
+        return {
+
+          id:
+            item.id,
+
+          title:
+            item.title,
+
+          quantity:
+            item.quantity,
+
+          unit_price:
+            discountedUnitPrice,
+
+          currency_id:
+            'BRL'
+
+        };
+
+      }
+    );
+
+
+  const email =
+    String(
+      body?.customer?.email || ''
+    ).trim();
+
+
+  const preference = {
+
+    items:
+      mercadoPagoItems,
+
+    external_reference:
+      `VENUS-BR-${Date.now()}`,
+
+    back_urls: {
+
+      success:
+        'https://venusporthaianne.com/?payment=success',
+
+      failure:
+        'https://venusporthaianne.com/?payment=failure',
+
+      pending:
+        'https://venusporthaianne.com/?payment=pending'
+
+    },
+
+    auto_return:
+      'approved'
+
+  };
+
+
+  if (email) {
+
+    preference.payer = {
+      email
+    };
+
+  }
+
+
+  const response =
+    await fetch(
+      'https://api.mercadopago.com/checkout/preferences',
+      {
+
+        method:
+          'POST',
+
+        headers: {
+
+          'Authorization':
+            `Bearer ${env.MERCADOPAGO_ACCESS_TOKEN}`,
+
+          'Content-Type':
+            'application/json',
+
+          'Accept':
+            'application/json'
+
+        },
+
+        body:
+          JSON.stringify(
+            preference
+          )
+
+      }
+    );
+
+
+  const text =
+    await response.text();
+
+
+  let data;
+
+
+  try {
+
+    data =
+      JSON.parse(text);
+
+  } catch {
+
+    data = {
+      raw:
+        text.slice(0, 2000)
+    };
+
+  }
+
+
+  if (!response.ok) {
+
+    throw new Error(
+      `Mercado Pago rejected the checkout (${response.status}).`
+    );
+
+  }
+
+
+  const checkoutUrl =
+    data?.init_point ||
+    data?.sandbox_init_point;
+
+
+  if (!checkoutUrl) {
+
+    throw new Error(
+      'Mercado Pago did not return a checkout URL.'
+    );
+
+  }
+
+
+  return {
+
+    init_point:
+      checkoutUrl,
+
+    provider:
+      'mercadopago',
+
+    subtotal:
+      Number(
+        subtotal.toFixed(2)
+      ),
+
+    discount,
+
+    total:
+      Number(
+        (
+          subtotal *
+          (1 - discount)
+        ).toFixed(2)
+      )
+
+  };
+
+}
+
+
+/*
+ * PAYPAL - CREATE ORDER
+ */
+
+async function createPayPalOrder(
+  body,
+  env
+) {
+
+  const items =
+    buildUSItems(body);
+
+
+  const subtotal =
+    calculateSubtotal(items);
+
+
+  const discount =
+    getValidDiscount(
+      body?.discount
+    );
+
+
+  const total =
+    Number(
+      (
+        subtotal *
+        (1 - discount)
+      ).toFixed(2)
+    );
+
+
+  if (
+    total <= 0
+  ) {
+
+    throw new Error(
+      'Invalid PayPal order total.'
+    );
+
+  }
+
+
+  const paypalItems =
+    items.map(
+      item => {
+
+        const discountedUnitPrice =
+          Number(
+            (
+              item.unit_price *
+              (1 - discount)
+            ).toFixed(2)
+          );
+
+
+        return {
+
+          name:
+            item.title,
+
+          quantity:
+            String(
+              item.quantity
+            ),
+
+          unit_amount: {
+
+            currency_code:
+              'USD',
+
+            value:
+              discountedUnitPrice.toFixed(2)
+
+          }
+
+        };
+
+      }
+    );
+
+
+  const accessToken =
+    await getPayPalAccessToken(
+      env
+    );
+
+
+  const orderPayload = {
+
+    intent:
+      'CAPTURE',
+
+    purchase_units: [
+
+      {
+
+        reference_id:
+          `VENUS-US-${Date.now()}`,
+
+        description:
+          'Vênus by Thaianne Tarot Reading',
+
+        amount: {
+
+          currency_code:
+            'USD',
+
+          value:
+            total.toFixed(2),
+
+          breakdown: {
+
+            item_total: {
+
+              currency_code:
+                'USD',
+
+              value:
+                total.toFixed(2)
+
+            }
+
+          }
+
+        },
+
+        items:
+          paypalItems
+
+      }
+
+    ]
+
+  };
+
+
+  const response =
+    await fetch(
+      'https://api-m.sandbox.paypal.com/v2/checkout/orders',
+      {
+
+        method:
+          'POST',
+
+        headers: {
+
+          'Authorization':
+            `Bearer ${accessToken}`,
+
+          'Content-Type':
+            'application/json',
+
+          'Accept':
+            'application/json'
+
+        },
+
+        body:
+          JSON.stringify(
+            orderPayload
+          )
+
+      }
+    );
+
+
+  const text =
+    await response.text();
+
+
+  let data;
+
+
+  try {
+
+    data =
+      JSON.parse(text);
+
+  } catch {
+
+    data = {
+      raw:
+        text.slice(0, 2000)
+    };
+
+  }
+
+
+  if (!response.ok) {
+
+    console.error(
+      'PayPal create order error:',
+      data
+    );
+
+
+    throw new Error(
+      `PayPal order creation failed (${response.status}).`
+    );
+
+  }
+
+
+  if (!data?.id) {
+
+    throw new Error(
+      'PayPal did not return an order ID.'
+    );
+
+  }
+
+
+  return {
+
+    id:
+      data.id,
+
+    provider:
+      'paypal',
+
+    currency:
+      'USD',
+
+    subtotal:
+      Number(
+        subtotal.toFixed(2)
+      ),
+
+    discount,
+
+    total
+
+  };
+
+}
+
+
+/*
+ * PAYPAL - CAPTURE ORDER
+ */
+
+async function capturePayPalOrder(
+  orderId,
+  env
+) {
+
+  if (
+    !orderId
+  ) {
+
+    throw new Error(
+      'PayPal order ID is required.'
+    );
+
+  }
+
+
+  const accessToken =
+    await getPayPalAccessToken(
+      env
+    );
+
+
+  const response =
+    await fetch(
+      `https://api-m.sandbox.paypal.com/v2/checkout/orders/${encodeURIComponent(orderId)}/capture`,
+      {
+
+        method:
+          'POST',
+
+        headers: {
+
+          'Authorization':
+            `Bearer ${accessToken}`,
+
+          'Content-Type':
+            'application/json',
+
+          'Accept':
+            'application/json'
+
+        }
+
+      }
+    );
+
+
+  const text =
+    await response.text();
+
+
+  let data;
+
+
+  try {
+
+    data =
+      JSON.parse(text);
+
+  } catch {
+
+    data = {
+      raw:
+        text.slice(0, 2000)
+    };
+
+  }
+
+
+  if (!response.ok) {
+
+    console.error(
+      'PayPal capture error:',
+      data
+    );
+
+
+    throw new Error(
+      `PayPal capture failed (${response.status}).`
+    );
+
+  }
+
+
+  return data;
+
+}
+
+
 export default {
 
-  async fetch(request, env) {
+  async fetch(
+    request,
+    env
+  ) {
 
     const origin =
       request.headers.get('Origin') || '';
 
 
     try {
-    const url = new URL(request.url);
 
-    if (
-      url.pathname === '/paypal-client-token' &&
-      request.method === 'GET'
-    ) {
-    
-      if (
-        !env.PAYPAL_CLIENT_ID ||
-        !env.PAYPAL_CLIENT_SECRET
-      ) {
-    
-        return jsonResponse(
-          {
-            error:
-              'PayPal credentials are not configured.'
-          },
-          500,
-          origin
-        );
-    
-      }
-    
-      const basicAuth =
-        btoa(
-          `${env.PAYPAL_CLIENT_ID}:${env.PAYPAL_CLIENT_SECRET}`
-        );
-    
-      const tokenResponse =
-        await fetch(
-          'https://api-m.sandbox.paypal.com/v1/oauth2/token',
-          {
-            method: 'POST',
-    
-            headers: {
-              'Authorization':
-                `Basic ${basicAuth}`,
-    
-              'Content-Type':
-                'application/x-www-form-urlencoded'
-            },
-    
-            body:
-              'grant_type=client_credentials' +
-              '&response_type=client_token' +
-              '&domains[]=venusporthaianne.com'
-          }
-        );
-    
-      const tokenText =
-        await tokenResponse.text();
-    
-      let tokenData;
-    
-      try {
-    
-        tokenData =
-          JSON.parse(tokenText);
-    
-      } catch {
-    
-        tokenData = {
-          raw:
-            tokenText.slice(0, 1000)
-        };
-    
-      }
-    
-      if (!tokenResponse.ok) {
-    
-        return jsonResponse(
-          {
-            error:
-              'PayPal client token request failed.',
-    
-            status:
-              tokenResponse.status,
-    
-            details:
-              tokenData
-          },
-          502,
-          origin
-        );
-    
-      }
-    
-      if (!tokenData.access_token) {
-    
-        return jsonResponse(
-          {
-            error:
-              'PayPal did not return a client token.'
-          },
-          502,
-          origin
-        );
-    
-      }
-    
-      return jsonResponse(
-        {
-          accessToken:
-            tokenData.access_token,
-    
-          expiresIn:
-            tokenData.expires_in
-        },
-        200,
-        origin
-      );
-    }
+      /*
+       * CORS
+       */
+
       if (
         request.method === 'OPTIONS'
       ) {
@@ -225,17 +952,34 @@ export default {
       }
 
 
+      const url =
+        new URL(
+          request.url
+        );
+
+
+      /*
+       * Simple health check
+       */
+
       if (
-        request.method !== 'POST'
+        request.method === 'GET' &&
+        url.pathname === '/'
       ) {
 
         return jsonResponse(
           {
-            error:
-              'Method not allowed.'
+            ok:
+              true,
+
+            service:
+              'venus-checkout',
+
+            status:
+              'online'
           },
 
-          405,
+          200,
 
           origin
         );
@@ -243,109 +987,54 @@ export default {
       }
 
 
-      if (
-        !ALLOWED_ORIGINS.includes(origin)
-      ) {
+      /*
+       * PayPal token endpoint
+       *
+       * This endpoint is not needed when using
+       * Client ID authentication in SDK v6.
+       * Kept out intentionally.
+       */
 
-        return jsonResponse(
-          {
-            error:
-              'Origin not allowed.',
-            receivedOrigin:
-              origin
-          },
 
-          403,
-
-          origin
-        );
-
-      }
-
+      /*
+       * PayPal create order
+       */
 
       if (
-        !env.MERCADOPAGO_ACCESS_TOKEN
+        request.method === 'POST' &&
+        url.pathname === '/paypal-create-order'
       ) {
 
-        return jsonResponse(
-          {
-            error:
-              'MERCADOPAGO_ACCESS_TOKEN is missing.'
-          },
-
-          500,
-
-          origin
-        );
-
-      }
-
-
-      const body =
-        await request.json();
-
-
-      if (
-        !body ||
-        !Array.isArray(body.items) ||
-        body.items.length === 0
-      ) {
-
-        return jsonResponse(
-          {
-            error:
-              'Cart is empty or invalid.'
-          },
-
-          400,
-
-          origin
-        );
-
-      }
-
-
-      if (
-        body.country !== 'br'
-      ) {
-
-        return jsonResponse(
-          {
-            error:
-              'Only Brazil checkout is enabled in this version.'
-          },
-
-          400,
-
-          origin
-        );
-
-      }
-
-
-      const items = [];
-
-
-      for (
-        const incoming of body.items
-      ) {
-
-        const id =
-          String(
-            incoming?.id || ''
-          );
-
-
-        const catalogItem =
-          CATALOG[id];
-
-
-        if (!catalogItem) {
+        if (
+          !ALLOWED_ORIGINS.includes(origin)
+        ) {
 
           return jsonResponse(
             {
               error:
-                `Unknown service: ${id}`
+                'Origin not allowed.'
+            },
+
+            403,
+
+            origin
+          );
+
+        }
+
+
+        const body =
+          await request.json();
+
+
+        if (
+          body?.country !== 'us'
+        ) {
+
+          return jsonResponse(
+            {
+              error:
+                'PayPal endpoint requires country=us.'
             },
 
             400,
@@ -356,245 +1045,74 @@ export default {
         }
 
 
-        const quantity =
-          Math.max(
-            1,
-            Math.min(
-              10,
-              Number(
-                incoming?.quantity || 1
-              )
-            )
+        const result =
+          await createPayPalOrder(
+            body,
+            env
           );
 
-
-        items.push({
-
-          id,
-
-          title:
-            catalogItem.title,
-
-          quantity,
-
-          unit_price:
-            catalogItem.price
-
-        });
-
-      }
-
-
-      const subtotal =
-        items.reduce(
-          (
-            sum,
-            item
-          ) =>
-            sum +
-            (
-              item.unit_price *
-              item.quantity
-            ),
-
-          0
-        );
-
-
-      const requestedDiscount =
-        Number(
-          body.discount || 0
-        );
-
-
-      const validDiscount =
-        Object.values(
-          COUPONS
-        ).includes(
-          requestedDiscount
-        )
-          ? requestedDiscount
-          : 0;
-
-
-      const mercadoPagoItems =
-        items.map(
-          item => {
-
-            const discountedPrice =
-              Number(
-                (
-                  item.unit_price *
-                  (1 - validDiscount)
-                ).toFixed(2)
-              );
-
-
-            return {
-
-              id:
-                item.id,
-
-              title:
-                item.title,
-
-              quantity:
-                item.quantity,
-
-              unit_price:
-                discountedPrice,
-
-              currency_id:
-                'BRL'
-
-            };
-
-          }
-        );
-
-
-      const email =
-        String(
-          body?.customer?.email || ''
-        ).trim();
-
-
-      const preference = {
-
-        items:
-          mercadoPagoItems,
-
-        external_reference:
-          `VENUS-${Date.now()}`,
-
-        back_urls: {
-
-          success:
-            'https://venusporthaianne.com/?payment=success',
-
-          failure:
-            'https://venusporthaianne.com/?payment=failure',
-
-          pending:
-            'https://venusporthaianne.com/?payment=pending'
-
-        },
-
-        auto_return:
-          'approved'
-
-      };
-
-
-      if (email) {
-
-        preference.payer = {
-          email
-        };
-
-      }
-
-
-      let mpResponse;
-
-
-      try {
-
-        mpResponse =
-          await fetch(
-            'https://api.mercadopago.com/checkout/preferences',
-
-            {
-              method:
-                'POST',
-
-              headers: {
-
-                'Authorization':
-                  `Bearer ${env.MERCADOPAGO_ACCESS_TOKEN}`,
-
-                'Content-Type':
-                  'application/json',
-
-                'Accept':
-                  'application/json'
-
-              },
-
-              body:
-                JSON.stringify(
-                  preference
-                )
-
-            }
-          );
-
-      } catch (error) {
 
         return jsonResponse(
-          {
-            error:
-              'Mercado Pago connection failed.',
-
-            details:
-              String(
-                error?.message ||
-                error
-              )
-          },
-
-          502,
-
+          result,
+          200,
           origin
         );
 
       }
 
 
-      const responseText =
-        await mpResponse.text();
-
-
-      let mpData;
-
-
-      try {
-
-        mpData =
-          JSON.parse(
-            responseText
-          );
-
-      } catch {
-
-        mpData = {
-          raw:
-            responseText.slice(
-              0,
-              2000
-            )
-        };
-
-      }
-
+      /*
+       * PayPal capture order
+       */
 
       if (
-        !mpResponse.ok
+        request.method === 'POST' &&
+        url.pathname === '/paypal-capture-order'
       ) {
+
+        if (
+          !ALLOWED_ORIGINS.includes(origin)
+        ) {
+
+          return jsonResponse(
+            {
+              error:
+                'Origin not allowed.'
+            },
+
+            403,
+
+            origin
+          );
+
+        }
+
+
+        const body =
+          await request.json();
+
+
+        const result =
+          await capturePayPalOrder(
+            body?.orderId,
+            env
+          );
+
 
         return jsonResponse(
           {
-            error:
-              'Mercado Pago rejected the preference.',
+            ok:
+              true,
 
-            status:
-              mpResponse.status,
+            provider:
+              'paypal',
 
-            details:
-              mpData
+            order:
+              result
+
           },
 
-          502,
+          200,
 
           origin
         );
@@ -602,23 +1120,72 @@ export default {
       }
 
 
-      const checkoutUrl =
-        mpData?.init_point ||
-        mpData?.sandbox_init_point;
+      /*
+       * Brazil checkout
+       */
+
+      if (
+        request.method === 'POST' &&
+        url.pathname === '/'
+      ) {
+
+        if (
+          !ALLOWED_ORIGINS.includes(origin)
+        ) {
+
+          return jsonResponse(
+            {
+              error:
+                'Origin not allowed.',
+              receivedOrigin:
+                origin
+            },
+
+            403,
+
+            origin
+          );
+
+        }
 
 
-      if (!checkoutUrl) {
+        const body =
+          await request.json();
+
+
+        if (
+          body?.country === 'br'
+        ) {
+
+          const result =
+            await createMercadoPagoCheckout(
+              body,
+              env
+            );
+
+
+          return jsonResponse(
+            result,
+            200,
+            origin
+          );
+
+        }
+
+
+        /*
+         * We deliberately reject US requests
+         * at this root route. US uses the dedicated
+         * PayPal endpoints above.
+         */
 
         return jsonResponse(
           {
             error:
-              'Mercado Pago created no checkout URL.',
-
-            details:
-              mpData
+              'For United States checkout, use the PayPal checkout flow.'
           },
 
-          502,
+          400,
 
           origin
         );
@@ -628,34 +1195,11 @@ export default {
 
       return jsonResponse(
         {
-          ok:
-            true,
-
-          init_point:
-            checkoutUrl,
-
-          preference_id:
-            mpData?.id ||
-            null,
-
-          subtotal:
-            Number(
-              subtotal.toFixed(2)
-            ),
-
-          discount:
-            validDiscount,
-
-          total:
-            Number(
-              (
-                subtotal *
-                (1 - validDiscount)
-              ).toFixed(2)
-            )
+          error:
+            'Not found.'
         },
 
-        200,
+        404,
 
         origin
       );
@@ -663,22 +1207,17 @@ export default {
 
     } catch (error) {
 
-      /*
-       * FINAL SAFETY NET:
-       * No unexpected exception should
-       * turn into an HTML response.
-       */
+      console.error(
+        'Worker error:',
+        error
+      );
+
 
       return jsonResponse(
         {
           error:
-            'Worker exception.',
-
-          details:
-            String(
-              error?.message ||
-              error
-            )
+            error?.message ||
+            'Unexpected Worker error.'
         },
 
         500,
