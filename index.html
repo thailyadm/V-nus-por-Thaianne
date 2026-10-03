@@ -212,28 +212,185 @@
   </aside>
 
   <div class="modal" id="checkoutModal" aria-hidden="true">
-    <div class="modal-card">
-      <button class="modal-close" id="closeCheckout" aria-label="Fechar">×</button>
-      <p class="eyebrow" data-i18n="checkoutEyebrow">CHECKOUT</p>
-      <h2 data-i18n="checkoutTitle">Finalize sua reserva</h2>
-      <div id="checkoutSummary" class="checkout-summary"></div>
-      <form id="checkoutForm">
-        <div id="paypalCheckout" class="paypal-checkout" hidden>
-          <div class="payment-option-title">
-            <span>Payment</span>
-          </div>
-          <div id="paypal-button-container"></div>
-          <div id="venmo-button-container"></div>
-          <div id="paypal-card-container"></div>
+    <div class="modal-card">  
+      <button
+        class="modal-close"
+        id="closeCheckout"
+        aria-label="Fechar"
+        type="button"
+      >
+        ×
+      </button>
+  
+      <p
+        class="eyebrow"
+        data-i18n="checkoutEyebrow"
+      >
+        CHECKOUT
+      </p>
+  
+      <h2 data-i18n="checkoutTitle">
+        Finalize sua reserva
+      </h2>
+  
+      <div
+        id="checkoutSummary"
+        class="checkout-summary"
+      ></div>
+  
+  
+      <!-- CUSTOMER INFORMATION -->
+  
+      <div id="customerInformation">
+  
+        <div class="form-grid">
+  
+          <label>
+            <span data-i18n="fullName">
+              Nome completo
+            </span>
+  
+            <input
+              required
+              name="name"
+              autocomplete="name"
+              form="checkoutForm"
+            />
+          </label>
+  
+  
+          <label>
+            <span data-i18n="email">
+              E-mail
+            </span>
+  
+            <input
+              required
+              type="email"
+              name="email"
+              autocomplete="email"
+              form="checkoutForm"
+            />
+          </label>
+  
+  
+          <label>
+            <span data-i18n="phone">
+              WhatsApp
+            </span>
+  
+            <input
+              required
+              name="phone"
+              inputmode="tel"
+              form="checkoutForm"
+            />
+          </label>
+  
         </div>
-        <div id="paymentNote" class="payment-note"></div>
-        <label class="consent"><input required type="checkbox" /><span data-i18n="consent">Li e aceito os termos e entendo que a leitura de tarô é interpretativa e não substitui aconselhamento profissional.</span></label>
-        <button class="btn btn-primary full" type="submit" data-i18n="continuePayment">Continuar para pagamento</button>
-      </form>
-      <p class="secure-note" data-i18n="secureNote">Nesta versão para GitHub Pages, o botão de pagamento usa links externos configuráveis. Nenhum dado de cartão é armazenado neste site.</p>
+  
+      </div>
+  
+  
+      <!-- BRAZIL / MERCADO PAGO -->
+  
+      <div id="brazilCheckout">
+  
+        <form id="checkoutForm">
+  
+          <div class="payment-method-row">
+  
+            <label>
+              <span data-i18n="paymentMethod">
+                Forma de pagamento
+              </span>
+  
+              <select
+                id="paymentMethod"
+                name="payment"
+              ></select>
+            </label>
+  
+          </div>
+  
+          <div
+            id="paymentNote"
+            class="payment-note"
+          ></div>
+  
+  
+          <label class="consent">
+  
+            <input
+              required
+              type="checkbox"
+              name="consent"
+            />
+  
+            <span data-i18n="consent">
+              Li e aceito os termos e entendo que a leitura de tarô é interpretativa e não substitui aconselhamento profissional.
+            </span>
+  
+          </label>
+  
+  
+          <button
+            class="btn btn-primary full"
+            type="submit"
+            data-i18n="continuePayment"
+          >
+            Continuar para pagamento
+          </button>
+  
+        </form>
+  
+      </div>
+  
+  
+      <!-- UNITED STATES / PAYPAL -->
+  
+      <div
+        id="paypalCheckout"
+        class="paypal-checkout"
+        hidden
+      >
+  
+        <div class="payment-option-title">
+          <span>
+            Payment
+          </span>
+        </div>
+  
+  
+        <div
+          id="paypal-button-container"
+          class="paypal-button-container"
+        ></div>
+  
+  
+        <div
+          id="venmo-button-container"
+          class="venmo-button-container"
+        ></div>
+  
+  
+        <div
+          id="paypal-card-container"
+          class="paypal-card-container"
+        ></div>
+  
+      </div>
+  
+  
+      <p
+        class="secure-note"
+        data-i18n="secureNote"
+      >
+        O pagamento será realizado em uma página segura do provedor de pagamento. Nenhum dado de cartão é armazenado neste site.
+      </p>
+  
     </div>
   </div>
-
   <div class="toast" id="toast"></div>
   <script
     async
