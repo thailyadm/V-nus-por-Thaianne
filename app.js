@@ -2658,6 +2658,32 @@ if (year) {
 
 
 /* INITIALIZE */
+function handlePaymentReturn() {
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+  const payment =
+    params.get('payment');
+
+  if (payment === 'success') {
+
+    cart = [];
+
+    discount = 0;
+
+    persist();
+
+    renderCart();
+
+    showPaymentSuccess();
+
+  }
+
+}
+handlePaymentReturn();
 
 updateLanguage();
 
