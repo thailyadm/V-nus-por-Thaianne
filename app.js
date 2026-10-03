@@ -1681,7 +1681,16 @@ async function createPayPalOrder() {
 
 }
 
+function showPaymentSuccess() {
+  // código novo aqui
+}
 
+
+async function capturePayPalOrder(
+  orderId
+) {
+  // código que já existe
+}
 async function capturePayPalOrder(
   orderId
 ) {
