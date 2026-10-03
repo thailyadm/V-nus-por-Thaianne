@@ -2030,19 +2030,18 @@ async function initializePayPalCheckout() {
         async () => {
 
           try {
-
             await venmoPaymentSession.start(
               {
                 presentationMode:
                   'auto'
               },
-
-              createPayPalOrder()
-
+            
+              createPayPalOrder().then(
+                result => result.orderId
+              )
             );
 
           } catch (error) {
-
             console.error(
               'Venmo start error:',
               error
