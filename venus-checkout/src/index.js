@@ -1,34 +1,32 @@
 const CATALOG = {
-  br: {
-    essencial: {
-      title: 'Leitura Essencial',
-      price: 50
-    },
+  essencial: {
+    title: 'Leitura Essencial',
+    price: 50
+  },
 
-    venus: {
-      title: 'Leitura Vênus',
-      price: 100
-    },
+  venus: {
+    title: 'Leitura Vênus',
+    price: 100
+  },
 
-    caminhos: {
-      title: 'Caminhos & Possibilidades',
-      price: 160
-    },
+  caminhos: {
+    title: 'Caminhos & Possibilidades',
+    price: 160
+  },
 
-    amor: {
-      title: 'Amor & Relações',
-      price: 130
-    },
+  amor: {
+    title: 'Amor & Relações',
+    price: 130
+  },
 
-    espiritual: {
-      title: 'Direcionamento Espiritual',
-      price: 130
-    },
+  espiritual: {
+    title: 'Direcionamento Espiritual',
+    price: 130
+  },
 
-    completa: {
-      title: 'Leitura Completa',
-      price: 250
-    }
+  completa: {
+    title: 'Leitura Completa',
+    price: 250
   }
 };
 
@@ -51,7 +49,6 @@ function corsHeaders(origin) {
     ALLOWED_ORIGINS.includes(origin)
       ? origin
       : ALLOWED_ORIGINS[0];
-
 
   return {
     'Access-Control-Allow-Origin':
@@ -82,7 +79,7 @@ function jsonResponse(
 
       headers: {
         'Content-Type':
-          'application/json',
+          'application/json; charset=UTF-8',
 
         ...corsHeaders(origin)
       }
@@ -93,16 +90,13 @@ function jsonResponse(
 
 export default {
 
-  async fetch(
-    request,
-    env
-  ) {
+  async fetch(request, env) {
 
     const origin =
       request.headers.get('Origin') || '';
 
 
-    /* CORS preflight */
+    /* CORS */
 
     if (
       request.method === 'OPTIONS'
@@ -112,7 +106,6 @@ export default {
         null,
         {
           status: 204,
-
           headers:
             corsHeaders(origin)
         }
@@ -141,7 +134,7 @@ export default {
     }
 
 
-    /* Check origin */
+    /* Allowed website */
 
     if (
       !ALLOWED_ORIGINS.includes(origin)
@@ -150,7 +143,8 @@ export default {
       return jsonResponse(
         {
           error:
-            'Origin not allowed.'
+            'Origin not allowed.',
+          origin
         },
 
         403,
@@ -161,7 +155,7 @@ export default {
     }
 
 
-    /* Check token */
+    /* Secret */
 
     if (
       !env.MERCADOPAGO_ACCESS_TOKEN
@@ -170,7 +164,7 @@ export default {
       return jsonResponse(
         {
           error:
-            'Mercado Pago credentials are not configured.'
+            'MERCADOPAGO_ACCESS_TOKEN is not configured.'
         },
 
         500,
@@ -181,8 +175,9 @@ export default {
     }
 
 
-    let body;
+    /* Read request body */
 
+    let body;
 
     try {
 
@@ -194,7 +189,7 @@ export default {
       return jsonResponse(
         {
           error:
-            'Invalid JSON.'
+            'Invalid JSON received.'
         },
 
         400,
@@ -216,7 +211,7 @@ export default {
       return jsonResponse(
         {
           error:
-            'This checkout endpoint is currently configured for Brazil.'
+            'This checkout is currently configured for Brazil.'
         },
 
         400,
@@ -227,14 +222,14 @@ export default {
     }
 
 
-    const rawItems =
+    const incomingItems =
       Array.isArray(body?.items)
         ? body.items
         : [];
 
 
     if (
-      rawItems.length === 0
+      incomingItems.length === 0
     ) {
 
       return jsonResponse(
@@ -252,30 +247,28 @@ export default {
 
 
     /*
-     * Rebuild the order from OUR catalog.
-     *
-     * We intentionally do not trust the
-     * prices sent by the browser.
+     * Rebuild the cart from our own catalog.
+     * Prices sent by the browser are ignored.
      */
 
     const items = [];
 
 
     for (
-      const rawItem of rawItems
+      const incoming of incomingItems
     ) {
 
       const id =
         String(
-          rawItem?.id || ''
+          incoming?.id || ''
         );
 
 
-      const catalogItem =
-        CATALOG.br[id];
+      const product =
+        CATALOG[id];
 
 
-      if (!catalogItem) {
+      if (!product) {
 
         return jsonResponse(
           {
@@ -295,7 +288,7 @@ export default {
         Math.min(
           Math.max(
             Number(
-              rawItem?.quantity || 1
+              incoming?.quantity || 1
             ),
 
             1
@@ -306,23 +299,22 @@ export default {
 
 
       items.push({
-
         id,
-
         title:
-          catalogItem.title,
+          product.title,
 
         quantity,
 
         unit_price:
-          catalogItem.price
-
+          product.price
       });
 
     }
 
 
-    /* Calculate subtotal */
+    /*
+     * Calculate subtotal.
+     */
 
     const subtotal =
       items.reduce(
@@ -338,9 +330,7 @@ export default {
 
 
     /*
-     * Apply coupon server-side.
-     * The browser is not trusted with
-     * the final discount amount.
+     * Validate coupon.
      */
 
     const requestedDiscount =
@@ -349,109 +339,90 @@ export default {
       );
 
 
-    const discount =
-      (
-        requestedDiscount >= 0 &&
-        requestedDiscount <= 0.15
-      )
+    const validDiscount =
+      Object.values(COUPONS)
+        .includes(requestedDiscount)
         ? requestedDiscount
         : 0;
 
 
-    const discountAmount =
-      subtotal * discount;
-
-
-    const total =
-      subtotal -
-      discountAmount;
-
-
-    if (
-      total <= 0
-    ) {
-
-      return jsonResponse(
-        {
-          error:
-            'Invalid order total.'
-        },
-
-        400,
-
-        origin
-      );
-
-    }
-
-
     /*
-     * Mercado Pago items.
-     *
-     * To preserve the exact discounted total,
-     * the discount is represented as a negative
-     * item when a coupon is used.
+     * For Mercado Pago we keep all line prices positive.
+     * The coupon is applied proportionally to each item.
      */
 
     const mercadoPagoItems =
-      items.map(item => ({
+      items.map(
+        item => {
 
-        title:
-          item.title,
-
-        quantity:
-          item.quantity,
-
-        unit_price:
-          item.unit_price,
-
-        currency_id:
-          'BRL'
-
-      }));
+          const discountedUnitPrice =
+            Number(
+              (
+                item.unit_price *
+                (1 - validDiscount)
+              ).toFixed(2)
+            );
 
 
-    if (
-      discountAmount > 0
-    ) {
+          return {
 
-      mercadoPagoItems.push({
+            id:
+              item.id,
 
-        title:
-          'Desconto',
+            title:
+              item.title,
 
-        quantity:
-          1,
+            quantity:
+              item.quantity,
 
-        unit_price:
-          -Number(
-            discountAmount.toFixed(2)
-          ),
+            unit_price:
+              discountedUnitPrice,
 
-        currency_id:
-          'BRL'
+            currency_id:
+              'BRL'
 
-      });
+          };
 
-    }
+        }
+      );
 
 
     /*
-     * Optional customer data.
-     * We use only what the checkout form sends.
+     * Customer information.
      */
 
     const customer =
       body?.customer || {};
 
 
-    const preferencePayload = {
+    const payer = {};
+
+
+    if (
+      customer.email
+    ) {
+
+      payer.email =
+        String(
+          customer.email
+        ).trim();
+
+    }
+
+
+    /*
+     * Create Mercado Pago preference.
+     */
+
+    const preference = {
 
       items:
         mercadoPagoItems,
 
       external_reference:
         `VENUS-${Date.now()}`,
+
+      payer,
 
       back_urls: {
 
@@ -472,74 +443,138 @@ export default {
     };
 
 
-    /*
-     * Create Mercado Pago preference.
-     */
-
-    const mpResponse =
-      await fetch(
-        'https://api.mercadopago.com/checkout/preferences',
-
-        {
-
-          method:
-            'POST',
-
-          headers: {
-
-            'Authorization':
-              `Bearer ${env.MERCADOPAGO_ACCESS_TOKEN}`,
-
-            'Content-Type':
-              'application/json'
-
-          },
-
-          body:
-            JSON.stringify(
-              preferencePayload
-            )
-
-        }
-      );
+    let mercadoPagoResponse;
 
 
-    const mpData =
-      await mpResponse.json();
+    try {
 
+      mercadoPagoResponse =
+        await fetch(
+          'https://api.mercadopago.com/checkout/preferences',
+          {
 
-    if (
-      !mpResponse.ok
-    ) {
+            method:
+              'POST',
 
-      console.error(
-        'Mercado Pago error:',
-        mpData
-      );
+            headers: {
 
+              'Authorization':
+                `Bearer ${env.MERCADOPAGO_ACCESS_TOKEN}`,
+
+              'Content-Type':
+                'application/json',
+
+              'Accept':
+                'application/json'
+
+            },
+
+            body:
+              JSON.stringify(
+                preference
+              )
+
+          }
+        );
+
+    } catch (error) {
 
       return jsonResponse(
         {
-          error: 'Mercado Pago error.',
-          details: mpData
+          error:
+            'Could not connect to Mercado Pago.',
+
+          details:
+            String(
+              error?.message ||
+              error
+            )
         },
-      
+
         502,
-      
+
         origin
       );
 
     }
 
 
+    /*
+     * Read as text first.
+     * This prevents:
+     * Unexpected token '<'
+     */
+
+    const responseText =
+      await mercadoPagoResponse.text();
+
+
+    let mercadoPagoData;
+
+
+    try {
+
+      mercadoPagoData =
+        JSON.parse(
+          responseText
+        );
+
+    } catch {
+
+      mercadoPagoData = {
+        raw:
+          responseText.slice(
+            0,
+            1000
+          )
+      };
+
+    }
+
+
+    /*
+     * Mercado Pago rejected the preference.
+     */
+
     if (
-      !mpData.init_point
+      !mercadoPagoResponse.ok
     ) {
 
       return jsonResponse(
         {
           error:
-            'Mercado Pago did not return a checkout URL.'
+            'Mercado Pago rejected the checkout.',
+
+          status:
+            mercadoPagoResponse.status,
+
+          details:
+            mercadoPagoData
+        },
+
+        502,
+
+        origin
+      );
+
+    }
+
+
+    /*
+     * Successful preference creation.
+     */
+
+    if (
+      !mercadoPagoData?.init_point
+    ) {
+
+      return jsonResponse(
+        {
+          error:
+            'Mercado Pago did not return init_point.',
+
+          details:
+            mercadoPagoData
         },
 
         502,
@@ -553,15 +588,11 @@ export default {
     return jsonResponse(
       {
         init_point:
-          mpData.init_point,
+          mercadoPagoData.init_point,
 
-        total:
-          Number(
-            total.toFixed(2)
-          ),
+        preference_id:
+          mercadoPagoData.id || null
 
-        currency:
-          'BRL'
       },
 
       200,
