@@ -2087,10 +2087,7 @@ async function initializePayPalCheckout() {
 
 }
 async function checkout(event) {
-
   event.preventDefault();
-
-
   if (!cart.length) {
 
     toast(
@@ -2099,11 +2096,22 @@ async function checkout(event) {
 
     return;
   }
+  /*
+   * EUA:
+   *
+   * PayPal/Venmo usam seus próprios botões.
+   * O submit tradicional não é usado.
+   */
+  if (country === 'us') {
+    initializePayPalCheckout();
+    return;
 
+  }
 
   /*
-   * O checkout agora aceita MAIS DE UMA consulta.
-   * O carrinho inteiro será enviado ao endpoint.
+   * BRASIL:
+   *
+   * Continua exatamente pelo Mercado Pago.
    */
 
   if (!CONFIG.checkoutEndpoint) {
@@ -2146,13 +2154,17 @@ async function checkout(event) {
 
         return {
 
-          id: service.id,
+          id:
+            service.id,
 
-          title: current.title,
+          title:
+            current.title,
 
-          quantity: 1,
+          quantity:
+            1,
 
-          unit_price: current.price
+          unit_price:
+            current.price
 
         };
 
@@ -2173,20 +2185,14 @@ async function checkout(event) {
   const payload = {
 
     country:
-
-      country,
+      'br',
 
     currency:
+      'BRL',
 
-      t().currency,
+    items,
 
-    items:
-
-      items,
-
-    discount:
-
-      discount,
+    discount,
 
     customer: {
 
@@ -2232,8 +2238,10 @@ async function checkout(event) {
             'POST',
 
           headers: {
+
             'Content-Type':
               'application/json'
+
           },
 
           body:
@@ -2245,18 +2253,21 @@ async function checkout(event) {
       );
 
 
-    const result = await response.json();
+    const result =
+      await response.json();
+
 
     if (!response.ok) {
-      console.error('Checkout server error:', result);
-    
+
       throw new Error(
         result?.details?.message ||
         result?.details?.error ||
         result?.error ||
         `Checkout request failed: ${response.status}`
       );
+
     }
+
 
     if (
       !result ||
@@ -2274,13 +2285,14 @@ async function checkout(event) {
       result.init_point;
 
 
-   } catch (error) {
-  
+  } catch (error) {
+
     console.error(
       'Checkout error:',
       error
     );
-  
+
+
     toast(
       error.message ||
       (
@@ -2289,6 +2301,7 @@ async function checkout(event) {
           : 'Unable to open payment. Please try again.'
       )
     );
+
 
   } finally {
 
@@ -2300,9 +2313,8 @@ async function checkout(event) {
     }
 
   }
+
 }
-
-
 function toast(text) {
 
   const element =
