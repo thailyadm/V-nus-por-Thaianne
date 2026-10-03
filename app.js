@@ -1478,7 +1478,614 @@ function updatePaymentNote() {
       : t().cardNote;
 }
 
+let paypalSdkInstance = null;
+let paypalCheckoutInitialized = false;
 
+
+function waitForPayPalSdk(timeout = 10000) {
+
+  return new Promise(
+    (resolve, reject) => {
+
+      if (
+        window.paypal &&
+        typeof window.paypal.createInstance === 'function'
+      ) {
+
+        resolve();
+
+        return;
+      }
+
+
+      const start =
+        Date.now();
+
+
+      const interval =
+        setInterval(
+          () => {
+
+            if (
+              window.paypal &&
+              typeof window.paypal.createInstance === 'function'
+            ) {
+
+              clearInterval(interval);
+
+              resolve();
+
+              return;
+            }
+
+
+            if (
+              Date.now() - start >= timeout
+            ) {
+
+              clearInterval(interval);
+
+              reject(
+                new Error(
+                  'PayPal SDK did not load.'
+                )
+              );
+
+            }
+
+          },
+          100
+        );
+
+    }
+  );
+
+}
+
+
+function paypalPayload() {
+
+  const items =
+    cart
+      .map(id => {
+
+        const service =
+          services.find(
+            item =>
+              item.id === id
+          );
+
+
+        if (!service) {
+          return null;
+        }
+
+
+        const current =
+          serviceData(service);
+
+
+        return {
+
+          id:
+            service.id,
+
+          title:
+            current.title,
+
+          quantity:
+            1,
+
+          unit_price:
+            current.price
+
+        };
+
+      })
+      .filter(Boolean);
+
+
+  return {
+
+    country:
+      'us',
+
+    currency:
+      'USD',
+
+    items,
+
+    discount,
+
+    customer: {
+
+      name:
+        document.querySelector(
+          '[name="name"]'
+        )?.value || '',
+
+      email:
+        document.querySelector(
+          '[name="email"]'
+        )?.value || '',
+
+      phone:
+        document.querySelector(
+          '[name="phone"]'
+        )?.value || ''
+
+    }
+
+  };
+
+}
+
+
+async function createPayPalOrder() {
+
+  const payload =
+    paypalPayload();
+
+
+  const response =
+    await fetch(
+      `${CONFIG.checkoutEndpoint}/paypal-create-order`,
+      {
+
+        method:
+          'POST',
+
+        headers: {
+
+          'Content-Type':
+            'application/json'
+
+        },
+
+        body:
+          JSON.stringify(
+            payload
+          )
+
+      }
+    );
+
+
+  const result =
+    await response.json();
+
+
+  if (!response.ok) {
+
+    throw new Error(
+      result?.error ||
+      'Unable to create PayPal order.'
+    );
+
+  }
+
+
+  if (!result?.id) {
+
+    throw new Error(
+      'PayPal did not return an order ID.'
+    );
+
+  }
+
+
+  return {
+    orderId:
+      result.id
+  };
+
+}
+
+
+async function capturePayPalOrder(
+  orderId
+) {
+
+  const response =
+    await fetch(
+      `${CONFIG.checkoutEndpoint}/paypal-capture-order`,
+      {
+
+        method:
+          'POST',
+
+        headers: {
+
+          'Content-Type':
+            'application/json'
+
+        },
+
+        body:
+          JSON.stringify({
+            orderId
+          })
+
+      }
+    );
+
+
+  const result =
+    await response.json();
+
+
+  if (!response.ok) {
+
+    throw new Error(
+      result?.error ||
+      'Unable to capture PayPal order.'
+    );
+
+  }
+
+
+  return result;
+
+}
+
+
+async function initializePayPalCheckout() {
+
+  if (
+    paypalCheckoutInitialized
+  ) {
+    return;
+  }
+
+
+  const container =
+    $('#paypal-button-container');
+
+  const venmoContainer =
+    $('#venmo-button-container');
+
+
+  if (
+    !container ||
+    !venmoContainer
+  ) {
+    return;
+  }
+
+
+  try {
+
+    await waitForPayPalSdk();
+
+
+    paypalSdkInstance =
+      await window.paypal.createInstance({
+
+        clientId:
+          CONFIG.paypalClientId,
+
+        components: [
+          'paypal-payments',
+          'venmo-payments'
+        ],
+
+        pageType:
+          'checkout',
+
+        locale:
+          'en-US'
+
+      });
+
+
+    const eligible =
+      await paypalSdkInstance.findEligibleMethods({
+        currencyCode:
+          'USD'
+      });
+
+
+    container.innerHTML = '';
+
+    venmoContainer.innerHTML = '';
+
+
+    /*
+     * PAYPAL
+     */
+
+    if (
+      eligible.isEligible('paypal')
+    ) {
+
+      const paypalButton =
+        document.createElement(
+          'paypal-button'
+        );
+
+
+      paypalButton.setAttribute(
+        'type',
+        'button'
+      );
+
+
+      container.appendChild(
+        paypalButton
+      );
+
+
+      const paymentSession =
+        paypalSdkInstance
+          .createPayPalOneTimePaymentSession({
+
+            async onApprove(data) {
+
+              try {
+
+                const result =
+                  await capturePayPalOrder(
+                    data.orderId
+                  );
+
+
+                console.log(
+                  'PayPal payment captured:',
+                  result
+                );
+
+
+                cart = [];
+
+                discount = 0;
+
+                persist();
+
+                renderCart();
+
+                closeCheckout();
+
+                toast(
+                  country === 'us'
+                    ? 'Payment completed successfully.'
+                    : 'Pagamento concluído com sucesso.'
+                );
+
+              } catch (error) {
+
+                console.error(
+                  'PayPal capture error:',
+                  error
+                );
+
+                toast(
+                  error.message ||
+                  'Payment could not be completed.'
+                );
+
+              }
+
+            },
+
+
+            onCancel(data) {
+
+              console.log(
+                'PayPal payment cancelled:',
+                data
+              );
+
+            },
+
+
+            onError(error) {
+
+              console.error(
+                'PayPal payment error:',
+                error
+              );
+
+              toast(
+                'PayPal payment error. Please try again.'
+              );
+
+            }
+
+          });
+
+
+      paypalButton.addEventListener(
+        'click',
+        async () => {
+
+          try {
+
+            await paymentSession.start(
+              {
+                presentationMode:
+                  'auto'
+              },
+
+              createPayPalOrder()
+
+            );
+
+          } catch (error) {
+
+            console.error(
+              'PayPal start error:',
+              error
+            );
+
+            toast(
+              error.message ||
+              'Unable to start PayPal checkout.'
+            );
+
+          }
+
+        }
+      );
+
+    }
+
+
+    /*
+     * VENMO
+     */
+
+    if (
+      eligible.isEligible('venmo')
+    ) {
+
+      const venmoButton =
+        document.createElement(
+          'button'
+        );
+
+
+      venmoButton.type =
+        'button';
+
+
+      venmoButton.className =
+        'paypal-venmo-button';
+
+
+      venmoButton.textContent =
+        'Pay with Venmo';
+
+
+      venmoContainer.appendChild(
+        venmoButton
+      );
+
+
+      const venmoPaymentSession =
+        paypalSdkInstance
+          .createVenmoOneTimePaymentSession({
+
+            async onApprove(data) {
+
+              try {
+
+                await capturePayPalOrder(
+                  data.orderId
+                );
+
+
+                cart = [];
+
+                discount = 0;
+
+                persist();
+
+                renderCart();
+
+                closeCheckout();
+
+                toast(
+                  'Payment completed successfully.'
+                );
+
+              } catch (error) {
+
+                console.error(
+                  'Venmo capture error:',
+                  error
+                );
+
+                toast(
+                  error.message ||
+                  'Venmo payment could not be completed.'
+                );
+
+              }
+
+            },
+
+
+            onCancel(data) {
+
+              console.log(
+                'Venmo payment cancelled:',
+                data
+              );
+
+            },
+
+
+            onError(error) {
+
+              console.error(
+                'Venmo payment error:',
+                error
+              );
+
+              toast(
+                'Venmo payment error. Please try again.'
+              );
+
+            }
+
+          });
+
+
+      venmoButton.addEventListener(
+        'click',
+        async () => {
+
+          try {
+
+            await venmoPaymentSession.start(
+              {
+                presentationMode:
+                  'auto'
+              },
+
+              createPayPalOrder()
+
+            );
+
+          } catch (error) {
+
+            console.error(
+              'Venmo start error:',
+              error
+            );
+
+            toast(
+              error.message ||
+              'Unable to start Venmo.'
+            );
+
+          }
+
+        }
+      );
+
+    }
+
+
+    paypalCheckoutInitialized =
+      true;
+
+
+  } catch (error) {
+
+    console.error(
+      'PayPal initialization error:',
+      error
+    );
+
+
+    toast(
+      'PayPal is temporarily unavailable. Please try again.'
+    );
+
+  }
+
+}
 async function checkout(event) {
 
   event.preventDefault();
