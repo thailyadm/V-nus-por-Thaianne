@@ -854,7 +854,7 @@ async function capturePayPalOrder(
 
   const response =
     await fetch(
-      `https://api-m.sandbox.paypal.com/v2/checkout/orders/${encodeURIComponent(orderId)}/capture`,
+      `https://api-m.paypal.com`,
       {
 
         method:
