@@ -96,184 +96,94 @@ export default {
       request.headers.get('Origin') || '';
 
 
-    /* CORS */
-
-    if (
-      request.method === 'OPTIONS'
-    ) {
-
-      return new Response(
-        null,
-        {
-          status: 204,
-          headers:
-            corsHeaders(origin)
-        }
-      );
-
-    }
-
-
-    /* Only POST */
-
-    if (
-      request.method !== 'POST'
-    ) {
-
-      return jsonResponse(
-        {
-          error:
-            'Method not allowed.'
-        },
-
-        405,
-
-        origin
-      );
-
-    }
-
-
-    /* Allowed website */
-
-    if (
-      !ALLOWED_ORIGINS.includes(origin)
-    ) {
-
-      return jsonResponse(
-        {
-          error:
-            'Origin not allowed.',
-          origin
-        },
-
-        403,
-
-        origin
-      );
-
-    }
-
-
-    /* Secret */
-
-    if (
-      !env.MERCADOPAGO_ACCESS_TOKEN
-    ) {
-
-      return jsonResponse(
-        {
-          error:
-            'MERCADOPAGO_ACCESS_TOKEN is not configured.'
-        },
-
-        500,
-
-        origin
-      );
-
-    }
-
-
-    /* Read request body */
-
-    let body;
-
     try {
 
-      body =
-        await request.json();
+      if (
+        request.method === 'OPTIONS'
+      ) {
 
-    } catch {
-
-      return jsonResponse(
-        {
-          error:
-            'Invalid JSON received.'
-        },
-
-        400,
-
-        origin
-      );
-
-    }
-
-
-    const country =
-      body?.country;
-
-
-    if (
-      country !== 'br'
-    ) {
-
-      return jsonResponse(
-        {
-          error:
-            'This checkout is currently configured for Brazil.'
-        },
-
-        400,
-
-        origin
-      );
-
-    }
-
-
-    const incomingItems =
-      Array.isArray(body?.items)
-        ? body.items
-        : [];
-
-
-    if (
-      incomingItems.length === 0
-    ) {
-
-      return jsonResponse(
-        {
-          error:
-            'Cart is empty.'
-        },
-
-        400,
-
-        origin
-      );
-
-    }
-
-
-    /*
-     * Rebuild the cart from our own catalog.
-     * Prices sent by the browser are ignored.
-     */
-
-    const items = [];
-
-
-    for (
-      const incoming of incomingItems
-    ) {
-
-      const id =
-        String(
-          incoming?.id || ''
+        return new Response(
+          null,
+          {
+            status: 204,
+            headers:
+              corsHeaders(origin)
+          }
         );
 
-
-      const product =
-        CATALOG[id];
+      }
 
 
-      if (!product) {
+      if (
+        request.method !== 'POST'
+      ) {
 
         return jsonResponse(
           {
             error:
-              `Unknown service: ${id}`
+              'Method not allowed.'
+          },
+
+          405,
+
+          origin
+        );
+
+      }
+
+
+      if (
+        !ALLOWED_ORIGINS.includes(origin)
+      ) {
+
+        return jsonResponse(
+          {
+            error:
+              'Origin not allowed.',
+            receivedOrigin:
+              origin
+          },
+
+          403,
+
+          origin
+        );
+
+      }
+
+
+      if (
+        !env.MERCADOPAGO_ACCESS_TOKEN
+      ) {
+
+        return jsonResponse(
+          {
+            error:
+              'MERCADOPAGO_ACCESS_TOKEN is missing.'
+          },
+
+          500,
+
+          origin
+        );
+
+      }
+
+
+      const body =
+        await request.json();
+
+
+      if (
+        !body ||
+        !Array.isArray(body.items) ||
+        body.items.length === 0
+      ) {
+
+        return jsonResponse(
+          {
+            error:
+              'Cart is empty or invalid.'
           },
 
           400,
@@ -284,205 +194,374 @@ export default {
       }
 
 
-      const quantity =
-        Math.min(
+      if (
+        body.country !== 'br'
+      ) {
+
+        return jsonResponse(
+          {
+            error:
+              'Only Brazil checkout is enabled in this version.'
+          },
+
+          400,
+
+          origin
+        );
+
+      }
+
+
+      const items = [];
+
+
+      for (
+        const incoming of body.items
+      ) {
+
+        const id =
+          String(
+            incoming?.id || ''
+          );
+
+
+        const catalogItem =
+          CATALOG[id];
+
+
+        if (!catalogItem) {
+
+          return jsonResponse(
+            {
+              error:
+                `Unknown service: ${id}`
+            },
+
+            400,
+
+            origin
+          );
+
+        }
+
+
+        const quantity =
           Math.max(
-            Number(
-              incoming?.quantity || 1
+            1,
+            Math.min(
+              10,
+              Number(
+                incoming?.quantity || 1
+              )
+            )
+          );
+
+
+        items.push({
+
+          id,
+
+          title:
+            catalogItem.title,
+
+          quantity,
+
+          unit_price:
+            catalogItem.price
+
+        });
+
+      }
+
+
+      const subtotal =
+        items.reduce(
+          (
+            sum,
+            item
+          ) =>
+            sum +
+            (
+              item.unit_price *
+              item.quantity
             ),
 
-            1
-          ),
-
-          10
+          0
         );
 
 
-      items.push({
-        id,
-        title:
-          product.title,
-
-        quantity,
-
-        unit_price:
-          product.price
-      });
-
-    }
+      const requestedDiscount =
+        Number(
+          body.discount || 0
+        );
 
 
-    /*
-     * Calculate subtotal.
-     */
-
-    const subtotal =
-      items.reduce(
-        (sum, item) =>
-          sum +
-          (
-            item.unit_price *
-            item.quantity
-          ),
-
-        0
-      );
+      const validDiscount =
+        Object.values(
+          COUPONS
+        ).includes(
+          requestedDiscount
+        )
+          ? requestedDiscount
+          : 0;
 
 
-    /*
-     * Validate coupon.
-     */
+      const mercadoPagoItems =
+        items.map(
+          item => {
 
-    const requestedDiscount =
-      Number(
-        body?.discount || 0
-      );
-
-
-    const validDiscount =
-      Object.values(COUPONS)
-        .includes(requestedDiscount)
-        ? requestedDiscount
-        : 0;
+            const discountedPrice =
+              Number(
+                (
+                  item.unit_price *
+                  (1 - validDiscount)
+                ).toFixed(2)
+              );
 
 
-    /*
-     * For Mercado Pago we keep all line prices positive.
-     * The coupon is applied proportionally to each item.
-     */
+            return {
 
-    const mercadoPagoItems =
-      items.map(
-        item => {
+              id:
+                item.id,
 
-          const discountedUnitPrice =
-            Number(
-              (
-                item.unit_price *
-                (1 - validDiscount)
-              ).toFixed(2)
-            );
+              title:
+                item.title,
 
+              quantity:
+                item.quantity,
 
-          return {
+              unit_price:
+                discountedPrice,
 
-            id:
-              item.id,
+              currency_id:
+                'BRL'
 
-            title:
-              item.title,
-
-            quantity:
-              item.quantity,
-
-            unit_price:
-              discountedUnitPrice,
-
-            currency_id:
-              'BRL'
-
-          };
-
-        }
-      );
-
-
-    /*
-     * Customer information.
-     */
-
-    const customer =
-      body?.customer || {};
-
-
-    const payer = {};
-
-
-    if (
-      customer.email
-    ) {
-
-      payer.email =
-        String(
-          customer.email
-        ).trim();
-
-    }
-
-
-    /*
-     * Create Mercado Pago preference.
-     */
-
-    const preference = {
-
-      items:
-        mercadoPagoItems,
-
-      external_reference:
-        `VENUS-${Date.now()}`,
-
-      payer,
-
-      back_urls: {
-
-        success:
-          'https://venusporthaianne.com/?payment=success',
-
-        failure:
-          'https://venusporthaianne.com/?payment=failure',
-
-        pending:
-          'https://venusporthaianne.com/?payment=pending'
-
-      },
-
-      auto_return:
-        'approved'
-
-    };
-
-
-    let mercadoPagoResponse;
-
-
-    try {
-
-      mercadoPagoResponse =
-        await fetch(
-          'https://api.mercadopago.com/checkout/preferences',
-          {
-
-            method:
-              'POST',
-
-            headers: {
-
-              'Authorization':
-                `Bearer ${env.MERCADOPAGO_ACCESS_TOKEN}`,
-
-              'Content-Type':
-                'application/json',
-
-              'Accept':
-                'application/json'
-
-            },
-
-            body:
-              JSON.stringify(
-                preference
-              )
+            };
 
           }
         );
 
+
+      const email =
+        String(
+          body?.customer?.email || ''
+        ).trim();
+
+
+      const preference = {
+
+        items:
+          mercadoPagoItems,
+
+        external_reference:
+          `VENUS-${Date.now()}`,
+
+        back_urls: {
+
+          success:
+            'https://venusporthaianne.com/?payment=success',
+
+          failure:
+            'https://venusporthaianne.com/?payment=failure',
+
+          pending:
+            'https://venusporthaianne.com/?payment=pending'
+
+        },
+
+        auto_return:
+          'approved'
+
+      };
+
+
+      if (email) {
+
+        preference.payer = {
+          email
+        };
+
+      }
+
+
+      let mpResponse;
+
+
+      try {
+
+        mpResponse =
+          await fetch(
+            'https://api.mercadopago.com/checkout/preferences',
+
+            {
+              method:
+                'POST',
+
+              headers: {
+
+                'Authorization':
+                  `Bearer ${env.MERCADOPAGO_ACCESS_TOKEN}`,
+
+                'Content-Type':
+                  'application/json',
+
+                'Accept':
+                  'application/json'
+
+              },
+
+              body:
+                JSON.stringify(
+                  preference
+                )
+
+            }
+          );
+
+      } catch (error) {
+
+        return jsonResponse(
+          {
+            error:
+              'Mercado Pago connection failed.',
+
+            details:
+              String(
+                error?.message ||
+                error
+              )
+          },
+
+          502,
+
+          origin
+        );
+
+      }
+
+
+      const responseText =
+        await mpResponse.text();
+
+
+      let mpData;
+
+
+      try {
+
+        mpData =
+          JSON.parse(
+            responseText
+          );
+
+      } catch {
+
+        mpData = {
+          raw:
+            responseText.slice(
+              0,
+              2000
+            )
+        };
+
+      }
+
+
+      if (
+        !mpResponse.ok
+      ) {
+
+        return jsonResponse(
+          {
+            error:
+              'Mercado Pago rejected the preference.',
+
+            status:
+              mpResponse.status,
+
+            details:
+              mpData
+          },
+
+          502,
+
+          origin
+        );
+
+      }
+
+
+      const checkoutUrl =
+        mpData?.init_point ||
+        mpData?.sandbox_init_point;
+
+
+      if (!checkoutUrl) {
+
+        return jsonResponse(
+          {
+            error:
+              'Mercado Pago created no checkout URL.',
+
+            details:
+              mpData
+          },
+
+          502,
+
+          origin
+        );
+
+      }
+
+
+      return jsonResponse(
+        {
+          ok:
+            true,
+
+          init_point:
+            checkoutUrl,
+
+          preference_id:
+            mpData?.id ||
+            null,
+
+          subtotal:
+            Number(
+              subtotal.toFixed(2)
+            ),
+
+          discount:
+            validDiscount,
+
+          total:
+            Number(
+              (
+                subtotal *
+                (1 - validDiscount)
+              ).toFixed(2)
+            )
+        },
+
+        200,
+
+        origin
+      );
+
+
     } catch (error) {
+
+      /*
+       * FINAL SAFETY NET:
+       * No unexpected exception should
+       * turn into an HTML response.
+       */
 
       return jsonResponse(
         {
           error:
-            'Could not connect to Mercado Pago.',
+            'Worker exception.',
 
           details:
             String(
@@ -491,114 +570,12 @@ export default {
             )
         },
 
-        502,
+        500,
 
         origin
       );
 
     }
-
-
-    /*
-     * Read as text first.
-     * This prevents:
-     * Unexpected token '<'
-     */
-
-    const responseText =
-      await mercadoPagoResponse.text();
-
-
-    let mercadoPagoData;
-
-
-    try {
-
-      mercadoPagoData =
-        JSON.parse(
-          responseText
-        );
-
-    } catch {
-
-      mercadoPagoData = {
-        raw:
-          responseText.slice(
-            0,
-            1000
-          )
-      };
-
-    }
-
-
-    /*
-     * Mercado Pago rejected the preference.
-     */
-
-    if (
-      !mercadoPagoResponse.ok
-    ) {
-
-      return jsonResponse(
-        {
-          error:
-            'Mercado Pago rejected the checkout.',
-
-          status:
-            mercadoPagoResponse.status,
-
-          details:
-            mercadoPagoData
-        },
-
-        502,
-
-        origin
-      );
-
-    }
-
-
-    /*
-     * Successful preference creation.
-     */
-
-    if (
-      !mercadoPagoData?.init_point
-    ) {
-
-      return jsonResponse(
-        {
-          error:
-            'Mercado Pago did not return init_point.',
-
-          details:
-            mercadoPagoData
-        },
-
-        502,
-
-        origin
-      );
-
-    }
-
-
-    return jsonResponse(
-      {
-        init_point:
-          mercadoPagoData.init_point,
-
-        preference_id:
-          mercadoPagoData.id || null
-
-      },
-
-      200,
-
-      origin
-    );
 
   }
 
