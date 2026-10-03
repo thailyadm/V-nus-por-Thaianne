@@ -1842,23 +1842,14 @@ async function initializePayPalCheckout() {
                   'PayPal payment captured:',
                   result
                 );
-
-
                 cart = [];
-
                 discount = 0;
-
+                
                 persist();
-
+                
                 renderCart();
-
-                closeCheckout();
-
-                toast(
-                  country === 'us'
-                    ? 'Payment completed successfully.'
-                    : 'Pagamento concluído com sucesso.'
-                );
+                
+                showPaymentSuccess();
 
               } catch (error) {
 
