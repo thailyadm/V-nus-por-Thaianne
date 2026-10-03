@@ -6,7 +6,7 @@ const CONFIG = {
     'https://venus-checkout.contato-b46.workers.dev',
 
   paypalClientId:
-    'BAA5R6rpXSJjeAW7qD1vqbEf-sJfIRWbMTHNCSOgW5hlhlbOQ7t3C-RZkocLoSvOasBdxqANDhlE0dlZtI',
+    'BAA8E8antfB0JNn_xfSpg2ZY2CdTxpUKPYLd3LRtcemwAPvagBywVx_8ZC5dotrQRb6B3ItpPbyWVKnmHs',
 
   coupons: {
     VENUS10: 0.10,
