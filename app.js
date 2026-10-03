@@ -2019,17 +2019,15 @@ async function initializePayPalCheckout() {
         async () => {
 
           try {
+         const order =
+          await createPayPalOrder();   
             await venmoPaymentSession.start(
               {
                 presentationMode:
                   'auto'
               },
-            
-              createPayPalOrder().then(
-                result => result.orderId
-              )
+              order.orderId
             );
-
           } catch (error) {
             console.error(
               'Venmo start error:',
