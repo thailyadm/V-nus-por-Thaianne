@@ -2,10 +2,11 @@ const CONFIG = {
   whatsapp: '5561999546522',
   email: 'contato@venusporthaianne.com',
 
-  mercadoPagoGeneral:
-    'https://link.mercadopago.com.br/venusporthaianne',
+  checkoutEndpoint:
+    'https://venus-checkout.contato-b46.workers.dev',
 
-  checkoutEndpoint: 'https://venus-checkout.contato-b46.workers.dev',
+  paypalClientId:
+    'BAA5R6rpXSJjeAW7qD1vqbEf-sJfIRWbMTHNCSOgW5hlhlbOQ7t3C-RZkocLoSvOasBdxqANDhlE0dlZtI',
 
   coupons: {
     VENUS10: 0.10,
