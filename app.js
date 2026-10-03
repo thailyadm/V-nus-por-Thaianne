@@ -1605,18 +1605,18 @@ async function checkout(event) {
       );
 
 
-    if (!response.ok) {
+    const result = await response.json();
 
+    if (!response.ok) {
+      console.error('Checkout server error:', result);
+    
       throw new Error(
+        result?.details?.message ||
+        result?.details?.error ||
+        result?.error ||
         `Checkout request failed: ${response.status}`
       );
-
     }
-
-
-    const result =
-      await response.json();
-
 
     if (
       !result ||
