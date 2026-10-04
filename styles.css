@@ -1097,6 +1097,204 @@ a{
 
   line-height:1.8
 }
+/* =========================================================
+   ABOUT / SOBRE
+   ========================================================= */
+
+.about-section{
+  position:relative;
+  overflow:hidden
+}
+
+.about-section::before{
+  content:"♀";
+
+  position:absolute;
+
+  right:-50px;
+  top:20px;
+
+  font:
+    400 280px/1
+    "Cormorant Garamond",
+    serif;
+
+  color:rgba(213,164,95,.045);
+
+  pointer-events:none
+}
+
+.about-header{
+  max-width:760px;
+
+  margin-bottom:45px
+}
+
+.about-header h2{
+  max-width:720px;
+
+  font-family:
+    "Cormorant Garamond",
+    serif;
+
+  font-size:
+    clamp(44px,5vw,63px);
+
+  font-weight:500;
+
+  line-height:1.02;
+
+  margin:0
+}
+
+.about-cards{
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:22px
+}
+
+.about-card{
+  position:relative;
+
+  overflow:hidden;
+
+  padding:28px 30px;
+
+  border:
+    1px solid rgba(113,51,68,.13);
+
+  border-radius:24px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.74),
+      rgba(250,233,229,.42)
+    );
+
+  box-shadow:
+    0 12px 35px rgba(84,47,56,.045);
+
+  transition:
+    transform .3s ease,
+    border-color .3s ease,
+    box-shadow .3s ease,
+    background .3s ease
+}
+
+.about-card::before{
+  content:"";
+
+  position:absolute;
+
+  width:140px;
+  height:140px;
+
+  right:-70px;
+  top:-70px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(232,194,143,.20),
+      transparent 68%
+    );
+
+  pointer-events:none
+}
+
+.about-card:hover{
+  transform:translateY(-5px);
+
+  border-color:
+    rgba(213,164,95,.48);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.88),
+      rgba(244,229,215,.48)
+    );
+
+  box-shadow:
+    0 20px 45px rgba(84,47,56,.08)
+}
+
+.about-card-top{
+  display:flex;
+
+  align-items:center;
+  justify-content:space-between;
+
+  margin-bottom:12px
+}
+
+.about-number{
+  font:
+    500 30px/1
+    "Cormorant Garamond",
+    serif;
+
+  color:var(--gold)
+}
+
+.about-symbol{
+  width:38px;
+  height:38px;
+
+  display:grid;
+
+  place-items:center;
+
+  border-radius:50%;
+
+  color:var(--rose-dark);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.82),
+      rgba(232,194,143,.52)
+    );
+
+  border:
+    1px solid rgba(213,164,95,.34);
+
+  font-size:17px
+}
+
+.about-card h3{
+  margin:
+    0 0 10px;
+
+  font:
+    600 29px/1.1
+    "Cormorant Garamond",
+    serif;
+
+  color:var(--ink)
+}
+
+.about-card p{
+  margin:0;
+
+  font-size:15.5px;
+
+  line-height:1.68;
+
+  color:var(--muted)
+}
+
+.about-footer{
+  margin-top:26px;
+
+  text-align:right
+}
 .about-section .prose{
   font-size:15px;
   line-height:1.65
