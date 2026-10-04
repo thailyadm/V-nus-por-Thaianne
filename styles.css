@@ -1097,7 +1097,15 @@ a{
 
   line-height:1.8
 }
+.about-section .prose{
+  font-size:15px;
+  line-height:1.65
+}
 
+.about-section .prose p{
+  margin-top:0;
+  margin-bottom:14px
+}
 .text-link{
   display:inline-flex;
 
