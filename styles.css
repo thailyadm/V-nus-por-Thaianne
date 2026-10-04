@@ -609,7 +609,7 @@ a{
 
 .hero h1{
   font-size:
-    clamp(54px,6.4vw,83px);
+    clamp(46px,4.8vw,68px);
 
   letter-spacing:-.02em
 }
