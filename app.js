@@ -58,11 +58,11 @@ const I18N = {
 
 
     heroTitle:
-      'Ouça o que a sua intuição já está tentando dizer. <em>Olhe para as cartas. Encontre novos caminhos.</em>',
+      'Ouça o que a sua intuição já está tentando dizer. <em>Abra as cartas. Encontre novos caminhos.</em>',
 
 
     heroText:
-      'A cartomancia faz parte da minha prática espiritual. O tarô foi o primeiro oráculo que me escolheu e, desde então, sigo estudando, aprofundando e ampliando meu caminho através de diferentes sistemas de leitura.',
+      'A cartomancia faz parte da minha prática espiritual. O tarô foi o primeiro oráculo que me escolheu e, desde então, sigo aprofundando meus estudos sobre seus símbolos, arquétipos e caminhos de interpretação, enquanto amplio meu repertório para outros oráculos.',
 
 
     seeReadings:
@@ -94,19 +94,23 @@ const I18N = {
 
 
     aboutTitle:
-      'Uma leitura feita com estudo, presença e intuição.',
+      'Um caminho de estudo, espiritualidade e intuição.',
 
 
     aboutP1:
-      'A Vênus por Thaianne nasceu da minha relação com a cartomancia e com a espiritualidade. Para mim, uma consulta não é uma brincadeira. É um espaço de conexão, interpretação e reflexão, onde as cartas podem trazer à luz símbolos, movimentos, padrões e possibilidades que merecem ser olhados com atenção.',
+      'A Vênus por Thaianne nasceu da minha relação com a cartomancia e com a espiritualidade. Acredito nas cartas como uma linguagem de símbolos, arquétipos e movimentos, capaz de oferecer novas perspectivas sobre aquilo que estamos vivendo e sobre as perguntas que carregamos.',
 
 
     aboutP2:
-      'O tarô foi o primeiro oráculo que me escolheu. Desde então, sigo estudando e aprofundando minha prática, buscando compreender seus arquétipos, estruturas, simbolismos e diferentes tradições de estudo. Meu caminho continua se expandindo para outros oráculos, sempre com estudo, respeito e curiosidade.',
+      'O tarô foi o primeiro oráculo que me escolheu. Desde então, venho aprofundando meus estudos e minha prática, explorando seus arquétipos, estruturas, simbolismos e diferentes caminhos de interpretação.',
 
 
     aboutP3:
-      'Cada leitura é individual e parte da sua pergunta, do contexto que você compartilha e das combinações que aparecem no jogo. O atendimento é online, privado e enviado no seu ritmo, sem necessidade de chamada ao vivo.',
+      'A cartomancia é um caminho que continua se expandindo para mim. Além do tarô, sigo conhecendo e estudando outros oráculos, ampliando meu repertório e minha forma de compreender a linguagem simbólica e espiritual das cartas.',
+
+
+    aboutP4:
+      'Cada consulta parte da sua pergunta e da energia apresentada pelo jogo. A leitura considera as cartas que se revelam, suas posições, simbologias e combinações, buscando compreender o momento de forma ampla e cuidadosa.',
 
 
     aboutLink:
@@ -130,7 +134,7 @@ const I18N = {
 
 
     howTitle:
-      'Você traz a pergunta. Eu faço a leitura.',
+      'Você traz a pergunta. Eu abro o jogo.',
 
 
     step1Title:
@@ -138,15 +142,15 @@ const I18N = {
 
 
     step1Text:
-      'Escolha a leitura que mais combina com o que você quer compreender e adicione ao carrinho.',
+      'Escolha a consulta que mais se aproxima daquilo que você deseja compreender e adicione ao carrinho.',
 
 
     step2Title:
-      'Me conte o que deseja olhar',
+      'Traga sua pergunta',
 
 
     step2Text:
-      'Após a confirmação do pagamento, você recebe as orientações para enviar sua pergunta e o contexto que considerar importante.',
+      'Após a confirmação do pagamento, você recebe as orientações para enviar sua pergunta e compartilhar o contexto que considerar importante para a consulta.',
 
 
     step3Title:
@@ -154,11 +158,11 @@ const I18N = {
 
 
     step3Text:
-      'Eu faço o jogo e envio a interpretação pelo WhatsApp, em áudios gravados e, quando fizer sentido, com imagens das cartas e resumo escrito.',
+      'Eu abro o jogo, faço a leitura das cartas e envio a interpretação pelo WhatsApp, em áudios gravados e, quando fizer sentido, com imagens das cartas e um resumo escrito.',
 
 
     quote:
-      '“As cartas mostram símbolos, movimentos, tendências e possibilidades. A leitura ajuda a iluminar o momento — mas o caminho continua sendo seu.”',
+      '“As cartas revelam uma linguagem de símbolos, arquétipos e movimentos. A leitura ilumina o que se apresenta no momento e pode abrir novos caminhos de compreensão.”',
 
 
     faqEyebrow:
@@ -170,7 +174,7 @@ const I18N = {
 
 
     faqIntro:
-      'Algumas respostas para você entender como funciona a minha forma de leitura.',
+      'Algumas respostas para você conhecer melhor minha forma de trabalhar com as cartas e com os oráculos.',
 
 
     q1:
@@ -178,7 +182,7 @@ const I18N = {
 
 
     a1:
-      'Não. O formato principal é online e assíncrono. Você envia sua pergunta e recebe a leitura em áudios gravados, com a interpretação organizada para que possa ouvir com calma e voltar a ela quando quiser.',
+      'Não. O formato principal é online e assíncrono. Você envia sua pergunta e recebe a leitura em áudios gravados, com a interpretação do jogo organizada para você ouvir com calma e guardar para consultar novamente.',
 
 
     q2:
@@ -186,7 +190,7 @@ const I18N = {
 
 
     a2:
-      'A leitura pode abordar diferentes áreas da vida, desde que seja tratada como uma prática espiritual e interpretativa. Ela não substitui atendimento médico, psicológico, jurídico ou financeiro profissional.',
+      'A cartomancia pode abordar diferentes áreas da vida. A leitura é conduzida a partir da pergunta apresentada, das cartas que surgem no jogo e da interpretação simbólica desenvolvida durante a consulta. Ela não substitui atendimento médico, psicológico, jurídico ou financeiro profissional.',
 
 
     q3:
@@ -194,7 +198,7 @@ const I18N = {
 
 
     a3:
-      'O tarô pode mostrar tendências, influências, padrões, caminhos e possibilidades a partir do momento consultado. Eu não trato as cartas como um destino imutável. Existe contexto, existe livre-arbítrio e existem escolhas.',
+      'As cartas podem revelar tendências, influências, padrões, movimentos e possibilidades a partir do momento consultado. A leitura mostra o que se apresenta no jogo, enquanto escolhas, atitudes e circunstâncias também atravessam o caminho.',
 
 
     q4:
@@ -202,7 +206,7 @@ const I18N = {
 
 
     a4:
-      'A leitura é enviada pelo WhatsApp, principalmente em áudios gravados. Quando necessário, também posso enviar fotos das cartas e um resumo escrito para complementar a interpretação.',
+      'A leitura é enviada pelo WhatsApp, principalmente em áudios gravados. Quando fizer sentido para a consulta, também posso enviar imagens das cartas e um resumo escrito para complementar a interpretação.',
 
 
     contactEyebrow:
@@ -214,7 +218,7 @@ const I18N = {
 
 
     contactText:
-      'Pode falar comigo. Se você está em dúvida sobre qual consulta escolher ou quer entender melhor como funciona a leitura, me chame no WhatsApp ou por e-mail.',
+      'Se você quiser entender melhor uma consulta, escolher uma leitura ou conversar antes de marcar, pode me chamar. Será um prazer te orientar.',
 
 
     whatsappLabel:
@@ -357,34 +361,26 @@ const I18N = {
     locale: 'en-US',
     currency: 'USD',
 
-
     title:
       'Vênus by Thaianne | Cartomancy, spirituality & self-knowledge',
-
 
     description:
       'Vênus by Thaianne — cartomancy, spirituality and self-knowledge with online readings.',
 
-
     navAbout:
       'About',
-
 
     navServices:
       'Readings',
 
-
     navHow:
       'How it works',
-
 
     navFaq:
       'FAQ',
 
-
     navContact:
       'Contact',
-
 
     cart:
       'Cart',
@@ -395,11 +391,11 @@ const I18N = {
 
 
     heroTitle:
-      'Listen to what your intuition is already trying to tell you. <em>Look at the cards. Discover new possibilities.</em>',
+      'Listen to what your intuition is already trying to tell you. <em>Open the cards. Discover new paths.</em>',
 
 
     heroText:
-      'Cartomancy is part of my spiritual practice. Tarot was the first oracle that chose me, and since then I have continued to study, deepen my practice and expand my path through different systems of reading.',
+      'Cartomancy is part of my spiritual practice. Tarot was the first oracle that chose me, and since then I have continued deepening my studies of its symbols, archetypes and approaches to interpretation while expanding my path into other oracles.',
 
 
     seeReadings:
@@ -431,19 +427,23 @@ const I18N = {
 
 
     aboutTitle:
-      'A reading grounded in study, presence and intuition.',
+      'A path of study, spirituality and intuition.',
 
 
     aboutP1:
-      'Vênus by Thaianne was born from my relationship with cartomancy and spirituality. To me, a reading is not a game. It is a space for connection, interpretation and reflection, where the cards can bring symbols, movements, patterns and possibilities into focus.',
+      'Vênus by Thaianne was born from my relationship with cartomancy and spirituality. I see the cards as a language of symbols, archetypes and movements, offering new perspectives on what we are experiencing and on the questions we carry.',
 
 
     aboutP2:
-      'Tarot was the first oracle that chose me. Since then, I have continued studying and deepening my practice, exploring its archetypes, structures, symbolism and different traditions of study. My path continues to expand into other oracles, always with study, respect and curiosity.',
+      'Tarot was the first oracle that chose me. Since then, I have continued deepening my studies and practice, exploring its archetypes, structures, symbolism and different approaches to interpretation.',
 
 
     aboutP3:
-      'Each reading is personal and begins with your question, the context you share and the combinations that appear in the spread. The service is private, fully online and delivered at your own pace, with no live call required.',
+      'Cartomancy continues to be an expanding path for me. Beyond tarot, I am studying and discovering other oracles, broadening my understanding of symbolic and spiritual language.',
+
+
+    aboutP4:
+      'Each consultation begins with your question and the energy presented by the spread. The reading considers the cards that appear, their positions, symbolism and combinations, seeking a thoughtful understanding of the moment.',
 
 
     aboutLink:
@@ -467,7 +467,7 @@ const I18N = {
 
 
     howTitle:
-      'You bring the question. I read the cards.',
+      'You bring the question. I open the spread.',
 
 
     step1Title:
@@ -475,15 +475,15 @@ const I18N = {
 
 
     step1Text:
-      'Choose the reading that best fits what you want to understand and add it to your cart.',
+      'Choose the reading that best matches what you want to understand and add it to your cart.',
 
 
     step2Title:
-      'Tell me what you want to explore',
+      'Bring your question',
 
 
     step2Text:
-      'After your payment is confirmed, you will receive instructions for sending your question and any context you feel is important.',
+      'After your payment is confirmed, you will receive instructions for sending your question and any context you feel is important for the consultation.',
 
 
     step3Title:
@@ -491,11 +491,11 @@ const I18N = {
 
 
     step3Text:
-      'I lay out the cards and send your interpretation through WhatsApp, with recorded audio and, when helpful, photos of the cards and a written summary.',
+      'I open the spread, read the cards and send your interpretation through WhatsApp as recorded audio, with card images and a written summary when helpful.',
 
 
     quote:
-      '“The cards can reveal symbols, movements, tendencies and possibilities. A reading can illuminate the moment — but the path remains yours.”',
+      '“The cards reveal a language of symbols, archetypes and movements. A reading illuminates what is present in the moment and can open new paths of understanding.”',
 
 
     faqEyebrow:
@@ -507,7 +507,7 @@ const I18N = {
 
 
     faqIntro:
-      'A few answers to help you understand how I approach a reading.',
+      'A few answers to help you understand how I work with cards and oracles.',
 
 
     q1:
@@ -515,7 +515,7 @@ const I18N = {
 
 
     a1:
-      'No. The main format is online and asynchronous. You send your question and receive the reading through recorded audio messages, organized so you can listen calmly and return to it whenever you need.',
+      'No. The main format is online and asynchronous. You send your question and receive the reading through recorded audio, giving you space to listen carefully and return to the interpretation later.',
 
 
     q2:
@@ -523,7 +523,7 @@ const I18N = {
 
 
     a2:
-      'Readings can explore many areas of life, as long as they are approached as a spiritual and interpretive practice. They do not replace professional medical, psychological, legal or financial advice.',
+      'Cartomancy can explore many areas of life. The reading is guided by the question presented, the cards that appear and the symbolic interpretation developed during the consultation. It does not replace professional medical, psychological, legal or financial advice.',
 
 
     q3:
@@ -531,7 +531,7 @@ const I18N = {
 
 
     a3:
-      'Tarot can reveal tendencies, influences, patterns, paths and possibilities based on the moment being explored. I do not treat the cards as an unchangeable destiny. Context, free will and choices matter.',
+      'The cards can reveal tendencies, influences, patterns, movements and possibilities based on the moment being explored. A reading shows what appears in the spread, while choices, actions and circumstances also shape the path.',
 
 
     q4:
@@ -539,7 +539,7 @@ const I18N = {
 
 
     a4:
-      'Your reading is delivered through WhatsApp, primarily as recorded audio messages. When helpful, I can also send photos of the cards and a written summary to complement the interpretation.',
+      'Your reading is delivered through WhatsApp, primarily as recorded audio. When helpful, I can also send images of the cards and a written summary to complement the interpretation.',
 
 
     contactEyebrow:
@@ -551,7 +551,7 @@ const I18N = {
 
 
     contactText:
-      'You can reach out. If you are unsure which reading to choose or simply want to understand how the process works, message me on WhatsApp or by email.',
+      'If you would like to understand a reading better, choose an option or simply talk before booking, feel free to reach out. I will be happy to guide you.',
 
 
     whatsappLabel:
@@ -706,7 +706,7 @@ const services = [
         '1 pergunta • leitura direta',
 
       description:
-        'Para uma questão específica que você quer olhar com mais clareza, profundidade e orientação.',
+        'Para uma questão específica que você deseja compreender através das cartas, observando os movimentos e mensagens que se apresentam no jogo.',
 
       price:
         50
@@ -722,7 +722,7 @@ const services = [
         '1 question • focused reading',
 
       description:
-        'For one specific question you want to explore with clarity, depth and guidance.',
+        'For one specific question you want to explore through the cards, observing the movements and messages that appear in the spread.',
 
       price:
         15
@@ -746,7 +746,7 @@ const services = [
         '3 perguntas • leitura aprofundada',
 
       description:
-        'Uma leitura mais profunda para explorar diferentes aspectos de uma situação, relação ou fase da vida.',
+        'Uma leitura mais profunda para explorar diferentes aspectos de uma situação, relação ou fase da vida a partir das cartas e de suas combinações.',
 
       price:
         100
@@ -762,7 +762,7 @@ const services = [
         '3 questions • in-depth reading',
 
       description:
-        'A deeper reading to explore different aspects of a situation, relationship or phase of life.',
+        'A deeper reading to explore different aspects of a situation, relationship or phase of life through the cards and their combinations.',
 
       price:
         25
@@ -786,7 +786,7 @@ const services = [
         'tiragem ampla • múltiplos aspectos',
 
       description:
-        'Para olhar o cenário atual, influências, desafios, oportunidades, tendências e possibilidades de próximos passos.',
+        'Uma tiragem ampla para observar o cenário, influências, desafios, oportunidades, tendências e os caminhos que se desenham diante da situação.',
 
       price:
         160
@@ -802,7 +802,7 @@ const services = [
         'expanded reading • multiple aspects',
 
       description:
-        'Explore your current situation, influences, challenges, opportunities, trends and possible next steps.',
+        'An expanded reading to explore the current situation, influences, challenges, opportunities, tendencies and the paths taking shape.',
 
       price:
         35
@@ -826,7 +826,7 @@ const services = [
         'campo afetivo • vínculos',
 
       description:
-        'Uma leitura voltada para sentimentos, dinâmicas, limites, padrões e possibilidades dentro das relações.',
+        'Uma leitura voltada para sentimentos, vínculos, dinâmicas, padrões e movimentos presentes no campo afetivo.',
 
       price:
         130
@@ -842,7 +842,7 @@ const services = [
         'love • relationships',
 
       description:
-        'A reading focused on feelings, dynamics, boundaries, patterns and possibilities within relationships.',
+        'A reading focused on feelings, bonds, dynamics, patterns and movements within the field of relationships.',
 
       price:
         30
@@ -866,7 +866,7 @@ const services = [
         'espiritualidade • autoconhecimento',
 
       description:
-        'Uma leitura voltada para a energia do momento, padrões internos, espiritualidade e caminhos de autoconhecimento.',
+        'Uma leitura voltada para a energia do momento, questões internas, espiritualidade e caminhos de autoconhecimento através das cartas.',
 
       price:
         130
@@ -882,7 +882,7 @@ const services = [
         'spirituality • self-knowledge',
 
       description:
-        'A reading focused on your current energy, inner patterns, spirituality and paths of self-knowledge.',
+        'A reading focused on your current energy, inner questions, spirituality and paths of self-knowledge through the cards.',
 
       price:
         30
@@ -906,7 +906,7 @@ const services = [
         'leitura profunda • múltiplas questões',
 
       description:
-        'Para quem quer uma leitura mais extensa, com espaço para aprofundar questões e conectar diferentes áreas da vida.',
+        'Uma leitura mais extensa para aprofundar diferentes questões e observar como elas se conectam dentro do mesmo jogo.',
 
       price:
         250
@@ -922,7 +922,7 @@ const services = [
         'deep reading • multiple questions',
 
       description:
-        'A deeper reading with room to explore several questions and connect different areas of life.',
+        'A deeper reading with room to explore several questions and see how they connect within the same spread.',
 
       price:
         45
@@ -953,7 +953,11 @@ try {
     );
 
 
-  if (Array.isArray(savedCart)) {
+  if (
+    Array.isArray(
+      savedCart
+    )
+  ) {
 
     cart =
       savedCart
@@ -963,7 +967,9 @@ try {
               ? item
               : item?.id
         )
-        .filter(Boolean);
+        .filter(
+          Boolean
+        );
 
   }
 
@@ -1109,6 +1115,7 @@ function toast(
 
 
   setTimeout(
+
     () => {
 
       element.classList.remove(
@@ -1116,7 +1123,9 @@ function toast(
       );
 
     },
+
     2200
+
   );
 
 }
@@ -1265,7 +1274,9 @@ function switchCountry(
     nextCountry !== 'br' &&
     nextCountry !== 'us'
   ) {
+
     return;
+
   }
 
 
@@ -1291,7 +1302,9 @@ function renderServices() {
 
 
   if (!grid) {
+
     return;
+
   }
 
 
@@ -1331,7 +1344,9 @@ function renderServices() {
               <div class="service-footer">
 
                 <span class="price">
-                  ${money(data.price)}
+                  ${money(
+                    data.price
+                  )}
                 </span>
 
                 <button
@@ -1349,7 +1364,9 @@ function renderServices() {
           `;
 
         }
+
       )
+
       .join(
         ''
       );
@@ -1360,17 +1377,22 @@ function renderServices() {
       '.add-btn'
     )
     .forEach(
+
       button => {
 
         button.addEventListener(
+
           'click',
+
           () =>
             addToCart(
               button.dataset.id
             )
+
         );
 
       }
+
     );
 
 }
@@ -1388,7 +1410,9 @@ function addToCart(
 
 
   if (!service) {
+
     return;
+
   }
 
 
@@ -1420,7 +1444,9 @@ function removeFromCart(
     index < 0 ||
     index >= cart.length
   ) {
+
     return;
+
   }
 
 
@@ -1456,7 +1482,9 @@ function renderCart() {
     !items ||
     !totalElement
   ) {
+
     return;
+
   }
 
 
@@ -1488,7 +1516,9 @@ function renderCart() {
 
 
             if (!service) {
+
               return '';
+
             }
 
 
@@ -1533,10 +1563,13 @@ function renderCart() {
             `;
 
           }
+
         )
+
         .filter(
           Boolean
         )
+
         .join(
           ''
         );
@@ -1549,19 +1582,24 @@ function renderCart() {
       '.remove'
     )
     .forEach(
+
       button => {
 
         button.addEventListener(
+
           'click',
+
           () =>
             removeFromCart(
               Number(
                 button.dataset.index
               )
             )
+
         );
 
       }
+
     );
 
 
@@ -1587,7 +1625,9 @@ function applyCoupon() {
     !input ||
     !message
   ) {
+
     return;
+
   }
 
 
@@ -1598,10 +1638,13 @@ function applyCoupon() {
 
 
   if (
+
     code &&
+
     CONFIG.coupons[
       code
     ]
+
   ) {
 
     discount =
@@ -1611,6 +1654,7 @@ function applyCoupon() {
 
 
     message.textContent =
+
       `${t().couponApplied}: ${Math.round(
         discount * 100
       )}%.`;
@@ -1622,8 +1666,11 @@ function applyCoupon() {
 
 
     message.textContent =
+
       code
+
         ? t().invalidCoupon
+
         : t().enterCoupon;
 
   }
@@ -1704,6 +1751,7 @@ function openCheckout() {
       t().addBefore
     );
 
+
     return;
 
   }
@@ -1717,7 +1765,9 @@ function openCheckout() {
 
 
   if (!modal) {
+
     return;
+
   }
 
 
@@ -1744,7 +1794,9 @@ function closeCheckout() {
 
 
   if (!modal) {
+
     return;
+
   }
 
 
@@ -1768,7 +1820,9 @@ function renderCheckout() {
 
 
   if (!summary) {
+
     return;
+
   }
 
 
@@ -1792,7 +1846,9 @@ function renderCheckout() {
 
 
           if (!service) {
+
             return '';
+
           }
 
 
@@ -1808,9 +1864,11 @@ function renderCheckout() {
 
         }
       )
+
       .filter(
         Boolean
       )
+
       .join(
         '<br>'
       )}
@@ -1943,13 +2001,18 @@ function updatePaymentNote() {
     !select ||
     !note
   ) {
+
     return;
+
   }
 
 
   note.innerHTML =
+
     select.value === 'pix'
+
       ? t().pixNote
+
       : t().cardNote;
 
 }
@@ -1968,6 +2031,7 @@ function waitForPayPalSdk(
 ) {
 
   return new Promise(
+
     (
       resolve,
       reject
@@ -1975,9 +2039,12 @@ function waitForPayPalSdk(
 
 
       if (
+
         window.paypal &&
+
         typeof window.paypal.createInstance ===
           'function'
+
       ) {
 
         resolve();
@@ -1992,14 +2059,18 @@ function waitForPayPalSdk(
 
 
       const interval =
+
         setInterval(
+
           () => {
 
-
             if (
+
               window.paypal &&
+
               typeof window.paypal.createInstance ===
                 'function'
+
             ) {
 
               clearInterval(
@@ -2015,9 +2086,11 @@ function waitForPayPalSdk(
 
 
             if (
+
               Date.now() -
                 start >=
                 timeout
+
             ) {
 
               clearInterval(
@@ -2034,10 +2107,13 @@ function waitForPayPalSdk(
             }
 
           },
+
           100
+
         );
 
     }
+
   );
 
 }
@@ -2048,7 +2124,9 @@ function paypalPayload() {
   const items =
 
     cart
+
       .map(
+
         id => {
 
           const service =
@@ -2059,7 +2137,9 @@ function paypalPayload() {
 
 
           if (!service) {
+
             return null;
+
           }
 
 
@@ -2086,7 +2166,9 @@ function paypalPayload() {
           };
 
         }
+
       )
+
       .filter(
         Boolean
       );
@@ -2140,15 +2222,19 @@ async function createPayPalOrder() {
 
   const response =
     await fetch(
+
       `${CONFIG.checkoutEndpoint}/paypal-create-order`,
+
       {
 
         method:
           'POST',
 
         headers: {
+
           'Content-Type':
             'application/json'
+
         },
 
         body:
@@ -2157,6 +2243,7 @@ async function createPayPalOrder() {
           )
 
       }
+
     );
 
 
@@ -2167,8 +2254,11 @@ async function createPayPalOrder() {
   if (!response.ok) {
 
     throw new Error(
+
       result?.error ||
+
       'Unable to create PayPal order.'
+
     );
 
   }
@@ -2199,15 +2289,19 @@ async function capturePayPalOrder(
 
   const response =
     await fetch(
+
       `${CONFIG.checkoutEndpoint}/paypal-capture-order`,
+
       {
 
         method:
           'POST',
 
         headers: {
+
           'Content-Type':
             'application/json'
+
         },
 
         body:
@@ -2216,6 +2310,7 @@ async function capturePayPalOrder(
           })
 
       }
+
     );
 
 
@@ -2226,8 +2321,11 @@ async function capturePayPalOrder(
   if (!response.ok) {
 
     throw new Error(
+
       result?.error ||
+
       'Unable to capture PayPal order.'
+
     );
 
   }
@@ -2281,7 +2379,9 @@ function showPaymentSuccess() {
 
 
   if (!summary) {
+
     return;
+
   }
 
 
@@ -2299,6 +2399,7 @@ function showPaymentSuccess() {
 
 
   const whatsappUrl =
+
     `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(
       whatsappMessage
     )}`;
@@ -2311,6 +2412,7 @@ function showPaymentSuccess() {
       <div class="payment-success-icon">
         ✓
       </div>
+
 
       <p class="eyebrow">
 
@@ -2402,7 +2504,9 @@ async function initializePayPalCheckout() {
   if (
     paypalCheckoutInitialized
   ) {
+
     return;
+
   }
 
 
@@ -2418,7 +2522,9 @@ async function initializePayPalCheckout() {
     !container ||
     !venmoContainer
   ) {
+
     return;
+
   }
 
 
@@ -2428,6 +2534,7 @@ async function initializePayPalCheckout() {
 
 
     paypalSdkInstance =
+
       await window.paypal.createInstance({
 
         clientId:
@@ -2448,11 +2555,14 @@ async function initializePayPalCheckout() {
 
 
     const eligible =
+
       await paypalSdkInstance.findEligibleMethods(
+
         {
           currencyCode:
             'USD'
         }
+
       );
 
 
@@ -2492,6 +2602,7 @@ async function initializePayPalCheckout() {
 
 
       const paymentSession =
+
         paypalSdkInstance
           .createPayPalOneTimePaymentSession({
 
@@ -2571,7 +2682,9 @@ async function initializePayPalCheckout() {
 
 
       paypalButton.addEventListener(
+
         'click',
+
         async () => {
 
           try {
@@ -2599,13 +2712,17 @@ async function initializePayPalCheckout() {
 
 
             toast(
+
               error.message ||
+
               'Unable to start PayPal checkout.'
+
             );
 
           }
 
         }
+
       );
 
     }
@@ -2639,6 +2756,7 @@ async function initializePayPalCheckout() {
 
 
       const venmoPaymentSession =
+
         paypalSdkInstance
           .createVenmoOneTimePaymentSession({
 
@@ -2677,8 +2795,11 @@ async function initializePayPalCheckout() {
 
 
                 toast(
+
                   error.message ||
+
                   'Venmo payment could not be completed.'
+
                 );
 
               }
@@ -2718,7 +2839,9 @@ async function initializePayPalCheckout() {
 
 
       venmoButton.addEventListener(
+
         'click',
+
         async () => {
 
           try {
@@ -2746,13 +2869,17 @@ async function initializePayPalCheckout() {
 
 
             toast(
+
               error.message ||
+
               'Unable to start Venmo.'
+
             );
 
           }
 
         }
+
       );
 
     }
@@ -2794,6 +2921,7 @@ async function checkout(
       t().addBefore
     );
 
+
     return;
 
   }
@@ -2828,6 +2956,7 @@ async function checkout(
       t().checkoutSetup
     );
 
+
     return;
 
   }
@@ -2846,6 +2975,7 @@ async function checkout(
   const items =
 
     cart
+
       .map(
         id => {
 
@@ -2857,7 +2987,9 @@ async function checkout(
 
 
           if (!service) {
+
             return null;
+
           }
 
 
@@ -2884,7 +3016,9 @@ async function checkout(
           };
 
         }
+
       )
+
       .filter(
         Boolean
       );
@@ -2895,6 +3029,7 @@ async function checkout(
     toast(
       t().addBefore
     );
+
 
     return;
 
@@ -2960,7 +3095,9 @@ async function checkout(
 
     const response =
       await fetch(
+
         CONFIG.checkoutEndpoint,
+
         {
 
           method:
@@ -2979,6 +3116,7 @@ async function checkout(
             )
 
         }
+
       );
 
 
@@ -3142,7 +3280,9 @@ function setupBackToTop() {
 
 
   if (!button) {
+
     return;
+
   }
 
 
@@ -3184,6 +3324,7 @@ function setupBackToTop() {
     () => {
 
       window.scrollTo(
+
         {
           top:
             0,
@@ -3191,6 +3332,7 @@ function setupBackToTop() {
           behavior:
             'smooth'
         }
+
       );
 
     }
@@ -3202,7 +3344,9 @@ function setupBackToTop() {
 }
 
 
-/* COUNTRY */
+/* =====================================================
+   COUNTRY
+   ===================================================== */
 
 const countrySelect =
   $('#countrySelect');
@@ -3211,17 +3355,22 @@ const countrySelect =
 if (countrySelect) {
 
   countrySelect.addEventListener(
+
     'change',
+
     event =>
       switchCountry(
         event.target.value
       )
+
   );
 
 }
 
 
-/* CART */
+/* =====================================================
+   CART
+   ===================================================== */
 
 const openCartButton =
   $('#openCart');
@@ -3265,7 +3414,9 @@ if (drawerBackdrop) {
 }
 
 
-/* COUPON */
+/* =====================================================
+   COUPON
+   ===================================================== */
 
 const applyCouponButton =
   $('#applyCoupon');
@@ -3281,7 +3432,9 @@ if (applyCouponButton) {
 }
 
 
-/* CHECKOUT */
+/* =====================================================
+   CHECKOUT
+   ===================================================== */
 
 const checkoutButton =
   $('#goCheckout');
@@ -3339,7 +3492,9 @@ if (paymentMethod) {
 }
 
 
-/* MOBILE MENU */
+/* =====================================================
+   MOBILE MENU
+   ===================================================== */
 
 const menuToggle =
   $('.menu-toggle');
@@ -3348,7 +3503,9 @@ const menuToggle =
 if (menuToggle) {
 
   menuToggle.addEventListener(
+
     'click',
+
     () => {
 
       const nav =
@@ -3364,6 +3521,7 @@ if (menuToggle) {
       }
 
     }
+
   );
 
 }
@@ -3374,10 +3532,13 @@ document
     '.nav a'
   )
   .forEach(
+
     link => {
 
       link.addEventListener(
+
         'click',
+
         () => {
 
           const nav =
@@ -3393,13 +3554,17 @@ document
           }
 
         }
+
       );
 
     }
+
   );
 
 
-/* YEAR */
+/* =====================================================
+   YEAR
+   ===================================================== */
 
 const year =
   $('#year');
@@ -3414,7 +3579,9 @@ if (year) {
 }
 
 
-/* INITIALIZE */
+/* =====================================================
+   PAYMENT RETURN
+   ===================================================== */
 
 function handlePaymentReturn() {
 
@@ -3434,7 +3601,8 @@ function handlePaymentReturn() {
     payment === 'success'
   ) {
 
-    cart = [];
+    cart =
+      [];
 
     discount =
       0;
@@ -3450,6 +3618,10 @@ function handlePaymentReturn() {
 
 }
 
+
+/* =====================================================
+   INITIALIZE
+   ===================================================== */
 
 handlePaymentReturn();
 
