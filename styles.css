@@ -3236,44 +3236,174 @@ a{
     font-size:28px
   }
 }
-/* ===== AJUSTE DE ESCALA DO SITE ===== */
+/* ===== ESCALA COMPACTA DO SITE ===== */
 
+/* Menos altura em todas as seções */
 .section{
-  padding:64px 0;
+  padding:42px 0 !important;
 }
 
-.section-heading h2{
-  font-size:clamp(38px,4vw,52px);
+/* Títulos gerais */
+.section-heading h2,
+.about-header h2{
+  font-size:clamp(32px,3.2vw,43px) !important;
+  line-height:1.05 !important;
 }
 
 .section-heading.centered{
-  margin-bottom:32px;
+  margin-bottom:22px !important;
+}
+
+/* SOBRE */
+.about-header{
+  margin-bottom:24px !important;
+}
+
+.about-cards{
+  gap:14px !important;
+}
+
+.about-card{
+  padding:18px 20px !important;
+  border-radius:18px !important;
+}
+
+.about-card h3{
+  font-size:22px !important;
+  margin-bottom:5px !important;
+}
+
+.about-card p{
+  font-size:13px !important;
+  line-height:1.5 !important;
+}
+
+/* CONSULTAS */
+.cards{
+  gap:14px !important;
 }
 
 .service-card{
-  padding:24px;
+  padding:18px !important;
+  border-radius:20px !important;
+}
+
+.service-icon{
+  width:38px !important;
+  height:38px !important;
+  font-size:18px !important;
 }
 
 .service-card h3{
-  font-size:28px;
+  font-size:24px !important;
+  margin:9px 0 5px !important;
+}
+
+.service-card p{
+  font-size:13px !important;
+  line-height:1.5 !important;
+}
+
+.service-meta{
+  font-size:10px !important;
+}
+
+.service-footer{
+  padding-top:10px !important;
+}
+
+.price{
+  font-size:19px !important;
+}
+
+.add-btn{
+  padding:8px 12px !important;
+  font-size:12px !important;
+}
+
+/* COMO FUNCIONA */
+.steps{
+  gap:14px !important;
 }
 
 .process-card{
-  padding:24px;
+  padding:18px 20px !important;
+  border-radius:20px !important;
+}
+
+.process-number{
+  font-size:29px !important;
+}
+
+.process-icon{
+  width:36px !important;
+  height:36px !important;
 }
 
 .process-card h3{
-  font-size:25px;
+  font-size:22px !important;
+}
+
+.process-card p{
+  font-size:13px !important;
+  line-height:1.5 !important;
+}
+
+/* FRASE VINHO */
+.manifesto{
+  padding:38px 0 !important;
+}
+
+.manifesto-inner{
+  max-width:700px !important;
+}
+
+.venus-mark{
+  font-size:35px !important;
 }
 
 .manifesto blockquote{
-  font-size:clamp(30px,3.6vw,44px);
+  font-size:clamp(26px,3vw,36px) !important;
+  line-height:1.18 !important;
+  margin:10px 0 !important;
+}
+
+/* FAQ */
+.faq-wrap{
+  gap:40px !important;
+}
+
+.faq-list details{
+  padding:13px 16px !important;
+  margin-bottom:8px !important;
+}
+
+/* CONTATO */
+.contact-section{
+  padding-top:42px !important;
+  padding-bottom:48px !important;
 }
 
 .contact-shell{
-  padding:38px;
+  padding:28px !important;
+  gap:26px !important;
+  border-radius:24px !important;
 }
 
 .contact-copy h2{
-  font-size:clamp(36px,4vw,50px);
+  font-size:clamp(32px,3.2vw,42px) !important;
+}
+
+.contact-copy p:not(.eyebrow){
+  font-size:14px !important;
+  line-height:1.55 !important;
+}
+
+.contact-card{
+  padding:13px 15px !important;
+}
+
+/* FOOTER */
+.footer{
+  padding:32px 0 !important;
 }
