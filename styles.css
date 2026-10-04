@@ -2979,7 +2979,13 @@ a{
    ========================================================= */
 
 @media(max-width:980px){
-
+  .about-cards{
+    grid-template-columns:1fr
+  }
+  
+  .about-header{
+    margin-bottom:34px
+  }
   .nav{
     gap:5px
   }
