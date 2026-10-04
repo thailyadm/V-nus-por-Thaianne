@@ -62,7 +62,7 @@ const I18N = {
 
 
     heroText:
-      'A cartomancia faz parte da minha prática espiritual. O tarô foi o primeiro oráculo que me escolheu e, desde então, sigo aprofundando meus estudos sobre seus símbolos, arquétipos e caminhos de interpretação, enquanto amplio meu repertório para outros oráculos.',
+      'A cartomancia faz parte da minha prática espiritual. O tarô foi o primeiro oráculo a me escolher e, desde então, os oráculos se tornaram parte do meu caminho, da minha intuição e da maneira como acolho e interpreto as questões de quem me procura. Com o tempo, essa conexão também encontrou expressão no Baralho Cigano, unindo sensibilidade, simbolismo e intuição em cada leitura.',
 
 
     seeReadings:
