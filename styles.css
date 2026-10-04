@@ -994,7 +994,6 @@ a{
   50%{
     transform:translateY(-10px) rotate(8deg)
   }
-}
 
 @keyframes floatB{
   0%,100%{
