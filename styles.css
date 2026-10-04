@@ -3236,3 +3236,44 @@ a{
     font-size:28px
   }
 }
+/* ===== AJUSTE DE ESCALA DO SITE ===== */
+
+.section{
+  padding:64px 0;
+}
+
+.section-heading h2{
+  font-size:clamp(38px,4vw,52px);
+}
+
+.section-heading.centered{
+  margin-bottom:32px;
+}
+
+.service-card{
+  padding:24px;
+}
+
+.service-card h3{
+  font-size:28px;
+}
+
+.process-card{
+  padding:24px;
+}
+
+.process-card h3{
+  font-size:25px;
+}
+
+.manifesto blockquote{
+  font-size:clamp(30px,3.6vw,44px);
+}
+
+.contact-shell{
+  padding:38px;
+}
+
+.contact-copy h2{
+  font-size:clamp(36px,4vw,50px);
+}
