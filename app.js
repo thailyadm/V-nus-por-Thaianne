@@ -64,16 +64,16 @@ const I18N = {
       'Um caminho de estudo, espiritualidade e intuição.',
 
     aboutP1:
-      'A Vênus por Thaianne nasceu da minha relação com a cartomancia e com a espiritualidade. Acredito nas cartas como uma linguagem de símbolos, arquétipos e movimentos, capaz de oferecer novas perspectivas sobre aquilo que estamos vivendo e sobre as perguntas que carregamos.',
+      'A Vênus por Thaianne nasce de uma relação com a cartomancia que une espiritualidade, estudo e aprofundamento constante. Sempre enxerguei o conhecimento como algo que se constrói e, na cartomancia, não foi diferente. Minha prática se desenvolveu a partir da busca por compreender os oráculos para além dos significados individuais de cada carta, por meio de livros, cursos, diferentes abordagens de interpretação e da própria experiência com as leituras.',
 
     aboutP2:
-      'O tarô foi o primeiro oráculo que me escolheu. Desde então, venho aprofundando meus estudos e minha prática, explorando seus arquétipos, estruturas, simbolismos e diferentes caminhos de interpretação.',
+      'Para mim, conhecer um oráculo exige profundidade. É compreender sua estrutura, sua linguagem simbólica, seus arquétipos e as relações que se formam dentro de um jogo. Esse conhecimento caminha junto à minha intuição, sensibilidade e aos dons que reconheço e desenvolvo em minha prática espiritual. Não vejo estudo e espiritualidade como caminhos opostos. Quanto maior o conhecimento, maior também a capacidade de compreender e interpretar aquilo que a intuição percebe durante uma leitura.',
 
     aboutP3:
-      'A cartomancia é um caminho que continua se expandindo para mim. Além do tarô, sigo conhecendo e estudando outros oráculos, ampliando meu repertório e minha forma de compreender a linguagem simbólica e espiritual das cartas.',
+      'Por isso, continuo estudando e ampliando meu repertório. A cartomancia é uma prática complexa, atravessada por simbolismo, espiritualidade, intuição e diferentes possibilidades de interpretação. Nas minhas consultas, não trabalho com significados decorados ou respostas retiradas de uma carta isolada. Observo o jogo em sua totalidade, suas combinações, recorrências, contrastes e a maneira como cada elemento se relaciona com a questão apresentada.',
 
     aboutP4:
-      'Cada consulta parte da sua pergunta e da energia apresentada pelo jogo. A leitura considera as cartas que se revelam, suas posições, simbologias e combinações, buscando compreender o momento de forma ampla e cuidadosa.',
+      'Também não acredito em uma cartomancia que retire de alguém a responsabilidade sobre a própria vida. As cartas podem revelar tendências, trazer à superfície aquilo que ainda não está sendo percebido e ampliar a compreensão sobre uma situação, mas nenhuma leitura substitui o livre arbítrio. A Vênus representa essa forma de exercer a cartomancia: com profundidade, sensibilidade, responsabilidade e respeito pelo conhecimento que existe por trás de cada leitura.',
 
     aboutLink:
       'Falar com Thaianne →',
