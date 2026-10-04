@@ -443,8 +443,7 @@ a{
 }
 
 .country-picker select:focus{
-  border-color:
-    var(--gold)
+  border-color:var(--gold)
 }
 
 
@@ -1005,15 +1004,12 @@ a{
   50%{
     transform:translateY(8px) rotate(-8deg)
   }
-}
-
-
-/* =========================================================
+  /* =========================================================
    SECTIONS
    ========================================================= */
 
 .section{
-  padding:96px 0
+  padding:64px 0
 }
 
 .soft{
@@ -1037,7 +1033,7 @@ a{
 
   grid-template-columns:1fr 1fr;
 
-  gap:85px
+  gap:70px
 }
 
 .section-heading{
@@ -1045,7 +1041,7 @@ a{
 }
 
 .section-heading.centered{
-  margin:0 auto 42px;
+  margin:0 auto 32px;
 
   text-align:center
 }
@@ -1056,7 +1052,7 @@ a{
 
 .section-heading h2{
   font-size:
-    clamp(44px,5vw,63px)
+    clamp(38px,4vw,52px)
 }
 
 .section-intro,
@@ -1065,7 +1061,7 @@ a{
 }
 
 .eyebrow{
-  font-size:12px;
+  font-size:11px;
 
   letter-spacing:.23em;
 
@@ -1073,14 +1069,14 @@ a{
 
   color:var(--rose);
 
-  margin:0 0 18px
+  margin:0 0 14px
 }
 
 .section-line{
-  width:86px;
+  width:72px;
   height:1px;
 
-  margin-top:25px;
+  margin-top:20px;
 
   background:
     linear-gradient(
@@ -1091,12 +1087,14 @@ a{
 }
 
 .prose{
-  font-size:18px;
+  font-size:16px;
 
   color:var(--muted);
 
-  line-height:1.8
+  line-height:1.7
 }
+
+
 /* =========================================================
    ABOUT / SOBRE
    ========================================================= */
@@ -1111,38 +1109,38 @@ a{
 
   position:absolute;
 
-  right:-50px;
-  top:20px;
+  right:-45px;
+  top:10px;
 
   font:
-    400 280px/1
+    400 230px/1
     "Cormorant Garamond",
     serif;
 
-  color:rgba(213,164,95,.045);
+  color:rgba(213,164,95,.04);
 
   pointer-events:none
 }
 
 .about-header{
-  max-width:760px;
+  max-width:720px;
 
-  margin-bottom:45px
+  margin-bottom:32px
 }
 
 .about-header h2{
-  max-width:720px;
+  max-width:680px;
 
   font-family:
     "Cormorant Garamond",
     serif;
 
   font-size:
-    clamp(44px,5vw,63px);
+    clamp(38px,4vw,52px);
 
   font-weight:500;
 
-  line-height:1.02;
+  line-height:1.05;
 
   margin:0
 }
@@ -1153,7 +1151,7 @@ a{
   grid-template-columns:
     repeat(2,1fr);
 
-  gap:22px
+  gap:18px
 }
 
 .about-card{
@@ -1161,12 +1159,12 @@ a{
 
   overflow:hidden;
 
-  padding:28px 30px;
+  padding:22px 24px;
 
   border:
     1px solid rgba(113,51,68,.13);
 
-  border-radius:24px;
+  border-radius:22px;
 
   background:
     linear-gradient(
@@ -1176,7 +1174,7 @@ a{
     );
 
   box-shadow:
-    0 12px 35px rgba(84,47,56,.045);
+    0 10px 30px rgba(84,47,56,.04);
 
   transition:
     transform .3s ease,
@@ -1190,18 +1188,18 @@ a{
 
   position:absolute;
 
-  width:140px;
-  height:140px;
+  width:120px;
+  height:120px;
 
-  right:-70px;
-  top:-70px;
+  right:-60px;
+  top:-60px;
 
   border-radius:50%;
 
   background:
     radial-gradient(
       circle,
-      rgba(232,194,143,.20),
+      rgba(232,194,143,.18),
       transparent 68%
     );
 
@@ -1209,7 +1207,7 @@ a{
 }
 
 .about-card:hover{
-  transform:translateY(-5px);
+  transform:translateY(-4px);
 
   border-color:
     rgba(213,164,95,.48);
@@ -1222,7 +1220,7 @@ a{
     );
 
   box-shadow:
-    0 20px 45px rgba(84,47,56,.08)
+    0 16px 38px rgba(84,47,56,.07)
 }
 
 .about-card-top{
@@ -1231,12 +1229,12 @@ a{
   align-items:center;
   justify-content:space-between;
 
-  margin-bottom:12px
+  margin-bottom:8px
 }
 
 .about-number{
   font:
-    500 30px/1
+    500 26px/1
     "Cormorant Garamond",
     serif;
 
@@ -1244,8 +1242,8 @@ a{
 }
 
 .about-symbol{
-  width:38px;
-  height:38px;
+  width:34px;
+  height:34px;
 
   display:grid;
 
@@ -1265,15 +1263,14 @@ a{
   border:
     1px solid rgba(213,164,95,.34);
 
-  font-size:17px
+  font-size:15px
 }
 
 .about-card h3{
-  margin:
-    0 0 10px;
+  margin:0 0 7px;
 
   font:
-    600 29px/1.1
+    600 25px/1.1
     "Cormorant Garamond",
     serif;
 
@@ -1283,35 +1280,29 @@ a{
 .about-card p{
   margin:0;
 
-  font-size:15.5px;
+  font-size:14px;
 
-  line-height:1.68;
+  line-height:1.6;
 
   color:var(--muted)
 }
 
 .about-footer{
-  margin-top:26px;
+  margin-top:20px;
 
   text-align:right
 }
-.about-section .prose{
-  font-size:15px;
-  line-height:1.65
-}
 
-.about-section .prose p{
-  margin-top:0;
-  margin-bottom:14px
-}
 .text-link{
   display:inline-flex;
 
-  margin-top:9px;
+  margin-top:7px;
 
   color:var(--rose-dark);
 
   font-weight:600;
+
+  font-size:14px;
 
   position:relative
 }
@@ -1348,7 +1339,7 @@ a{
 
 
 /* =========================================================
-   SERVICE CARDS
+   SERVICE CARDS / CONSULTAS
    ========================================================= */
 
 .cards{
@@ -1357,13 +1348,16 @@ a{
   grid-template-columns:
     repeat(3,1fr);
 
-  gap:22px
+  gap:18px
 }
 
 .service-card{
   position:relative;
 
   overflow:hidden;
+
+  display:flex;
+  flex-direction:column;
 
   background:
     linear-gradient(
@@ -1375,12 +1369,12 @@ a{
   border:
     1px solid rgba(113,51,68,.15);
 
-  border-radius:28px;
+  border-radius:24px;
 
-  padding:31px;
+  padding:24px;
 
   box-shadow:
-    0 12px 38px rgba(84,47,56,.06);
+    0 10px 32px rgba(84,47,56,.055);
 
   backdrop-filter:blur(13px);
   -webkit-backdrop-filter:blur(13px);
@@ -1397,18 +1391,18 @@ a{
 
   position:absolute;
 
-  width:160px;
-  height:160px;
+  width:135px;
+  height:135px;
 
-  right:-80px;
-  top:-80px;
+  right:-68px;
+  top:-68px;
 
   border-radius:50%;
 
   background:
     radial-gradient(
       circle,
-      rgba(239,191,196,.25),
+      rgba(239,191,196,.22),
       transparent 68%
     );
 
@@ -1421,17 +1415,17 @@ a{
 
   position:absolute;
 
-  right:23px;
-  top:18px;
+  right:19px;
+  top:15px;
 
   color:
     rgba(213,164,95,.66);
 
-  font-size:13px
+  font-size:12px
 }
 
 .service-card:hover{
-  transform:translateY(-9px);
+  transform:translateY(-6px);
 
   border-color:
     rgba(213,164,95,.70);
@@ -1444,21 +1438,21 @@ a{
     );
 
   box-shadow:
-    0 24px 60px rgba(93,48,60,.13),
+    0 18px 45px rgba(93,48,60,.11),
     inset 0 1px 0 rgba(255,255,255,.76),
-    inset 0 0 28px rgba(232,194,143,.24);
+    inset 0 0 24px rgba(232,194,143,.20);
 
   backdrop-filter:blur(18px);
   -webkit-backdrop-filter:blur(18px)
 }
 
 .service-card:hover::before{
-  transform:scale(1.35)
+  transform:scale(1.3)
 }
 
 .service-icon{
-  width:48px;
-  height:48px;
+  width:42px;
+  height:42px;
 
   display:flex;
 
@@ -1467,7 +1461,7 @@ a{
 
   border-radius:50%;
 
-  font-size:23px;
+  font-size:20px;
 
   color:var(--rose-dark);
 
@@ -1483,7 +1477,7 @@ a{
 
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.76),
-    0 8px 20px rgba(93,48,60,.055);
+    0 7px 17px rgba(93,48,60,.05);
 
   transition:
     transform .3s ease,
@@ -1496,7 +1490,7 @@ a{
 .service-card:hover .service-icon{
   transform:
     translateY(-2px)
-    scale(1.06);
+    scale(1.05);
 
   color:#8a5260;
 
@@ -1512,30 +1506,38 @@ a{
 
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.92),
-    0 10px 26px rgba(197,154,100,.14)
+    0 9px 22px rgba(197,154,100,.13)
 }
 
 .service-card h3{
   font:
-    600 33px/1.1
+    600 28px/1.1
     "Cormorant Garamond",
     serif;
 
-  margin:15px 0 8px
+  margin:12px 0 6px
 }
 
 .service-card p{
-  color:var(--muted)
+  color:var(--muted);
+
+  font-size:14px;
+
+  line-height:1.6
 }
 
 .service-meta{
-  font-size:12px;
+  font-size:11px!important;
+
+  line-height:1.4!important;
 
   letter-spacing:.1em;
 
   text-transform:uppercase;
 
-  color:var(--rose)!important
+  color:var(--rose)!important;
+
+  margin-bottom:0
 }
 
 .service-footer{
@@ -1548,12 +1550,12 @@ a{
 
   margin-top:auto;
 
-  padding-top:18px
+  padding-top:14px
 }
 
 .price{
   font:
-    600 24px
+    600 21px
     "Cormorant Garamond",
     serif;
 
@@ -1571,7 +1573,7 @@ a{
 
   border-radius:999px;
 
-  padding:4px 13px
+  padding:3px 11px
 }
 
 .add-btn{
@@ -1588,12 +1590,14 @@ a{
 
   border-radius:999px;
 
-  padding:10px 14px;
+  padding:9px 13px;
 
   cursor:pointer;
 
+  font-size:13px;
+
   box-shadow:
-    0 8px 20px rgba(118,55,71,.14);
+    0 7px 18px rgba(118,55,71,.14);
 
   transition:.25s ease
 }
@@ -1602,12 +1606,12 @@ a{
   transform:translateY(-2px);
 
   box-shadow:
-    0 12px 27px rgba(118,55,71,.22)
+    0 10px 24px rgba(118,55,71,.21)
 }
 
 
 /* =========================================================
-   PROCESS
+   PROCESS / COMO FUNCIONA
    ========================================================= */
 
 .process-section{
@@ -1621,7 +1625,7 @@ a{
   grid-template-columns:
     repeat(3,1fr);
 
-  gap:22px
+  gap:18px
 }
 
 .process-card{
@@ -1629,12 +1633,12 @@ a{
 
   overflow:hidden;
 
-  padding:31px;
+  padding:24px;
 
   border:
     1px solid rgba(113,51,68,.14);
 
-  border-radius:26px;
+  border-radius:24px;
 
   background:
     linear-gradient(
@@ -1647,10 +1651,10 @@ a{
 }
 
 .process-card:hover{
-  transform:translateY(-7px);
+  transform:translateY(-5px);
 
   box-shadow:
-    0 22px 48px rgba(84,47,56,.09);
+    0 17px 38px rgba(84,47,56,.08);
 
   border-color:
     rgba(213,164,95,.48);
@@ -1668,7 +1672,7 @@ a{
 
 .process-number{
   font:
-    500 42px
+    500 34px
     "Cormorant Garamond",
     serif;
 
@@ -1678,11 +1682,11 @@ a{
 .process-icon{
   position:absolute;
 
-  right:25px;
-  top:22px;
+  right:20px;
+  top:18px;
 
-  width:46px;
-  height:46px;
+  width:40px;
+  height:40px;
 
   border-radius:50%;
 
@@ -1704,7 +1708,7 @@ a{
 
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.76),
-    0 8px 20px rgba(93,48,60,.055);
+    0 7px 17px rgba(93,48,60,.05);
 
   transition:
     transform .3s ease,
@@ -1714,7 +1718,7 @@ a{
 }
 
 .process-card:hover .process-icon{
-  transform:scale(1.07);
+  transform:scale(1.06);
 
   border-color:
     rgba(213,164,95,.72);
@@ -1728,23 +1732,27 @@ a{
 
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.92),
-    0 10px 24px rgba(197,154,100,.13)
+    0 9px 21px rgba(197,154,100,.12)
 }
 
 .process-card h3{
   font:
-    600 28px
+    600 25px
     "Cormorant Garamond",
     serif;
 
-  margin:6px 0
+  margin:4px 0 7px
 }
 
 .process-card p{
-  color:var(--muted)
+  color:var(--muted);
+
+  font-size:14px;
+
+  line-height:1.6;
+
+  margin-bottom:0
 }
-
-
 /* =========================================================
    MANIFESTO
    ========================================================= */
@@ -1764,7 +1772,9 @@ a{
 
   color:#fff;
 
-  text-align:center
+  text-align:center;
+
+  padding:58px 0
 }
 
 .manifesto::before{
@@ -1773,10 +1783,10 @@ a{
   position:absolute;
 
   left:7%;
-  top:-4%;
+  top:-8%;
 
   font:
-    400 170px
+    400 130px
     "Cormorant Garamond",
     serif;
 
@@ -1793,7 +1803,7 @@ a{
   right:10%;
   bottom:13%;
 
-  font-size:48px;
+  font-size:38px;
 
   color:
     rgba(232,194,143,.30)
@@ -1817,11 +1827,11 @@ a{
 
   z-index:1;
 
-  max-width:840px
+  max-width:760px
 }
 
 .venus-mark{
-  font-size:55px;
+  font-size:42px;
 
   color:#e8c28f;
 
@@ -1832,17 +1842,21 @@ a{
 .manifesto blockquote{
   font:
     500 italic
-    clamp(34px,5vw,58px)/1.18
+    clamp(30px,3.6vw,44px)/1.2
     "Cormorant Garamond",
     serif;
 
-  margin:20px 0;
+  margin:16px 0;
 
   color:#fff9f5
 }
 
 .manifesto-inner>p{
-  color:rgba(255,255,255,.82)
+  margin:10px 0 0;
+
+  color:rgba(255,255,255,.82);
+
+  font-size:14px
 }
 
 
@@ -1860,7 +1874,7 @@ a{
 
   grid-template-columns:.72fr 1.28fr;
 
-  gap:75px
+  gap:55px
 }
 
 .faq-list details{
@@ -1870,11 +1884,11 @@ a{
   border:
     1px solid rgba(113,51,68,.13);
 
-  border-radius:18px;
+  border-radius:16px;
 
-  padding:18px 21px;
+  padding:15px 18px;
 
-  margin-bottom:12px;
+  margin-bottom:10px;
 
   transition:.25s ease
 }
@@ -1893,7 +1907,7 @@ a{
 
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.78),
-    0 12px 26px rgba(84,47,56,.055);
+    0 10px 22px rgba(84,47,56,.05);
 
   backdrop-filter:blur(13px);
   -webkit-backdrop-filter:blur(13px)
@@ -1904,11 +1918,19 @@ a{
 
   font-weight:600;
 
+  font-size:14px;
+
   color:var(--ink)
 }
 
 .faq-list p{
-  color:var(--muted)
+  color:var(--muted);
+
+  font-size:13.5px;
+
+  line-height:1.6;
+
+  margin-bottom:2px
 }
 
 
@@ -1917,9 +1939,9 @@ a{
    ========================================================= */
 
 .contact-section{
-  padding-top:85px;
+  padding-top:60px;
 
-  padding-bottom:110px
+  padding-bottom:72px
 }
 
 .contact-shell{
@@ -1932,11 +1954,11 @@ a{
   grid-template-columns:
     1fr .95fr;
 
-  gap:40px;
+  gap:32px;
 
-  padding:54px;
+  padding:38px;
 
-  border-radius:34px;
+  border-radius:28px;
 
   background:
     linear-gradient(
@@ -1949,7 +1971,7 @@ a{
     1px solid rgba(113,51,68,.15);
 
   box-shadow:
-    0 24px 60px rgba(84,47,56,.085)
+    0 20px 50px rgba(84,47,56,.075)
 }
 
 .contact-shell::before{
@@ -1957,11 +1979,11 @@ a{
 
   position:absolute;
 
-  right:-35px;
-  top:-125px;
+  right:-30px;
+  top:-95px;
 
   font:
-    400 300px/1
+    400 240px/1
     "Cormorant Garamond",
     serif;
 
@@ -1970,7 +1992,7 @@ a{
 
 .contact-copy h2{
   font:
-    500 clamp(43px,5vw,62px)/1.03
+    500 clamp(36px,4vw,50px)/1.04
     "Cormorant Garamond",
     serif;
 
@@ -1980,13 +2002,13 @@ a{
 }
 
 .contact-copy p:not(.eyebrow){
-  max-width:650px;
+  max-width:620px;
 
   color:var(--muted);
 
-  font-size:17px;
+  font-size:15px;
 
-  line-height:1.75
+  line-height:1.65
 }
 
 .contact-options{
@@ -1994,7 +2016,7 @@ a{
 
   align-content:center;
 
-  gap:14px
+  gap:11px
 }
 
 .contact-card{
@@ -2005,9 +2027,9 @@ a{
 
   align-items:center;
 
-  gap:14px;
+  gap:12px;
 
-  padding:20px 21px;
+  padding:15px 17px;
 
   background:
     linear-gradient(
@@ -2019,13 +2041,13 @@ a{
   border:
     1px solid rgba(113,51,68,.13);
 
-  border-radius:22px;
+  border-radius:18px;
 
   transition:.28s ease
 }
 
 .contact-card:hover{
-  transform:translateX(6px);
+  transform:translateX(5px);
 
   border-color:
     rgba(213,164,95,.68);
@@ -2038,17 +2060,17 @@ a{
     );
 
   box-shadow:
-    0 18px 40px rgba(84,47,56,.09),
+    0 14px 32px rgba(84,47,56,.08),
     inset 0 1px 0 rgba(255,255,255,.82),
-    inset 0 0 24px rgba(232,194,143,.20);
+    inset 0 0 20px rgba(232,194,143,.18);
 
   backdrop-filter:blur(16px);
   -webkit-backdrop-filter:blur(16px)
 }
 
 .contact-icon{
-  width:46px;
-  height:46px;
+  width:40px;
+  height:40px;
 
   border-radius:50%;
 
@@ -2070,9 +2092,9 @@ a{
 
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.80),
-    0 8px 20px rgba(93,48,60,.055);
+    0 7px 17px rgba(93,48,60,.05);
 
-  font-size:20px;
+  font-size:18px;
 
   transition:
     transform .3s ease,
@@ -2082,7 +2104,7 @@ a{
 }
 
 .contact-card:hover .contact-icon{
-  transform:scale(1.07);
+  transform:scale(1.06);
 
   background:
     linear-gradient(
@@ -2096,7 +2118,7 @@ a{
 
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.94),
-    0 10px 25px rgba(197,154,100,.14)
+    0 9px 21px rgba(197,154,100,.13)
 }
 
 .contact-card small{
@@ -2104,7 +2126,7 @@ a{
 
   color:var(--rose);
 
-  font-size:11px;
+  font-size:10px;
 
   letter-spacing:.18em;
 
@@ -2116,13 +2138,13 @@ a{
 
   color:var(--ink);
 
-  font-size:14px;
+  font-size:13px;
 
-  margin-top:2px
+  margin-top:1px
 }
 
 .contact-arrow{
-  font-size:20px;
+  font-size:18px;
 
   color:var(--gold);
 
@@ -2144,7 +2166,7 @@ a{
 
   overflow:hidden;
 
-  padding:58px 0;
+  padding:42px 0;
 
   background:
     linear-gradient(
@@ -2167,7 +2189,7 @@ a{
   grid-template-columns:
     1.3fr .8fr 1fr;
 
-  gap:32px;
+  gap:28px;
 
   align-items:center
 }
@@ -2177,11 +2199,11 @@ a{
 }
 
 .footer-brand-col>p{
-  margin:10px 0 0;
+  margin:8px 0 0;
 
   color:#ead8d7;
 
-  font-size:13px;
+  font-size:12px;
 
   letter-spacing:.04em
 }
@@ -2192,9 +2214,9 @@ a{
 
   color:#f0dedf;
 
-  margin:7px 0;
+  margin:5px 0;
 
-  font-size:14px;
+  font-size:13px;
 
   transition:.25s ease
 }
@@ -2205,11 +2227,11 @@ a{
 }
 
 .footer-meta p{
-  margin:5px 0;
+  margin:4px 0;
 
   color:#dfcecf;
 
-  font-size:13px
+  font-size:12px
 }
 
 .footer-orbit{
@@ -2224,19 +2246,19 @@ a{
 }
 
 .footer-orbit-a{
-  width:340px;
-  height:340px;
+  width:300px;
+  height:300px;
 
-  right:-160px;
-  top:-210px
+  right:-145px;
+  top:-190px
 }
 
 .footer-orbit-b{
-  width:520px;
-  height:520px;
+  width:450px;
+  height:450px;
 
-  left:-300px;
-  bottom:-390px
+  left:-270px;
+  bottom:-340px
 }
 
 
@@ -2307,8 +2329,6 @@ a{
       0 2px 10px rgba(232,194,143,.34)
     )
 }
-
-
 /* =========================================================
    BACK TO TOP
    ========================================================= */
@@ -2319,8 +2339,8 @@ a{
   right:24px;
   bottom:24px;
 
-  width:64px;
-  height:64px;
+  width:58px;
+  height:58px;
 
   border-radius:50%;
 
@@ -2357,7 +2377,7 @@ a{
     border-color .28s ease;
 
   box-shadow:
-    0 14px 34px rgba(84,47,56,.25),
+    0 12px 28px rgba(84,47,56,.23),
     inset 0 1px 0 rgba(255,255,255,.28);
 
   z-index:70;
@@ -2382,7 +2402,7 @@ a{
 .back-to-top:hover{
   transform:
     translateY(-5px)
-    scale(1.08);
+    scale(1.07);
 
   border-color:
     rgba(232,194,143,.86);
@@ -2395,15 +2415,15 @@ a{
     );
 
   box-shadow:
-    0 20px 42px rgba(84,47,56,.32),
-    0 0 24px rgba(232,194,143,.22),
+    0 18px 36px rgba(84,47,56,.30),
+    0 0 22px rgba(232,194,143,.20),
     inset 0 1px 0 rgba(255,255,255,.38);
 
   animation:none
 }
 
 .back-to-top span{
-  font-size:30px;
+  font-size:27px;
 
   line-height:1;
 
@@ -2429,14 +2449,14 @@ a{
 
   50%{
     transform:
-      translateY(-6px)
+      translateY(-5px)
       scale(1.025)
   }
 }
 
 
 /* =========================================================
-   DRAWER
+   DRAWER / CART
    ========================================================= */
 
 .drawer-backdrop{
@@ -2468,7 +2488,7 @@ a{
   right:0;
   top:0;
 
-  width:min(440px,92vw);
+  width:min(420px,92vw);
 
   height:100vh;
 
@@ -2489,7 +2509,7 @@ a{
 
   transition:.28s ease;
 
-  padding:27px;
+  padding:24px;
 
   display:flex;
 
@@ -2516,7 +2536,7 @@ a{
 
 .drawer-header h2{
   font:
-    600 35px
+    600 31px
     "Cormorant Garamond",
     serif
 }
@@ -2527,7 +2547,7 @@ a{
 
   background:none;
 
-  font-size:31px;
+  font-size:29px;
 
   cursor:pointer;
 
@@ -2551,19 +2571,21 @@ a{
   border-bottom:
     1px solid var(--line);
 
-  padding:15px 0
+  padding:13px 0
 }
 
 .cart-item h4{
-  margin:0
+  margin:0;
+
+  font-size:14px
 }
 
 .cart-item p{
-  margin:4px 0;
+  margin:3px 0;
 
   color:var(--muted);
 
-  font-size:13px
+  font-size:12px
 }
 
 .remove{
@@ -2573,7 +2595,9 @@ a{
 
   color:var(--rose);
 
-  cursor:pointer
+  cursor:pointer;
+
+  font-size:12px
 }
 
 .coupon-row{
@@ -2581,7 +2605,7 @@ a{
 
   gap:8px;
 
-  margin-top:16px
+  margin-top:14px
 }
 
 .coupon-row input{
@@ -2590,7 +2614,7 @@ a{
   border:
     1px solid var(--line);
 
-  padding:12px;
+  padding:11px;
 
   border-radius:12px;
 
@@ -2643,9 +2667,9 @@ a{
 
   justify-content:space-between;
 
-  font-size:18px;
+  font-size:17px;
 
-  padding:14px 0
+  padding:12px 0
 }
 
 
@@ -2685,20 +2709,20 @@ a{
       #fff7f4
     );
 
-  width:min(720px,100%);
+  width:min(680px,100%);
 
   max-height:92vh;
 
   overflow:auto;
 
-  border-radius:27px;
+  border-radius:24px;
 
-  padding:35px;
+  padding:30px;
 
   position:relative;
 
   box-shadow:
-    0 35px 100px rgba(59,31,38,.21);
+    0 30px 85px rgba(59,31,38,.20);
 
   border:
     1px solid rgba(113,51,68,.13)
@@ -2707,9 +2731,9 @@ a{
 .modal-close{
   position:absolute;
 
-  right:22px;
+  right:20px;
 
-  top:16px
+  top:14px
 }
 
 .form-grid{
@@ -2718,11 +2742,11 @@ a{
   grid-template-columns:
     1fr 1fr;
 
-  gap:14px
+  gap:12px
 }
 
 .form-grid label{
-  font-size:13px;
+  font-size:12px;
 
   font-weight:600
 }
@@ -2731,14 +2755,14 @@ a{
 .form-grid select{
   width:100%;
 
-  margin-top:6px;
+  margin-top:5px;
 
   border:
     1px solid var(--line);
 
-  border-radius:12px;
+  border-radius:11px;
 
-  padding:13px;
+  padding:11px;
 
   background:white
 }
@@ -2763,15 +2787,15 @@ a{
       rgba(232,194,143,.32)
     );
 
-  padding:14px;
+  padding:12px;
 
-  border-radius:14px;
+  border-radius:13px;
 
-  margin:16px 0;
+  margin:14px 0;
 
   color:var(--muted);
 
-  font-size:14px;
+  font-size:13px;
 
   border:
     1px solid rgba(213,164,95,.22)
@@ -2780,17 +2804,17 @@ a{
 .consent{
   display:flex;
 
-  gap:10px;
+  gap:9px;
 
-  font-size:12px;
+  font-size:11px;
 
   color:var(--muted);
 
-  margin:14px 0
+  margin:12px 0
 }
 
 .secure-note{
-  font-size:11px;
+  font-size:10.5px;
 
   color:var(--muted);
 
@@ -2816,9 +2840,11 @@ a{
 
   color:#fff;
 
-  padding:12px 18px;
+  padding:11px 16px;
 
   border-radius:999px;
+
+  font-size:13px;
 
   opacity:0;
 
@@ -2844,14 +2870,14 @@ a{
 .payment-success{
   text-align:center;
 
-  padding:20px 10px 8px
+  padding:16px 10px 6px
 }
 
 .payment-success-icon{
-  width:68px;
-  height:68px;
+  width:58px;
+  height:58px;
 
-  margin:0 auto 18px;
+  margin:0 auto 15px;
 
   border-radius:50%;
 
@@ -2859,7 +2885,7 @@ a{
 
   place-items:center;
 
-  font-size:28px;
+  font-size:24px;
 
   color:#fff;
 
@@ -2871,24 +2897,26 @@ a{
     );
 
   box-shadow:
-    0 14px 32px rgba(118,55,71,.19)
+    0 12px 28px rgba(118,55,71,.18)
 }
 
 .payment-success h3{
   font:
-    600 34px/1.1
+    600 30px/1.1
     "Cormorant Garamond",
     serif;
 
-  margin:10px 0
+  margin:8px 0
 }
 
 .payment-success p{
-  max-width:540px;
+  max-width:520px;
 
-  margin:10px auto;
+  margin:8px auto;
 
-  color:var(--muted)
+  color:var(--muted);
+
+  font-size:14px
 }
 
 
@@ -2905,8 +2933,8 @@ a{
 }
 
 .whatsapp-icon img{
-  width:28px;
-  height:28px;
+  width:25px;
+  height:25px;
 
   object-fit:contain;
 
@@ -2934,7 +2962,7 @@ a{
 .reveal-on-scroll{
   opacity:0;
 
-  transform:translateY(22px);
+  transform:translateY(18px);
 
   transition:
     opacity .7s ease,
@@ -2979,13 +3007,15 @@ a{
    ========================================================= */
 
 @media(max-width:980px){
+
   .about-cards{
     grid-template-columns:1fr
   }
-  
+
   .about-header{
-    margin-bottom:34px
+    margin-bottom:28px
   }
+
   .nav{
     gap:5px
   }
@@ -3011,11 +3041,11 @@ a{
   }
 
   .hero-visual{
-    min-height:480px
+    min-height:460px
   }
 
   .hero-logo-wrap{
-    width:min(410px,74%)
+    width:min(390px,74%)
   }
 
   .two-col,
@@ -3031,7 +3061,7 @@ a{
   }
 
   .faq-wrap{
-    gap:45px
+    gap:35px
   }
 
   .contact-options{
@@ -3106,11 +3136,12 @@ a{
   }
 
   .hero{
-    padding-top:70px
+    padding:
+      54px 0 50px
   }
 
   .hero-visual{
-    min-height:430px
+    min-height:410px
   }
 
   .hero-pill{
@@ -3139,15 +3170,22 @@ a{
 @media(max-width:580px){
 
   .section{
-    padding:72px 0
+    padding:52px 0
+  }
+
+  .hero{
+    padding:
+      48px 0 44px
   }
 
   .hero h1{
-    font-size:50px
+    font-size:44px
   }
 
   .hero-text{
-    font-size:16px
+    font-size:15px;
+
+    line-height:1.65
   }
 
   .hero-proof{
@@ -3159,25 +3197,50 @@ a{
   }
 
   .hero-visual{
-    min-height:370px
+    min-height:350px
   }
 
   .hero-logo-wrap{
-    width:285px
+    width:270px
   }
 
   .hero-visual-ring{
-    width:315px;
-    height:315px
+    width:300px;
+    height:300px
   }
 
   .hero-visual-glow{
-    width:370px;
-    height:370px
+    width:350px;
+    height:350px
   }
 
   .floating-star{
     font-size:15px
+  }
+
+  .section-heading h2,
+  .about-header h2{
+    font-size:38px
+  }
+
+  .section-heading.centered{
+    margin-bottom:26px
+  }
+
+  .about-cards{
+    gap:14px
+  }
+
+  .about-card{
+    padding:20px
+  }
+
+  .about-card h3{
+    font-size:24px
+  }
+
+  .about-card p{
+    font-size:14px
   }
 
   .cards,
@@ -3185,14 +3248,48 @@ a{
     grid-template-columns:1fr
   }
 
-  .contact-shell{
-    padding:30px 24px;
+  .service-card{
+    padding:21px
+  }
 
-    border-radius:26px
+  .service-card h3{
+    font-size:27px
+  }
+
+  .process-card{
+    padding:21px
+  }
+
+  .manifesto{
+    padding:48px 0
+  }
+
+  .manifesto blockquote{
+    font-size:30px
+  }
+
+  .venus-mark{
+    font-size:38px
+  }
+
+  .contact-section{
+    padding-top:52px;
+
+    padding-bottom:58px
+  }
+
+  .contact-shell{
+    padding:26px 21px;
+
+    border-radius:24px
   }
 
   .contact-copy h2{
-    font-size:45px
+    font-size:38px
+  }
+
+  .footer{
+    padding:36px 0
   }
 
   .footer-grid{
@@ -3204,20 +3301,16 @@ a{
 
     bottom:16px;
 
-    width:58px;
-    height:58px
+    width:52px;
+    height:52px
   }
 
   .back-to-top span{
-    font-size:28px
+    font-size:25px
   }
 
   .modal-card{
-    padding:28px 18px
-  }
-
-  .section-heading h2{
-    font-size:45px
+    padding:26px 17px
   }
 
   .brand{
@@ -3235,4 +3328,5 @@ a{
   .venus-symbol{
     font-size:28px
   }
+}
 }
