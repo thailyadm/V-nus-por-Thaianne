@@ -621,15 +621,15 @@ a{
 }
 
 .hero-text{
-  max-width:670px;
+  max-width:650px;
 
-  font-size:18px;
+  font-size:16px;
 
   color:var(--muted);
 
-  margin:28px 0;
+  margin:24px 0;
 
-  line-height:1.82
+  line-height:1.7
 }
 
 .hero-actions{
