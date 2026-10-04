@@ -319,16 +319,16 @@ aboutP4:
       'A path of study, spirituality and intuition.',
 
     aboutP1:
-      'Vênus by Thaianne was born from my relationship with cartomancy and spirituality. I see the cards as a language of symbols, archetypes and movements, offering new perspectives on what we are experiencing and on the questions we carry.',
-
+      'Vênus by Thaianne was born from my relationship with cartomancy, bringing together spirituality, study and continuous learning. My practice has been shaped by books, courses, different approaches to interpretation and the experience gained through readings.',
+    
     aboutP2:
-      'Tarot was the first oracle that chose me. Since then, I have continued deepening my studies and practice, exploring its archetypes, structures, symbolism and different approaches to interpretation.',
-
+      'For me, understanding an oracle goes beyond memorizing the meanings of individual cards. It means understanding its structure, symbolic language, archetypes and the relationships that form within a spread, bringing together knowledge, intuition and sensitivity in each interpretation.',
+    
     aboutP3:
-      'Cartomancy continues to be an expanding path for me. Beyond tarot, I am studying and discovering other oracles, broadening my understanding of symbolic and spiritual language.',
-
+      'In my readings, I look at the spread as a whole: its combinations, recurring patterns, contrasts and the way each element relates to the question being asked. The cards can reveal tendencies and deepen our understanding of a situation, while always respecting free will.',
+    
     aboutP4:
-      'Each consultation begins with your question and the energy presented by the spread. The reading considers the cards that appear, their positions, symbolism and combinations, seeking a thoughtful understanding of the moment.',
+      'Vênus represents this way of practicing cartomancy: with depth, sensitivity, responsibility and respect for the knowledge behind every reading.',
 
     aboutLink:
       'Talk to Thaianne →',
