@@ -3415,3 +3415,9 @@ a{
 .services-trust{text-align:center;font-size:13px;color:var(--muted);margin:24px auto 0;max-width:720px}
 .hero-actions .btn-primary{min-height:48px}
 @media(max-width:640px){.reading-categories{justify-content:flex-start;gap:8px}.reading-categories a{font-size:12px;padding:8px 12px}.hero{padding-top:38px}.hero-actions .btn-primary{width:100%}}
+
+/* Filtros interativos do catálogo */
+.reading-categories button{font:inherit;cursor:pointer;display:inline-flex;align-items:center;min-height:42px;padding:9px 17px;border-radius:999px;background:rgba(255,255,255,.82);border:1px solid #d7b5bd;color:#713344;font-size:13px;font-weight:600;transition:background .2s,border-color .2s,transform .2s}
+.reading-categories button:hover,.reading-categories button:focus-visible{border-color:#c9788a;transform:translateY(-2px)}
+.reading-categories button.active{background:#713344;color:#fff;border-color:#713344}
+@media(max-width:640px){.reading-categories button{font-size:12px;padding:8px 12px}}
