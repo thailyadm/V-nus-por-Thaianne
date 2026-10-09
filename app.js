@@ -524,6 +524,7 @@ aboutP4:
 const services = [
   {
     id: 'essencial',
+    category: 'all',
     icon: '✦',
 
     br: {
@@ -545,6 +546,7 @@ const services = [
 
   {
     id: 'venus',
+    category: 'all',
     icon: '♀',
 
     br: {
@@ -566,6 +568,7 @@ const services = [
 
   {
     id: 'caminhos',
+    category: 'paths',
     icon: '☾',
 
     br: {
@@ -587,6 +590,7 @@ const services = [
 
   {
     id: 'amor',
+    category: 'love',
     icon: '♡',
 
     br: {
@@ -608,6 +612,7 @@ const services = [
 
   {
     id: 'espiritual',
+    category: 'spiritual',
     icon: '☼',
 
     br: {
@@ -629,6 +634,7 @@ const services = [
 
   {
     id: 'completa',
+    category: 'all',
     icon: '✧',
 
     br: {
@@ -881,6 +887,21 @@ function switchCountry(nextCountry) {
   updateLanguage();
 }
 
+let activeCategory = 'all';
+function setupCategoryFilters() {
+  document.querySelectorAll('.reading-categories button').forEach(button => {
+    button.addEventListener('click', () => {
+      activeCategory = button.dataset.category || 'all';
+      document.querySelectorAll('.reading-categories button').forEach(item => {
+        const selected = item === button;
+        item.classList.toggle('active', selected);
+        item.setAttribute('aria-pressed', String(selected));
+      });
+      renderServices();
+    });
+  });
+}
+
 function renderServices() {
   const grid =
     $('#serviceGrid');
@@ -891,6 +912,7 @@ function renderServices() {
 
   grid.innerHTML =
     services
+      .filter(service => activeCategory === 'all' || service.category === activeCategory || service.category === 'all')
       .map(
         service => {
           const data =
@@ -2466,6 +2488,7 @@ function handlePaymentReturn() {
    ===================================================== */
 
 handlePaymentReturn();
+setupCategoryFilters();
 updateLanguage();
 setupReveal();
 setupBackToTop();
