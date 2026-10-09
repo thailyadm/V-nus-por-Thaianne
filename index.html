@@ -399,11 +399,11 @@
 
         </div>
 
-        <div class="reading-categories" aria-label="Categorias de consultas">
-          <a href="#serviceGrid" data-i18n="categoryAll"></a>
-          <a href="#serviceGrid" data-i18n="categoryLove"></a>
-          <a href="#serviceGrid" data-i18n="categoryPaths"></a>
-          <a href="#serviceGrid" data-i18n="categorySpiritual"></a>
+        <div class="reading-categories" role="group" aria-label="Filtrar consultas">
+          <button type="button" class="active" data-category="all" aria-pressed="true" data-i18n="categoryAll"></button>
+          <button type="button" data-category="love" aria-pressed="false" data-i18n="categoryLove"></button>
+          <button type="button" data-category="paths" aria-pressed="false" data-i18n="categoryPaths"></button>
+          <button type="button" data-category="spiritual" aria-pressed="false" data-i18n="categorySpiritual"></button>
         </div>
         <div class="cards" id="serviceGrid"></div>
         <p class="services-trust" data-i18n="servicesTrust"></p>
