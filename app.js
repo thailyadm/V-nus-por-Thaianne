@@ -34,13 +34,13 @@ const I18N = {
       'CARTOMANCIA • ESPIRITUALIDADE • INTUIÇÃO',
 
     heroTitle:
-      'Ouça o que a sua intuição já está tentando dizer. <em>Abra as cartas. Encontre novos caminhos.</em>',
+      'Há perguntas que merecem ser ouvidas pelas cartas. <em>Encontre novos caminhos.</em>',
 
     heroText:
-      'A cartomancia faz parte da minha prática espiritual. O tarô foi o primeiro oráculo a me escolher e, desde então, os oráculos se tornaram parte do meu caminho, da minha intuição e da maneira como acolho e interpreto as questões de quem me procura. Com o tempo, essa conexão também encontrou expressão no Baralho Cigano, unindo sensibilidade, simbolismo e intuição em cada leitura.',
+      'Leituras individuais de Tarô e Baralho Cigano, feitas com estudo, sensibilidade e intuição. Escolha a consulta para sua questão e receba a interpretação em áudio, pelo WhatsApp.',
 
     seeReadings:
-      'Conhecer as consultas',
+      'Escolher minha leitura',
 
     howWorks:
       'Como funciona',
@@ -78,6 +78,11 @@ aboutP4:
     aboutLink:
       'Falar com Thaianne →',
 
+    categoryAll: 'Todas as leituras',
+    categoryLove: 'Amor e relações',
+    categoryPaths: 'Caminhos e decisões',
+    categorySpiritual: 'Espiritualidade',
+    servicesTrust: 'Atendimento individual • Áudio pelo WhatsApp • Envie sua pergunta após a compra',
     servicesEyebrow:
       'CONSULTAS',
 
@@ -289,13 +294,13 @@ aboutP4:
       'CARTOMANCY • SPIRITUALITY • INTUITION',
 
     heroTitle:
-      'Listen to what your intuition is already trying to tell you. <em>Open the cards. Discover new paths.</em>',
+      'Some questions deserve to be heard through the cards. <em>Discover new paths.</em>',
 
     heroText:
-      'Cartomancy is part of my spiritual practice. Tarot was the first oracle that chose me, and since then I have continued deepening my studies of its symbols, archetypes and approaches to interpretation while expanding my path into other oracles.',
+      'Personal Tarot and Lenormand readings grounded in study, sensitivity and intuition. Choose a reading for your question and receive your interpretation as a WhatsApp audio message.',
 
     seeReadings:
-      'Explore readings',
+      'Choose my reading',
 
     howWorks:
       'How it works',
@@ -333,6 +338,11 @@ aboutP4:
     aboutLink:
       'Talk to Thaianne →',
 
+    categoryAll: 'All readings',
+    categoryLove: 'Love & relationships',
+    categoryPaths: 'Paths & decisions',
+    categorySpiritual: 'Spirituality',
+    servicesTrust: 'Personal reading • WhatsApp audio delivery • Send your question after purchase',
     servicesEyebrow:
       'READINGS',
 
@@ -517,7 +527,7 @@ const services = [
     icon: '✦',
 
     br: {
-      title: 'Leitura Essencial',
+      title: 'Uma Pergunta',
       meta: '1 pergunta • leitura direta',
       description:
         'Para uma questão específica que você deseja compreender através das cartas, observando os movimentos e mensagens que se apresentam no jogo.',
@@ -525,7 +535,7 @@ const services = [
     },
 
     us: {
-      title: 'Essential Reading',
+      title: 'One Question',
       meta: '1 question • focused reading',
       description:
         'For one specific question you want to explore through the cards, observing the movements and messages that appear in the spread.',
@@ -580,7 +590,7 @@ const services = [
     icon: '♡',
 
     br: {
-      title: 'Amor & Relações',
+      title: 'Amor & Relacionamentos',
       meta: 'campo afetivo • vínculos',
       description:
         'Uma leitura voltada para sentimentos, vínculos, dinâmicas, padrões e movimentos presentes no campo afetivo.',
