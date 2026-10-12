@@ -21,7 +21,7 @@ const I18N = {
       'Vênus por Thaianne | Cartomancia, espiritualidade e autoconhecimento',
 
     description:
-      'Vênus por Thaianne — cartomancia, espiritualidade e autoconhecimento com atendimento online.',
+      'Vênus por Thaianne: cartomancia, espiritualidade e autoconhecimento com atendimento online.',
 
     navAbout: 'Sobre',
     navServices: 'Consultas',
@@ -270,7 +270,7 @@ aboutP4:
       'Vênus by Thaianne | Cartomancy, spirituality & self-knowledge',
 
     description:
-      'Vênus by Thaianne — cartomancy, spirituality and self-knowledge with online readings.',
+      'Vênus by Thaianne: cartomancy, spirituality and self-knowledge with online readings.',
 
     navAbout:
       'About',
@@ -1277,7 +1277,7 @@ function renderCheckout() {
           const data =
             serviceData(service);
 
-          return `${data.title} — ${money(
+          return `${data.title}: ${money(
             data.price
           )}`;
         }
