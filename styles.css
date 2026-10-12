@@ -3449,3 +3449,20 @@ button#backToTop.back-to-top.show{animation:venusButtonBounce 3.5s ease-in-out i
 /* Ajuste solicitado: botão Vênus ligeiramente maior */
 button#backToTop.back-to-top{width:84px!important;height:84px!important;min-width:84px!important;min-height:84px!important;max-width:84px!important;max-height:84px!important}
 @media(max-width:640px){button#backToTop.back-to-top{width:70px!important;height:70px!important;min-width:70px!important;min-height:70px!important;max-width:70px!important;max-height:70px!important}}
+
+/* Venus design audit: legibility, mobile polish and accessible interaction */
+html{scroll-padding-top:95px}
+body{min-height:100vh;overflow-x:hidden}
+main{display:block;min-width:0}
+.container{max-width:1180px;width:min(100% - 40px,1180px);margin-inline:auto}
+.section{scroll-margin-top:90px}
+.section h2,.section h3,.hero h1{text-wrap:balance;overflow-wrap:break-word}
+.section p,.service-card p,.about p,.faq p{text-wrap:pretty;overflow-wrap:break-word}
+button,a,input,select,textarea{touch-action:manipulation}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #a36ab6!important;outline-offset:4px}
+button:disabled{cursor:not-allowed;opacity:.65}
+img{max-width:100%;height:auto}
+.footer{margin-top:auto}
+@media(max-width:720px){.container{width:min(100% - 32px,1180px)}.section{scroll-margin-top:78px}.section h2{line-height:1.16}.reading-categories{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}.reading-categories button{min-height:42px}.footer-grid{gap:24px}}
+@media(max-width:420px){.container{width:calc(100% - 28px)}.hero h1{overflow-wrap:normal}.reading-categories button{font-size:.83rem}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
